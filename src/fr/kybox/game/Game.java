@@ -29,7 +29,7 @@ public class Game {
         switch (mode){
             case 1:
                 System.out.println("Mode sélectionné -> Challenger");
-                new Challenger();
+                new Challenger(game);
                 break;
             case 2:
                 System.out.println("Mode sélectionné -> Duel");

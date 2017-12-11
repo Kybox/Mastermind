@@ -8,6 +8,8 @@ public class Controller {
 
     private final String GAME_TYPE = "game";
     private final String GAME_MODE = "mode";
+    private final int GAME1 = 1;
+    private final int GAME2 = 2;
 
     private Scanner scanner;
 
@@ -23,8 +25,8 @@ public class Controller {
         System.out.println("[1] - Mastermind");
         System.out.println("[2] - Recherche +/-");
 
-        String GAME_MSG = "Saissir le numéro correspondant au jeu souhaité";
-        return getInput(GAME_TYPE, GAME_MSG);
+        String gameMsg = "Saissir le numéro correspondant au jeu souhaité";
+        return getParamsInput(GAME_TYPE, gameMsg);
     }
 
     public int getMode(){
@@ -35,12 +37,12 @@ public class Controller {
         System.out.println("[2] - Duel");
         System.out.println("[3] - Défenseur");
 
-        String MODE_MSG = "Saissir le numéro correspondant au mode de jeu souhaité";
-        return getInput(GAME_MODE, MODE_MSG);
+        String modeMsg = "Saissir le numéro correspondant au mode de jeu souhaité";
+        return getParamsInput(GAME_MODE, modeMsg);
 
     }
 
-    private int getInput(String type, String msg){
+    private int getParamsInput(String type, String msg){
 
         int nbChoices = 0;
         int input;
@@ -52,12 +54,27 @@ public class Controller {
 
             String line = scanner.nextLine();
 
-            if (!CheckInput.config(line, nbChoices)) System.out.println(msg);
+            if (!CheckInput.params(line, nbChoices)) System.out.println(msg);
             else {
                 input = Integer.parseInt(line);
                 break;
             }
         }
         return input;
+    }
+
+    public String getGameInput(int nbNumbers){
+
+        String line;
+
+        while (true){
+
+            line = scanner.nextLine();
+
+            if(!CheckInput.isApproved(line, nbNumbers)) continue;
+            else break;
+        }
+
+        return line;
     }
 }
