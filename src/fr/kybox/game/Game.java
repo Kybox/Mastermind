@@ -1,21 +1,35 @@
 package fr.kybox.game;
 
 import fr.kybox.controller.Controller;
+import fr.kybox.game.mode.Challenger;
+import org.apache.log4j.LogManager;
+import org.apache.log4j.Logger;
 
 public class Game {
 
-    private Controller controller;
+    private static final Logger LOG = LogManager.getLogger(Game.class);
 
     public Game(){
 
-        // Instance du controlleur
-        controller = new Controller();
+        Controller controller = new Controller();
+
+        int game = controller.getGame();
+
+        switch (game){
+            case 1:
+                System.out.println("Jeu sélectionné -> Mastermind");
+                break;
+            case 2:
+                System.out.println("Jeu sélectionné -> Recherche +/-");
+                break;
+        }
 
         int mode = controller.getMode();
 
         switch (mode){
             case 1:
                 System.out.println("Mode sélectionné -> Challenger");
+                new Challenger();
                 break;
             case 2:
                 System.out.println("Mode sélectionné -> Duel");

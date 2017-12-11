@@ -1,23 +1,19 @@
 package fr.kybox;
 
 import fr.kybox.game.Game;
+import fr.kybox.utils.Settings;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 
 public class Mastermind {
 
-    private static Logger logger = LogManager.getLogger(Mastermind.class);
+    private static final Logger LOG = LogManager.getLogger(Mastermind.class);
 
     public static void main(String[] args) {
 
-        logger.debug("msg de debug");
-        logger.info("msg d'info");
-        logger.warn("msg warning");
-        logger.error("msg error");
-        logger.fatal("msg fatal");
+        LOG.info("Mastermind v1");
 
-        System.out.println("Mastermind v1");
-
-        Game game = new Game();
+        if(Settings.loadProperties() != null) { Game game = new Game(); }
+        else LOG.info("Not properties loaded, exit the application");
     }
 }

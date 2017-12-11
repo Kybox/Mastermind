@@ -1,28 +1,21 @@
 package fr.kybox.utils;
 
+import java.util.Random;
+
 public class SecretCode {
 
-    public static int[] generate(){
+    public static int[] generate(int boxes, int nbNumbers){
 
         int index = 0;
-        int[] keys = new int[4];
+        Random random = new Random();
+        int[] keys = new int[boxes];
 
-        while (index < 4){
+        while (index < boxes){
 
-            boolean insert = true;
-            int key = (int) (10 * Math.random());
+            int key = random.nextInt(nbNumbers);
 
-            for(int value : keys){
-                if(value == key) {
-                    insert = false;
-                    break;
-                }
-            }
-
-            if(insert) {
-                keys[index] = key;
-                index++;
-            }
+            keys[index] = key;
+            index++;
         }
 
         return keys;

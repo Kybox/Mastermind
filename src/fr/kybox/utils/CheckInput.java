@@ -1,17 +1,16 @@
 package fr.kybox.utils;
 
-import java.util.Scanner;
+import static java.lang.Integer.parseInt;
 
 public class CheckInput {
 
-    public static boolean gameMode(String s){
-        try{ Integer.parseInt(s); }
-        catch (NumberFormatException e) { return false; }
-        catch (NullPointerException e) { return false; }
+    public static boolean config(String s, int max){
 
-        int mode = Integer.parseInt(s);
+        try{ parseInt(s); }
+        catch (NumberFormatException | NullPointerException e) { return false; }
 
-        if(mode != 0 && mode < 4) return true;
-        else return false;
+        int mode = parseInt(s);
+
+        return mode != 0 && mode < (max + 1);
     }
 }
