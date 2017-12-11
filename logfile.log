@@ -1,0 +1,5 @@
+2017-12-11 15:06:29.924 [main] DEBUG fr.kybox.Mastermind - msg de debug
+2017-12-11 15:06:29.924 [main] INFO  fr.kybox.Mastermind - msg d'info
+2017-12-11 15:06:29.924 [main] WARN  fr.kybox.Mastermind - msg warning
+2017-12-11 15:06:29.924 [main] ERROR fr.kybox.Mastermind - msg error
+2017-12-11 15:06:29.924 [main] FATAL fr.kybox.Mastermind - msg fatal
