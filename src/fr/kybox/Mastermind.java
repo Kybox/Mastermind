@@ -11,7 +11,7 @@ public class Mastermind {
 
     public static void main(String[] args) {
 
-        LOG.info("Mastermind v1");
+        LOG.info("Mastermind + Jeu de réflexion v1");
 
         if(Settings.loadProperties() != null) { Game game = new Game(); }
         else LOG.info("Not properties loaded, exit the application");

@@ -2,6 +2,7 @@ package fr.kybox.game;
 
 import fr.kybox.controller.Controller;
 import fr.kybox.game.mode.Challenger;
+import fr.kybox.game.mode.Defender;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 
@@ -36,6 +37,7 @@ public class Game {
                 break;
             case 3:
                 System.out.println("Mode sélectionné -> Défenseur");
+                new Defender(game);
                 break;
         }
     }

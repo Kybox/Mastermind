@@ -63,7 +63,7 @@ public class Controller {
         return input;
     }
 
-    public String getGameInput(int nbNumbers){
+    public String getGameInput(int nbBoxes, int maxNumbers){
 
         String line;
 
@@ -71,10 +71,48 @@ public class Controller {
 
             line = scanner.nextLine();
 
-            if(!CheckInput.isApproved(line, nbNumbers)) continue;
+            if(!CheckInput.isApproved(line, nbBoxes, maxNumbers)) continue;
             else break;
         }
 
         return line;
+    }
+
+    public String getSecretCode(int nbBoxes, int maxNumbers){
+
+        System.out.println("-----------------------------");
+        System.out.println("Sélectionner votre combinaison secrête :");
+        System.out.println("(" + nbBoxes + " chiffres compris entre 0 et " + (maxNumbers - 1) + ")");
+
+        String line;
+
+        while (true){
+
+            line = scanner.nextLine();
+
+            if(!CheckInput.isApproved(line, nbBoxes, maxNumbers)) continue;
+            else break;
+        }
+
+        return line;
+    }
+
+    public String getClues(int game, int nbBoxes){
+
+        String line = "";
+
+        if(game == GAME2){
+
+            while (true){
+
+                line = scanner.nextLine();
+
+                if(!CheckInput.checkCluesGame2(line, nbBoxes)) continue;
+                else break;
+            }
+
+            return line;
+        }
+        else return line;
     }
 }

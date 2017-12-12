@@ -40,7 +40,7 @@ public class Challenger {
             System.out.println("-------------------------");
             System.out.println("Saisir une combinaison : ");
 
-            String trial = controller.getGameInput(Settings.getBoxes());
+            String trial = controller.getGameInput(Settings.getBoxes(), Settings.getMaxNumbers());
 
             System.out.print("Proposition : " + trial);
             System.out.print(" -> Réponse : ");

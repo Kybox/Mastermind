@@ -18,7 +18,7 @@ public class CheckInput {
         return parseInt(s);
     }
 
-    public static boolean isApproved(String s, int length){
+    public static boolean isApproved(String s, int nbBoxes, int maxNumbers){
 
         try{ parseInt(s); }
         catch (NumberFormatException | NullPointerException e) {
@@ -26,12 +26,37 @@ public class CheckInput {
             return false;
         }
 
-        if(s.length() < length || s.length() > length) {
-            System.out.println("Vous devez saisir une combinaison de " + length + " chiffres !");
+        if(s.length() < nbBoxes || s.length() > nbBoxes) {
+            System.out.println("Vous devez saisir une combinaison de " + nbBoxes + " chiffres !");
             return false;
         }
-        else return true;
+
+        for(int i = 0; i < s.length(); i++){
+            if(Integer.parseInt(String.valueOf(s.charAt(i))) > maxNumbers - 1) {
+                System.out.println("Vous devez saisir des chiffres inférieurs ou égals à " + (maxNumbers - 1));
+                return false;
+            }
+        }
+
+        return true;
     }
 
+    public static boolean checkCluesGame2(String s, int nbBoxes){
 
+        if(s.length() != nbBoxes) {
+            System.out.println("Vous devez saisir un indice pour chacun des " + nbBoxes + " chiffres !");
+            return false;
+        }
+        else {
+            for (int i = 0; i < s.length(); i++) {
+                if(s.charAt(i) != '-' && s.charAt(i) != '=' && s.charAt(i) != '+') {
+                    System.out.println("Vous devez saisir un indice (- ou = ou +) pour chaque chiffre");
+                    System.out.println("Exemple : +--=");
+                    return false;
+                }
+            }
+
+            return true;
+        }
+    }
 }

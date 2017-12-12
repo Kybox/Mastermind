@@ -35,7 +35,7 @@ public class SecretCode {
         else return false;
     }
 
-    private static int[] convertToDigit(String code){
+    public static int[] convertToDigit(String code){
 
         int[] result = new int[code.length()];
 
@@ -43,7 +43,6 @@ public class SecretCode {
             try{ result[i] = Integer.parseInt(String.valueOf(code.charAt(i))); }
             catch (NumberFormatException e ) { LOG.fatal("Invalid code to digit conversion"); }
         }
-
         return result;
     }
 
