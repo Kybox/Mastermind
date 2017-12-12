@@ -1,6 +1,7 @@
 package fr.kybox.game.mode;
 
 import fr.kybox.controller.Controller;
+import fr.kybox.game.Game;
 import fr.kybox.utils.SecretCode;
 import fr.kybox.utils.Settings;
 
@@ -8,15 +9,13 @@ import java.util.Arrays;
 
 public class Challenger {
 
-    private int game;
     private int[] secretCode;
 
-    public Challenger(int game){
+    public Challenger(){
 
-        this.game = game;
         setSecretCode();
 
-        switch (game){
+        switch (Game.GAME_TYPE){
             case 1:
                 System.out.println("Début de la partie Mastermind en mode Challenger");
                 break;
@@ -46,7 +45,7 @@ public class Challenger {
             System.out.print(" -> Réponse : ");
 
             if(SecretCode.isEqual(secretCode, trial)) gameOver = true;
-            else System.out.println(SecretCode.getClues(game, secretCode, trial));
+            else System.out.println(SecretCode.getClues(Game.GAME_TYPE, secretCode, trial));
 
         }
         while(!gameOver);

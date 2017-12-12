@@ -8,15 +8,16 @@ import org.apache.log4j.Logger;
 
 public class Game {
 
+    public static int GAME_TYPE;
     private static final Logger LOG = LogManager.getLogger(Game.class);
 
     public Game(){
 
         Controller controller = new Controller();
 
-        int game = controller.getGame();
+        GAME_TYPE = controller.getGame();
 
-        switch (game){
+        switch (GAME_TYPE){
             case 1:
                 System.out.println("Jeu sélectionné -> Mastermind");
                 break;
@@ -30,14 +31,14 @@ public class Game {
         switch (mode){
             case 1:
                 System.out.println("Mode sélectionné -> Challenger");
-                new Challenger(game);
+                new Challenger();
                 break;
             case 2:
                 System.out.println("Mode sélectionné -> Duel");
                 break;
             case 3:
                 System.out.println("Mode sélectionné -> Défenseur");
-                new Defender(game);
+                new Defender();
                 break;
         }
     }

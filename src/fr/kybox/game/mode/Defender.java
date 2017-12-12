@@ -1,20 +1,18 @@
 package fr.kybox.game.mode;
 
 import fr.kybox.controller.Controller;
+import fr.kybox.game.Game;
 import fr.kybox.game.player.AI;
 import fr.kybox.utils.SecretCode;
 import fr.kybox.utils.Settings;
 
 public class Defender {
 
-    private int game;
     private int[] secretCode;
 
     private Controller controller;
 
-    public Defender(int game){
-
-        this.game = game;
+    public Defender(){
 
         controller = new Controller();
 
@@ -27,7 +25,7 @@ public class Defender {
     private void startGame(){
 
         boolean gameOver = false;
-        AI computer = new AI(Settings.getBoxes(), Settings.getMaxNumbers(), game);
+        AI computer = new AI(Settings.getBoxes(), Settings.getMaxNumbers(), Game.GAME_TYPE);
 
         do{
             System.out.println("-------------------------");
@@ -39,7 +37,7 @@ public class Defender {
             if(!SecretCode.isEqual(secretCode, code)) {
 
                 System.out.println("Réponse :");
-                computer.setClues(controller.getClues(game, Settings.getBoxes()));
+                computer.setClues(controller.getClues(Game.GAME_TYPE, Settings.getBoxes()));
             }
             else gameOver = true;
         }
