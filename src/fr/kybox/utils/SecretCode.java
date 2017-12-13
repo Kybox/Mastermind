@@ -12,13 +12,27 @@ public class SecretCode {
 
     public static int[] generate(int boxes, int nbNumbers){
 
-        int index = 0;
+        int index = 0, key;
         Random random = new Random();
         int[] keys = new int[boxes];
 
         while (index < boxes){
 
-            int key = random.nextInt(nbNumbers);
+            boolean exist;
+
+            do{
+                exist = false;
+
+                key = random.nextInt(nbNumbers);
+
+                for (int i = 0; i < index; i++) {
+                    if (keys[i] == key) {
+                        exist = true;
+                        break;
+                    }
+                }
+            }
+            while (exist);
 
             keys[index] = key;
             index++;
@@ -26,6 +40,8 @@ public class SecretCode {
 
         return keys;
     }
+
+
 
     public static boolean isEqual(int[] secretCode, String userCode){
 

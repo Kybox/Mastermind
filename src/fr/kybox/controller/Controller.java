@@ -101,7 +101,17 @@ public class Controller {
 
         String line = "";
 
-        if(game == GAME2){
+        if(game == GAME1){
+
+            while (true){
+
+                line = scanner.nextLine();
+
+                if(!CheckInput.checkCluesGame1(line)) continue;
+                else break;
+            }
+        }
+        else if(game == GAME2){
 
             while (true){
 
@@ -110,9 +120,8 @@ public class Controller {
                 if(!CheckInput.checkCluesGame2(line, nbBoxes)) continue;
                 else break;
             }
-
-            return line;
         }
-        else return line;
+
+        return line;
     }
 }
