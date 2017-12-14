@@ -1,5 +1,6 @@
 package fr.kybox.controller;
 
+import fr.kybox.game.Game;
 import fr.kybox.utils.CheckInput;
 
 import java.util.Scanner;
@@ -97,29 +98,26 @@ public class Controller {
         return line;
     }
 
-    public String getClues(int game, int nbBoxes){
+    public String getClues(int nbBoxes, String code, int[] secretCode){
 
         String line = "";
 
-        if(game == GAME1){
+        switch (Game.GAME_TYPE){
+            case 1:
+                while (true){
+                    line = scanner.nextLine();
+                    if(!CheckInput.getCluesGame1(line, code, secretCode)) continue;
+                    else break;
+                }
+                break;
 
-            while (true){
-
-                line = scanner.nextLine();
-
-                if(!CheckInput.checkCluesGame1(line)) continue;
-                else break;
-            }
-        }
-        else if(game == GAME2){
-
-            while (true){
-
-                line = scanner.nextLine();
-
-                if(!CheckInput.checkCluesGame2(line, nbBoxes)) continue;
-                else break;
-            }
+            case 2:
+                while (true){
+                    line = scanner.nextLine();
+                    if(!CheckInput.getCluesGame2(line, nbBoxes)) continue;
+                    else break;
+                }
+                break;
         }
 
         return line;

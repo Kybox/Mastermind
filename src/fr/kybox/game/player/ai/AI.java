@@ -64,9 +64,6 @@ public class AI {
                     strCode = strCode + code[i];
                 }
             }
-
-            trials++;
-            return strCode;
         }
         else if(Game.GAME_TYPE == 2) {
             for (int i = 0; i < nbBoxes; i++) {

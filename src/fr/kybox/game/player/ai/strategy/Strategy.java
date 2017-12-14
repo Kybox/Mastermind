@@ -30,10 +30,6 @@ public class Strategy {
         int wellPut = Integer.parseInt(String.valueOf(clues.charAt(0)));
         int existing = Integer.parseInt(String.valueOf(clues.charAt(2)));
 
-        Display.info("wellput : " + wellPut);
-        Display.info("existing : " + existing);
-
-
         if(wellPut == 0) combinationList = removeAllFor(code);
         else wellPutList.put(code, wellPut);
 
@@ -72,8 +68,7 @@ public class Strategy {
 
         Display.info(uselessList.size() + " codes to remove");
 
-        for(int[] value : uselessList)
-            combinationList.remove(value);
+        for(int[] value : uselessList) combinationList.remove(value);
 
         return combinationList;
     }
@@ -84,22 +79,18 @@ public class Strategy {
 
         for(int[] value : combinationList){
             for(int i = 0; i < value.length; i++){
-                Display.info("value[i] = " + value[i] + " == code[i] = " + code[i]);
-                if(value[i] == code[i]) {
-                    uselessList.add(value);
-                    System.out.println("to remove : " + Arrays.toString(value));
-                }
+                if(value[i] == code[i]) uselessList.add(value);
             }
         }
 
-        Display.info(uselessList.size() + " codes to remove");
-
-        for(int[] value : uselessList) {
-            combinationList.remove(value);
-        }
-
+        for(int[] value : uselessList) combinationList.remove(value);
 
         return combinationList;
+    }
+
+    private void checkWellPlaced(){
+
+
     }
 
     private ArrayList<int[]> setCombinations(){

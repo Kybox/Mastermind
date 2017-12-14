@@ -3,6 +3,7 @@ package fr.kybox.game.mode;
 import fr.kybox.controller.Controller;
 import fr.kybox.game.Game;
 import fr.kybox.game.player.ai.AI;
+import fr.kybox.utils.CheckInput;
 import fr.kybox.utils.SecretCode;
 import fr.kybox.utils.Settings;
 import fr.kybox.view.Display;
@@ -40,7 +41,9 @@ public class Defender {
             if(!SecretCode.isEqual(secretCode, code)) {
 
                 Display.info("Réponse :");
-                computer.setClues(controller.getClues(Game.GAME_TYPE, Settings.getBoxes()));
+
+                String clues = controller.getClues(Settings.getBoxes(), code, secretCode);
+                computer.setClues(clues);
             }
             else gameOver = true;
         }
