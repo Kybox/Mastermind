@@ -34,13 +34,14 @@ public class Strategy {
         else wellPutList.put(code, wellPut);
 
         if(existing == code.length) combinationList = removeNotContain(code);
+        else if(existing + wellPut == code.length) combinationList = removeNotContain(code);
         else if(existing == 0) combinationList = removeAllFor(code);
         else existingList.put(code, existing);
 
         combinationList.remove(code);
 
         Display.info( combinationList.size() + " combinaitions left");
-        diplayCombinations();
+        //diplayCombinations();
     }
 
     public int[] getNewCode(){

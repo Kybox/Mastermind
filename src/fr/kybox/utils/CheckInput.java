@@ -58,7 +58,7 @@ public class CheckInput {
         }
         else if(!checkClues(s, code, secretCode)){
             Display.leading("Votre indice n'est pas correct");
-            Display.leading("Merci de vérifier votre réponse.");
+            Display.leading("Merci de vérifier votre réponse");
             Display.info("\tVous devez saisir 2 indices séparés par une virgule :");
             Display.info("\tle premier pour le nombre de chiffre bien placés,");
             Display.info("\tet le second pour le nombre de chiffres présents mal placés");
