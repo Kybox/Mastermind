@@ -46,8 +46,8 @@ public class CheckInput {
         if(s.length() != 3 || s.charAt(1) != ','
                 || !Character.isDigit(s.charAt(0)) || !Character.isDigit(s.charAt(2))){
             System.out.println("Vous devez saisir 2 indices séparés par une virgule :");
-            System.out.println("le premier pour le nombre de chiffre présents,");
-            System.out.println("et le second pour le nombre de chiffres bien placés");
+            System.out.println("le premier pour le nombre de chiffre bien placés,");
+            System.out.println("et le second pour le nombre de chiffres présents mal placés");
             System.out.println("Exemple : 1 bien placé & 2 présents donne -> 1,2");
             return false;
         }
