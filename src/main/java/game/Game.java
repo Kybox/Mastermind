@@ -1,8 +1,8 @@
-package fr.kybox.game;
+package main.java.game;
 
-import fr.kybox.controller.Controller;
-import fr.kybox.game.mode.Challenger;
-import fr.kybox.game.mode.Defender;
+import main.java.controller.Controller;
+import main.java.game.mode.Challenger;
+import main.java.game.mode.Defender;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 

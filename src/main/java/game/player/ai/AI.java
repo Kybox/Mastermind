@@ -1,7 +1,7 @@
-package fr.kybox.game.player.ai;
+package main.java.game.player.ai;
 
-import fr.kybox.game.Game;
-import fr.kybox.game.player.ai.strategy.Strategy;
+import main.java.game.player.ai.strategy.Strategy;
+import main.java.game.Game;
 
 import java.util.*;
 

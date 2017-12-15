@@ -1,6 +1,6 @@
-package fr.kybox.game.player.ai.strategy;
+package main.java.game.player.ai.strategy;
 
-import fr.kybox.view.Display;
+import main.java.view.Display;
 
 import java.util.*;
 
@@ -21,7 +21,6 @@ public class Strategy {
         wellPutList = new HashMap<>();
         existingList = new HashMap<>();
         Display.info(combinationList.size() + " total combinations parsed");
-        diplayCombinations();
 
     }
 
@@ -41,7 +40,6 @@ public class Strategy {
         combinationList.remove(code);
 
         Display.info( combinationList.size() + " combinaitions left");
-        //diplayCombinations();
     }
 
     public int[] getNewCode(){
@@ -105,8 +103,6 @@ public class Strategy {
 
         getCombinations(nbList, "", nbList.length, nbBoxes, list);
 
-        Display.info("Total combinations without parse = " + list.size());
-
         return parseDuplicates(list);
     }
 
@@ -156,11 +152,5 @@ public class Strategy {
         for(int[] value : duplicateList) list.remove(value);
 
         return list;
-    }
-
-    private void diplayCombinations(){
-
-        for(int[] value : combinationList)
-            System.out.println(Arrays.toString(value));
     }
 }

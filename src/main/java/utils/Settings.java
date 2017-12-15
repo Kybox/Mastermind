@@ -1,6 +1,6 @@
-package fr.kybox.utils;
+package main.java.utils;
 
-import fr.kybox.Mastermind;
+import main.java.Mastermind;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 
@@ -11,7 +11,7 @@ import java.util.Properties;
 public class Settings {
 
     private static Properties SETTINGS;
-    private static final String FILE = "config.properties";
+    private static final String FILE = "main/resources/config.properties";
     private static final Logger LOG = LogManager.getLogger(Settings.class);
 
     public static Properties loadProperties(){
@@ -47,7 +47,9 @@ public class Settings {
         Integer boxes = null;
 
         try{ boxes = Integer.parseInt(SETTINGS.getProperty("nbBoxes")); }
-        catch (NumberFormatException | NullPointerException e) { LOG.error("Error in the configuration file for boxes"); }
+        catch (NumberFormatException | NullPointerException e) {
+            LOG.error("Error in the configuration file for boxes");
+        }
         return boxes;
     }
 

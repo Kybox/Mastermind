@@ -1,4 +1,4 @@
-package fr.kybox.utils;
+package main.java.utils;
 
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;

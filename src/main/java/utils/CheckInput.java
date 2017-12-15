@@ -1,7 +1,7 @@
-package fr.kybox.utils;
+package main.java.utils;
 
-import fr.kybox.game.Game;
-import fr.kybox.view.Display;
+import main.java.game.Game;
+import main.java.view.Display;
 
 import java.util.Arrays;
 

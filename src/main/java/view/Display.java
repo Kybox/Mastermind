@@ -1,4 +1,4 @@
-package fr.kybox.view;
+package main.java.view;
 
 public class Display {
 

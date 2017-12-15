@@ -1,7 +1,8 @@
-package fr.kybox.controller;
+package main.java.controller;
 
-import fr.kybox.game.Game;
-import fr.kybox.utils.CheckInput;
+import main.java.game.Game;
+import main.java.utils.CheckInput;
+import main.java.view.Display;
 
 import java.util.Scanner;
 
@@ -9,8 +10,6 @@ public class Controller {
 
     private final String GAME_TYPE = "game";
     private final String GAME_MODE = "mode";
-    private final int GAME1 = 1;
-    private final int GAME2 = 2;
 
     private Scanner scanner;
 
@@ -21,10 +20,10 @@ public class Controller {
 
     public int getGame(){
 
-        System.out.println("-----------------------------");
-        System.out.println("Sélectionner un jeu :");
-        System.out.println("[1] - Mastermind");
-        System.out.println("[2] - Recherche +/-");
+        Display.info("-----------------------------");
+        Display.info("Sélectionner un jeu :");
+        Display.info("[1] - Mastermind");
+        Display.info("[2] - Recherche +/-");
 
         String gameMsg = "Saissir le numéro correspondant au jeu souhaité";
         return getParamsInput(GAME_TYPE, gameMsg);
@@ -32,11 +31,11 @@ public class Controller {
 
     public int getMode(){
 
-        System.out.println("-----------------------------");
-        System.out.println("Sélectionner un mode de jeu :");
-        System.out.println("[1] - Challenger");
-        System.out.println("[2] - Duel");
-        System.out.println("[3] - Défenseur");
+        Display.info("-----------------------------");
+        Display.info("Sélectionner un mode de jeu :");
+        Display.info("[1] - Challenger");
+        Display.info("[2] - Duel");
+        Display.info("[3] - Défenseur");
 
         String modeMsg = "Saissir le numéro correspondant au mode de jeu souhaité";
         return getParamsInput(GAME_MODE, modeMsg);
@@ -81,9 +80,9 @@ public class Controller {
 
     public String getSecretCode(int nbBoxes, int maxNumbers){
 
-        System.out.println("-----------------------------");
-        System.out.println("Sélectionner votre combinaison secrête :");
-        System.out.println("(" + nbBoxes + " chiffres compris entre 0 et " + (maxNumbers - 1) + ")");
+        Display.info("-----------------------------");
+        Display.info("Sélectionner votre combinaison secrête :");
+        Display.info("(" + nbBoxes + " chiffres compris entre 0 et " + (maxNumbers - 1) + ")");
 
         String line;
 

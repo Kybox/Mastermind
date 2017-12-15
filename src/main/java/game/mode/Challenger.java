@@ -1,9 +1,9 @@
-package fr.kybox.game.mode;
+package main.java.game.mode;
 
-import fr.kybox.controller.Controller;
-import fr.kybox.game.Game;
-import fr.kybox.utils.SecretCode;
-import fr.kybox.utils.Settings;
+import main.java.controller.Controller;
+import main.java.game.Game;
+import main.java.utils.SecretCode;
+import main.java.utils.Settings;
 
 import java.util.Arrays;
 
