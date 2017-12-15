@@ -1,6 +1,7 @@
 package main.java.game.mode;
 
 import main.java.controller.Controller;
+import main.java.game.GameOver;
 import main.java.game.player.ai.AI;
 import main.java.utils.SecretCode;
 import main.java.utils.Settings;
@@ -11,14 +12,14 @@ public class Defender {
     private int[] secretCode;
     private AI computer;
     private Controller controller;
+    private GameOver gameOver;
 
-    public Defender(){
+    public Defender(GameOver gameOver){
 
+        this.gameOver = gameOver;
         controller = new Controller();
-
         String code = controller.getSecretCode(Settings.getBoxes(), Settings.getMaxNumbers());
         secretCode = SecretCode.convertToDigit(code);
-
         startGame();
     }
 

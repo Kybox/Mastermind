@@ -2,22 +2,28 @@ package main.java.game.mode;
 
 import main.java.controller.Controller;
 import main.java.game.Game;
+import main.java.game.GameOver;
 import main.java.utils.SecretCode;
 import main.java.utils.Settings;
+import main.java.view.Display;
 
 import java.util.Arrays;
 
 public class Challenger {
 
+    private GameOver gameOver;
     private int[] secretCode;
+    private int maxTrials;
 
-    public Challenger(){
+    public Challenger(GameOver gameOver){
 
         setSecretCode();
+        this.gameOver = gameOver;
+        maxTrials = Settings.getTrials();
 
         switch (Game.GAME_TYPE){
             case 1:
-                System.out.println("Début de la partie Main en mode Challenger");
+                System.out.println("Début de la partie Mastermind en mode Challenger");
                 break;
 
             case 2:
@@ -31,26 +37,36 @@ public class Challenger {
     private void startGame(){
 
         Controller controller = new Controller();
-        boolean gameOver = false;
+        boolean blnGameOver = false;
+        boolean win = false;
+        int trials = 0;
 
-        System.out.println("Combinaison secrête : " + Arrays.toString(secretCode));
+        Display.info("Combinaison secrête : " + Arrays.toString(secretCode));
 
         do{
-            System.out.println("-------------------------");
-            System.out.println("Saisir une combinaison : ");
+            trials++;
 
-            String trial = controller.getGameInput(Settings.getBoxes(), Settings.getMaxNumbers());
+            if(trials > maxTrials) {
+                win = false;
+                blnGameOver = true;
+            }
+            else {
+                Display.info("-------------------------");
+                Display.info("Saisir une combinaison : ");
 
-            System.out.print("Proposition : " + trial);
-            System.out.print(" -> Réponse : ");
+                String trial = controller.getGameInput(Settings.getBoxes(), Settings.getMaxNumbers());
 
-            if(SecretCode.isEqual(secretCode, trial)) gameOver = true;
-            else System.out.println(SecretCode.getClues(Game.GAME_TYPE, secretCode, trial));
-
+                if (SecretCode.isEqual(secretCode, trial)) {
+                    win = true;
+                    blnGameOver = true;
+                }
+                else
+                    Display.info("Réponse : " + SecretCode.getClues(Game.GAME_TYPE, secretCode, trial));
+            }
         }
-        while(!gameOver);
+        while(!blnGameOver);
 
-        System.out.println("Bravo, vous avez trouvé la combinaison secrête !");
+        gameOver.display(win, Arrays.toString(secretCode), trials);
     }
 
     private void setSecretCode(){

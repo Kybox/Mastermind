@@ -58,8 +58,18 @@ public class Settings {
         Integer nbNumbers = null;
 
         try { nbNumbers = Integer.parseInt(SETTINGS.getProperty("nbNumbers")); }
-        catch (NumberFormatException e) { LOG.error("Error in the configutation file total numbers"); }
-        catch (NullPointerException e) { LOG.error("Error in the configuration file for boxes"); }
+        catch (NumberFormatException e) { LOG.error("Error in the configutation file, wrong number format"); }
+        catch (NullPointerException e) { LOG.error("Error in the configuration file range of numbers"); }
         return nbNumbers;
+    }
+
+    public static int getTrials(){
+
+        Integer nbTrials = null;
+
+        try { nbTrials = Integer.parseInt(SETTINGS.getProperty("nbTrials")); }
+        catch (NumberFormatException e) { LOG.error("Error in the configutation file, wrong number format"); }
+        catch (NullPointerException e) { LOG.error("Error in the configuration file for trials"); }
+        return nbTrials;
     }
 }

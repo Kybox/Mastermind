@@ -19,10 +19,6 @@ public class CheckInput {
         return mode != 0 && mode < (max + 1);
     }
 
-    public static int getInteger(String s){
-        return parseInt(s);
-    }
-
     public static boolean isApproved(String s, int nbBoxes, int maxNumbers){
 
         try{ parseInt(s); }
@@ -69,14 +65,14 @@ public class CheckInput {
     public static boolean getCluesGame2(String s, int nbBoxes){
 
         if(s.length() != nbBoxes) {
-            Display.info("Vous devez saisir un indice pour chacun des " + nbBoxes + " chiffres !");
+            Display.leading("Vous devez saisir un indice pour chacun des " + nbBoxes + " chiffres !");
             return false;
         }
         else {
             for (int i = 0; i < s.length(); i++) {
                 if(s.charAt(i) != '-' && s.charAt(i) != '=' && s.charAt(i) != '+') {
                     Display.leading("Vous devez saisir un indice (- ou = ou +) pour chaque chiffre");
-                    Display.info("\tExemple : +--=");
+                    Display.leading("\tExemple : +--=");
                     return false;
                 }
             }
@@ -104,6 +100,15 @@ public class CheckInput {
                 return false;
 
             default: return false;
+        }
+    }
+
+    public static boolean checkReply(String reply){
+
+        if(reply.equals("1") || reply.equals("2") || reply.equals("3")) return true;
+        else {
+            Display.leading("Veuillez saisir 1, 2 ou 3 suivant votre choix de réponse");
+            return false;
         }
     }
 }

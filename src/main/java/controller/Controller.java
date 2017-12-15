@@ -20,9 +20,8 @@ public class Controller {
 
     public int getGame(){
 
-        Display.info("-----------------------------");
         Display.info("Sélectionner un jeu :");
-        Display.info("[1] - Main");
+        Display.info("[1] - Mastermind");
         Display.info("[2] - Recherche +/-");
 
         String gameMsg = "Saissir le numéro correspondant au jeu souhaité";
@@ -31,7 +30,7 @@ public class Controller {
 
     public int getMode(){
 
-        Display.info("-----------------------------");
+        Display.info("");
         Display.info("Sélectionner un mode de jeu :");
         Display.info("[1] - Challenger");
         Display.info("[2] - Duel");
@@ -120,5 +119,23 @@ public class Controller {
         }
 
         return line;
+    }
+
+    public int getUserReply(){
+
+        int reply;
+
+        while (true){
+
+            String line = scanner.nextLine();
+
+            if(!CheckInput.checkReply(line)) continue;
+            else {
+                reply = Integer.parseInt(line);
+                break;
+            }
+        }
+
+        return reply;
     }
 }

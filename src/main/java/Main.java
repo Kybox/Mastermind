@@ -8,7 +8,7 @@ import org.apache.log4j.Logger;
 
 public class Main {
 
-    private static final Logger LOG = LogManager.getLogger(Main.class);
+    //private static final Logger LOG = LogManager.getLogger(Main.class);
 
     public static void main(String[] args) {
 
@@ -16,6 +16,6 @@ public class Main {
         Display.info("Main + Jeu de réflexion v1");
 
         if(Settings.loadProperties() != null) { new Game(); }
-        else LOG.info("Not properties loaded, exit the application");
+        //else LOG.info("Not properties loaded, exit the application");
     }
 }
