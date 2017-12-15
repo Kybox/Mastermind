@@ -7,9 +7,8 @@ import java.util.Observable;
 
 public class GameOver extends Observable {
 
-    public GameOver(){
+    public GameOver(){ }
 
-    }
     public void display(boolean win, String code, int trials){
 
         if (win) {
@@ -34,7 +33,7 @@ public class GameOver extends Observable {
             }
 
             Display.info("  Le code secret : " + code);
-            Display.info("  Nombre d'essais : " + trials);
+            Display.info("  Nombre d'essais : " + trials + " / " + Settings.getTrials());
             Display.info("");
         }
         else{

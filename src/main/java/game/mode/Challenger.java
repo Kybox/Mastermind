@@ -54,7 +54,7 @@ public class Challenger {
                 Display.info("-------------------------");
                 Display.info("Saisir une combinaison : ");
 
-                String trial = controller.getGameInput(Settings.getBoxes(), Settings.getMaxNumbers());
+                String trial = controller.getGameInput();
 
                 if (SecretCode.isEqual(secretCode, trial)) {
                     win = true;

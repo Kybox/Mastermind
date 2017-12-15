@@ -62,7 +62,7 @@ public class Controller {
         return input;
     }
 
-    public String getGameInput(int nbBoxes, int maxNumbers){
+    public String getGameInput(){
 
         String line;
 
@@ -70,7 +70,7 @@ public class Controller {
 
             line = scanner.nextLine();
 
-            if(!CheckInput.isApproved(line, nbBoxes, maxNumbers)) continue;
+            if(!CheckInput.isApproved(line)) continue;
             else break;
         }
 
@@ -89,7 +89,7 @@ public class Controller {
 
             line = scanner.nextLine();
 
-            if(!CheckInput.isApproved(line, nbBoxes, maxNumbers)) continue;
+            if(!CheckInput.isApproved(line)) continue;
             else break;
         }
 

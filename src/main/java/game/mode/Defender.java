@@ -59,7 +59,11 @@ public class Defender {
                     Display.info("Réponse :");
                     String clues = controller.getClues(Settings.getBoxes(), newCode, secretCode);
                     computer.setClues(clues);
-                } else blnGameOver = true;
+                }
+                else {
+                    win = true;
+                    blnGameOver = true;
+                }
             }
         }
         while (!blnGameOver);

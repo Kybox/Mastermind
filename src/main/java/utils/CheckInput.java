@@ -19,7 +19,7 @@ public class CheckInput {
         return mode != 0 && mode < (max + 1);
     }
 
-    public static boolean isApproved(String s, int nbBoxes, int maxNumbers){
+    public static boolean isApproved(String s){
 
         try{ parseInt(s); }
         catch (NumberFormatException | NullPointerException e) {
@@ -27,11 +27,13 @@ public class CheckInput {
             return false;
         }
 
+        int nbBoxes = Settings.getBoxes();
         if(s.length() < nbBoxes || s.length() > nbBoxes) {
             Display.info("Vous devez saisir une combinaison de " + nbBoxes + " chiffres !");
             return false;
         }
 
+        int maxNumbers = Settings.getMaxNumbers();
         for(int i = 0; i < s.length(); i++){
             if(Integer.parseInt(String.valueOf(s.charAt(i))) > maxNumbers - 1) {
                 Display.info("Vous devez saisir des chiffres inférieurs ou égals à " + (maxNumbers - 1));
