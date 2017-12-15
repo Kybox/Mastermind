@@ -59,21 +59,35 @@ public class CheckInput {
         }
         else return true;
     }
-    public static boolean getCluesGame2(String s, int nbBoxes){
+    public static boolean getCluesGame2(String s, String code, int[] secretCode){
 
-        if(s.length() != nbBoxes) {
-            Display.error("Vous devez saisir un indice pour chacun des " + nbBoxes + " chiffres !");
+        if(s.length() != Settings.getBoxes()) {
+            Display.error("Vous devez saisir un indice pour chacun des " + Settings.getBoxes() + " chiffres !");
             return false;
         }
         else {
+            boolean error = false;
             for (int i = 0; i < s.length(); i++) {
                 if(s.charAt(i) != '-' && s.charAt(i) != '=' && s.charAt(i) != '+') {
                     Display.error("Vous devez saisir un indice (- ou = ou +) pour chaque chiffre");
                     Display.error("\tExemple : +--=");
                     return false;
                 }
+                else{
+                    int nb = Integer.parseInt(String.valueOf(code.charAt(i)));
+                    if(nb < secretCode[i] && s.charAt(i) != '+') error = true;
+                    else if(nb > secretCode[i] &&  s.charAt(i) != '-') error = true;
+                    else if(nb == secretCode[i] && s.charAt(i) != '=') error = true;
+                    if(error) break;
+                }
             }
-            return true;
+
+            if(error){
+                Display.error("\tVotre indice n'est pas correct !");
+                Display.error("\tMerci de vérifier votre réponse.");
+                return false;
+            }
+            else return true;
         }
     }
 

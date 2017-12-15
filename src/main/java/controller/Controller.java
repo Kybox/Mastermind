@@ -112,7 +112,7 @@ public class Controller {
             case 2:
                 while (true){
                     line = scanner.nextLine();
-                    if(!CheckInput.getCluesGame2(line, nbBoxes)) continue;
+                    if(!CheckInput.getCluesGame2(line, code, secretCode)) continue;
                     else break;
                 }
                 break;
