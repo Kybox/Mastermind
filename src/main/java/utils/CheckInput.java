@@ -46,15 +46,15 @@ public class CheckInput {
 
         if(s.length() != 3 || s.charAt(1) != ','
                 || !Character.isDigit(s.charAt(0)) || !Character.isDigit(s.charAt(2))){
-            Display.leading("Vous devez saisir 2 indices séparés par une virgule :");
+            Display.error("Vous devez saisir 2 indices séparés par une virgule :");
             Display.info("\tle premier pour le nombre de chiffre bien placés,");
             Display.info("\tet le second pour le nombre de chiffres présents mal placés");
             Display.info("\tExemple : 1 bien placé & 2 présents donne -> 1,2");
             return false;
         }
         else if(!checkClues(s, code, secretCode)){
-            Display.leading("\tVotre indice n'est pas correct !");
-            Display.leading("\tMerci de vérifier votre réponse.");
+            Display.error("\tVotre indice n'est pas correct !");
+            Display.error("\tMerci de vérifier votre réponse.");
             return false;
         }
         else return true;
@@ -62,14 +62,14 @@ public class CheckInput {
     public static boolean getCluesGame2(String s, int nbBoxes){
 
         if(s.length() != nbBoxes) {
-            Display.leading("Vous devez saisir un indice pour chacun des " + nbBoxes + " chiffres !");
+            Display.error("Vous devez saisir un indice pour chacun des " + nbBoxes + " chiffres !");
             return false;
         }
         else {
             for (int i = 0; i < s.length(); i++) {
                 if(s.charAt(i) != '-' && s.charAt(i) != '=' && s.charAt(i) != '+') {
-                    Display.leading("Vous devez saisir un indice (- ou = ou +) pour chaque chiffre");
-                    Display.leading("\tExemple : +--=");
+                    Display.error("Vous devez saisir un indice (- ou = ou +) pour chaque chiffre");
+                    Display.error("\tExemple : +--=");
                     return false;
                 }
             }
@@ -104,7 +104,7 @@ public class CheckInput {
 
         if(reply.equals("1") || reply.equals("2") || reply.equals("3")) return true;
         else {
-            Display.leading("Veuillez saisir 1, 2 ou 3 suivant votre choix de réponse");
+            Display.error("Veuillez saisir 1, 2 ou 3 suivant votre choix de réponse");
             return false;
         }
     }

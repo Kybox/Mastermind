@@ -11,17 +11,24 @@ public class Strategy {
     private Map<int[], Integer> wellPutList;
     private int nbBoxes;
     private int maxNumber;
+    private int loop = 0;
+    private int total = 0;
+    private int totalComb = 0;
+    private int percent = 0;
 
     public Strategy(){ }
 
     public void initCombinations(int nbBoxes, int maxNumber){
+
         this.nbBoxes = nbBoxes;
         this.maxNumber = maxNumber;
+
+        totalComb =  (int) Math.pow(maxNumber, nbBoxes);
         combinationList = setCombinations();
         wellPutList = new HashMap<>();
         existingList = new HashMap<>();
-        Display.info(combinationList.size() + " total combinations parsed");
 
+        //Display.info(combinationList.size() + " total combinations parsed");
     }
 
     public void setClues(String clues, int[] code){
@@ -39,7 +46,7 @@ public class Strategy {
 
         combinationList.remove(code);
 
-        Display.info( combinationList.size() + " combinaitions left");
+        //Display.info( combinationList.size() + " combinaitions left");
     }
 
     public int[] getNewCode(){
@@ -65,7 +72,7 @@ public class Strategy {
             }
         }
 
-        Display.info(uselessList.size() + " codes to remove");
+        //Display.info(uselessList.size() + " codes to remove");
 
         for(int[] value : uselessList) combinationList.remove(value);
 
@@ -101,14 +108,31 @@ public class Strategy {
 
         ArrayList<int[]> list = new ArrayList<>();
 
+        Display.info("-----------------------------");
+
         getCombinations(nbList, "", nbList.length, nbBoxes, list);
+
+        Display.info("");
 
         return parseDuplicates(list);
     }
 
     private void getCombinations(char[] set, String prefix, int n, int boxes, ArrayList<int[]> list){
 
+        loop++;
+
+        if(loop == 10000){
+            loop = 0;
+            Runtime runtime = Runtime.getRuntime();
+            runtime.gc();
+            list = parseDuplicates(list);
+        }
+
         if(boxes == 0){
+
+            total++;
+            percent = (total * 100) / totalComb;
+            Display.loading("Chargement de combinaisons... " + percent + "%");
 
             int[] code = new int[nbBoxes];
 
@@ -116,6 +140,7 @@ public class Strategy {
                 code[j] = Integer.parseInt(String.valueOf(prefix.charAt(j)));
 
             list.add(code);
+
             return;
         }
 

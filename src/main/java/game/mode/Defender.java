@@ -22,17 +22,22 @@ public class Defender {
         this.gameOver = gameOver;
         controller = new Controller();
         maxTrials = Settings.getTrials();
-        String code = controller.getSecretCode(Settings.getBoxes(), Settings.getMaxNumbers());
-        secretCode = SecretCode.convertToDigit(code);
+
         startGame();
     }
 
     private void startGame(){
 
         computer = new AI(Settings.getBoxes(), Settings.getMaxNumbers());
+
+        String code = controller.getSecretCode(Settings.getBoxes(), Settings.getMaxNumbers());
+        secretCode = SecretCode.convertToDigit(code);
+
         boolean blnGameOver = false;
         boolean win = false;
-        String code = null;
+
+        String newCode = null;
+
         int trials = 0;
 
         do{
@@ -46,13 +51,13 @@ public class Defender {
                 Display.info("-----------------------------");
                 Display.info("Proposition : ");
 
-                code = computer.generate();
-                System.out.println(code);
+                newCode = computer.generate();
+                System.out.println(newCode);
 
-                if (!SecretCode.isEqual(secretCode, code)) {
+                if (!SecretCode.isEqual(secretCode, newCode)) {
 
                     Display.info("Réponse :");
-                    String clues = controller.getClues(Settings.getBoxes(), code, secretCode);
+                    String clues = controller.getClues(Settings.getBoxes(), newCode, secretCode);
                     computer.setClues(clues);
                 } else blnGameOver = true;
             }

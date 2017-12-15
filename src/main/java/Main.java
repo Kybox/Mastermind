@@ -12,6 +12,6 @@ public class Main {
         Display.info("Main + Jeu de réflexion v1");
 
         if(Settings.loadProperties() != null) new Game();
-        else Display.leading("Error loading configuration file");
+        else Display.error("Error loading configuration file");
     }
 }
