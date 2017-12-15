@@ -22,7 +22,7 @@ public class Controller {
 
         Display.info("-----------------------------");
         Display.info("Sélectionner un jeu :");
-        Display.info("[1] - Mastermind");
+        Display.info("[1] - Main");
         Display.info("[2] - Recherche +/-");
 
         String gameMsg = "Saissir le numéro correspondant au jeu souhaité";

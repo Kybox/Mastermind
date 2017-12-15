@@ -1,6 +1,6 @@
 package main.java.utils;
 
-import main.java.Mastermind;
+import main.java.Main;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 
@@ -21,7 +21,7 @@ public class Settings {
         InputStream inputStream = null;
 
         try {
-            inputStream = Mastermind.class.getClassLoader().getResourceAsStream(FILE);
+            inputStream = Main.class.getClassLoader().getResourceAsStream(FILE);
 
             if(inputStream != null) {
                 properties.load(inputStream);

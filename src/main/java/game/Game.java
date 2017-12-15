@@ -19,7 +19,7 @@ public class Game {
 
         switch (GAME_TYPE){
             case 1:
-                System.out.println("Jeu sélectionné -> Mastermind");
+                System.out.println("Jeu sélectionné -> Main");
                 break;
             case 2:
                 System.out.println("Jeu sélectionné -> Recherche +/-");

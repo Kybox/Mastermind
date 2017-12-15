@@ -17,7 +17,7 @@ public class Challenger {
 
         switch (Game.GAME_TYPE){
             case 1:
-                System.out.println("Début de la partie Mastermind en mode Challenger");
+                System.out.println("Début de la partie Main en mode Challenger");
                 break;
 
             case 2:
