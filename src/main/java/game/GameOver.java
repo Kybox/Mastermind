@@ -17,9 +17,9 @@ public class GameOver extends Observable {
 
             switch (Game.GAME_MODE){
                 case 1:
-                    Display.info("+---------------------------------------------------+");
-                    Display.info("| Bravo, vous avez découvert la combinaison secrête |");
-                    Display.info("+---------------------------------------------------+");
+                    Display.info("+----------------------------------------------------+");
+                    Display.info("| Gagné ! Vous avez découvert la combinaison secrête |");
+                    Display.info("+----------------------------------------------------+");
                     break;
 
                 case 2:
@@ -27,9 +27,9 @@ public class GameOver extends Observable {
                     break;
 
                 case 3:
-                    Display.info("+----------------------------------------------------+");
-                    Display.info("| L'ordinateur a découvert votre combinaison secrête |");
-                    Display.info("+----------------------------------------------------+");
+                    Display.info("+------------------------------------------------------------+");
+                    Display.info("| Perdu ! L'ordinateur a découvert votre combinaison secrête |");
+                    Display.info("+------------------------------------------------------------+");
                     break;
             }
 
@@ -52,12 +52,12 @@ public class GameOver extends Observable {
 
                 case 3:
                     Display.info("+------------------------------------------------------------------+");
-                    Display.info("| Perdu ! L'ordinateur n'a pas découvert votre combinaison secrête |");
+                    Display.info("| Gagné ! L'ordinateur n'a pas découvert votre combinaison secrête |");
                     Display.info("+------------------------------------------------------------------+");
                     break;
             }
 
-            Display.info("  Le code secret : " + code);
+            Display.info("  Combinaison secrête : " + code);
             Display.info("  Nombre d'essais : " + trials + " / " + Settings.getTrials());
             Display.info("");
         }

@@ -7,17 +7,21 @@ import main.java.utils.SecretCode;
 import main.java.utils.Settings;
 import main.java.view.Display;
 
+import java.util.Arrays;
+
 public class Defender {
 
     private int[] secretCode;
     private AI computer;
     private Controller controller;
     private GameOver gameOver;
+    private int maxTrials;
 
     public Defender(GameOver gameOver){
 
         this.gameOver = gameOver;
         controller = new Controller();
+        maxTrials = Settings.getTrials();
         String code = controller.getSecretCode(Settings.getBoxes(), Settings.getMaxNumbers());
         secretCode = SecretCode.convertToDigit(code);
         startGame();
@@ -26,11 +30,19 @@ public class Defender {
     private void startGame(){
 
         computer = new AI(Settings.getBoxes(), Settings.getMaxNumbers());
-        boolean gameOver = false;
+        boolean blnGameOver = false;
+        boolean win = false;
         String code = null;
+        int trials = 0;
 
         do{
-            if(!gameOver) {
+            trials++;
+
+            if(trials > maxTrials) {
+                win = false;
+                blnGameOver = true;
+            }
+            else {
                 Display.info("-----------------------------");
                 Display.info("Proposition : ");
 
@@ -40,26 +52,13 @@ public class Defender {
                 if (!SecretCode.isEqual(secretCode, code)) {
 
                     Display.info("Réponse :");
-
                     String clues = controller.getClues(Settings.getBoxes(), code, secretCode);
                     computer.setClues(clues);
-                }
-                else gameOver = true;
+                } else blnGameOver = true;
             }
         }
-        while (!gameOver);
+        while (!blnGameOver);
 
-        gameOver(code);
-    }
-
-    private void gameOver(String code){
-
-        Display.leading("");
-        Display.leading("+----------------------------------------------------+");
-        Display.leading("| L'ordinateur a découvert votre combinaison secrête |");
-        Display.leading("+----------------------------------------------------+");
-        Display.leading("  Votre code secret : " + code);
-        Display.leading("  Nombre d'essais : " + computer.getTrials());
-        Display.leading("");
+        gameOver.display(win, Arrays.toString(secretCode), trials - 1);
     }
 }
