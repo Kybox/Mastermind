@@ -3,6 +3,7 @@ package main.java.game;
 import main.java.controller.Controller;
 import main.java.game.mode.Challenger;
 import main.java.game.mode.Defender;
+import main.java.game.mode.Duel;
 import main.java.view.Display;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
@@ -51,14 +52,23 @@ public class Game implements Observer{
         switch (GAME_MODE){
             case 1:
                 Display.info("Mode sélectionné -> Challenger");
-                new Challenger(gameOver);
+                Challenger challenger = new Challenger(gameOver);
+                challenger.setAutoManagement(true);
+                challenger.setSecretCode();
+                challenger.startGame();
                 break;
             case 2:
                 Display.info("Mode sélectionné -> Duel");
+                Duel duel = new Duel(gameOver);
+                duel.setSecretCode();
+                duel.startGame();
                 break;
             case 3:
                 Display.info("Mode sélectionné -> Défenseur");
-                new Defender(gameOver);
+                Defender defender = new Defender(gameOver);
+                defender.setAutoManagement(true);
+                defender.setSecretCode();
+                defender.startGame();
                 break;
         }
     }

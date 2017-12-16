@@ -17,22 +17,24 @@ public class GameOver extends Observable {
             switch (Game.GAME_MODE){
                 case 1:
                     Display.info("+----------------------------------------------------+");
-                    Display.info("| Gagné ! Vous avez découvert la combinaison secrête |");
+                    Display.info("| Gagné ! Vous avez découvert la combinaison secrète |");
                     Display.info("+----------------------------------------------------+");
                     break;
 
                 case 2:
-
+                    Display.info("+----------------------------------------------------+");
+                    Display.info("| Gagné ! Vous avez découvert la combinaison secrète |");
+                    Display.info("+----------------------------------------------------+");
                     break;
 
                 case 3:
                     Display.info("+------------------------------------------------------------+");
-                    Display.info("| Perdu ! L'ordinateur a découvert votre combinaison secrête |");
+                    Display.info("| Perdu ! L'ordinateur a découvert votre combinaison secrète |");
                     Display.info("+------------------------------------------------------------+");
                     break;
             }
 
-            Display.info("  Le code secret : " + code);
+            Display.info("  Combinaison secrète : " + code);
             Display.info("  Nombre d'essais : " + trials + " / " + Settings.getTrials());
             Display.info("");
         }
@@ -41,22 +43,24 @@ public class GameOver extends Observable {
             switch (Game.GAME_MODE){
                 case 1:
                     Display.info("+----------------------------------------------------------+");
-                    Display.info("| Perdu ! Vous n'avez pas découvert la combinaison secrête |");
+                    Display.info("| Perdu ! Vous n'avez pas découvert la combinaison secrète |");
                     Display.info("+----------------------------------------------------------+");
                     break;
 
                 case 2:
-
+                    Display.info("+------------------------------------------------------------+");
+                    Display.info("| Gagné ! L'ordinateur a découvert votre combinaison secrète |");
+                    Display.info("+------------------------------------------------------------+");
                     break;
 
                 case 3:
                     Display.info("+------------------------------------------------------------------+");
-                    Display.info("| Gagné ! L'ordinateur n'a pas découvert votre combinaison secrête |");
+                    Display.info("| Gagné ! L'ordinateur n'a pas découvert votre combinaison secrète |");
                     Display.info("+------------------------------------------------------------------+");
                     break;
             }
 
-            Display.info("  Combinaison secrête : " + code);
+            Display.info("  Combinaison secrète : " + code);
             Display.info("  Nombre d'essais : " + trials + " / " + Settings.getTrials());
             Display.info("");
         }

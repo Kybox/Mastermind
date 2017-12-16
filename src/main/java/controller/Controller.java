@@ -21,6 +21,7 @@ public class Controller {
     public int getGame(){
 
         Display.info("Sélectionner un jeu :");
+        Display.info("---------------------");
         Display.info("[1] - Mastermind");
         Display.info("[2] - Recherche +/-");
 
@@ -32,9 +33,10 @@ public class Controller {
 
         Display.info("");
         Display.info("Sélectionner un mode de jeu :");
-        Display.info("[1] - Challenger");
-        Display.info("[2] - Duel");
-        Display.info("[3] - Défenseur");
+        Display.info("-----------------------------");
+        Display.info("[1] - Challenger -> vous devez trouver la combinaison secrète de l'ordinateur");
+        Display.info("[2] - Duel -> l'ordinateur et vous jouez tour à tour pour trouver la combinaison secrète");
+        Display.info("[3] - Défenseur -> c'est à l'ordinateur de trouver votre combinaison secrète");
 
         String modeMsg = "Saissir le numéro correspondant au mode de jeu souhaité";
         return getParamsInput(GAME_MODE, modeMsg);
