@@ -21,6 +21,7 @@ public class Settings {
         InputStream inputStream = null;
 
         try {
+            // Check si input(file)
             inputStream = Main.class.getClassLoader().getResourceAsStream(FILE);
 
             if(inputStream != null) {

@@ -25,6 +25,8 @@ public class Challenger {
         this.gameOver = gameOver;
         controller = new Controller();
         maxTrials = Settings.getTrials();
+
+        //setSecretCode();
     }
 
     public void startGame(){

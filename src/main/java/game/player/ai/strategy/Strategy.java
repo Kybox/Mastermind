@@ -1,6 +1,8 @@
 package main.java.game.player.ai.strategy;
 
 import main.java.view.Display;
+import org.apache.log4j.LogManager;
+import org.apache.log4j.Logger;
 
 import java.util.*;
 
@@ -16,6 +18,8 @@ public class Strategy {
     private int totalComb = 0;
     private int percent = 0;
 
+    private static final Logger LOG = LogManager.getLogger(Strategy.class);
+
     public Strategy(){ }
 
     public void initCombinations(int nbBoxes, int maxNumber){
@@ -25,6 +29,7 @@ public class Strategy {
 
         totalComb =  (int) Math.pow(maxNumber, nbBoxes);
         combinationList = setCombinations();
+
         wellPutList = new HashMap<>();
         existingList = new HashMap<>();
 
@@ -101,81 +106,104 @@ public class Strategy {
 
     private ArrayList<int[]> setCombinations(){
 
-        char[] nbList = new char[maxNumber];
-
-        for(int i = 0; i < maxNumber; i++)
-            nbList[i] = Integer.toString(i).charAt(0);
-
+        String numbers = stringOfNumbers(maxNumber);
         ArrayList<int[]> list = new ArrayList<>();
 
-        Display.info("-----------------------------");
+        if(nbBoxes == numbers.length()) list = getCombinations(numbers, list);
+        else{
+            int nextInt = 0;
+            String strNext = "0";
 
-        getCombinations(nbList, "", nbList.length, nbBoxes, list);
+            for(int j = 0; j < maxNumber; j++){
 
-        Display.info("");
+                String range = numbers.substring(0, nbBoxes);
 
-        return parseDuplicates(list);
-    }
-
-    private void getCombinations(char[] set, String prefix, int n, int boxes, ArrayList<int[]> list){
-
-        loop++;
-
-        if(loop == 10000){
-            loop = 0;
-            Runtime runtime = Runtime.getRuntime();
-            runtime.gc();
-            list = parseDuplicates(list);
-        }
-
-        if(boxes == 0){
-
-            total++;
-            percent = (total * 100) / totalComb;
-            Display.loading("Chargement de combinaisons... " + percent + "%");
-
-            int[] code = new int[nbBoxes];
-
-            for(int j = 0; j < nbBoxes; j++)
-                code[j] = Integer.parseInt(String.valueOf(prefix.charAt(j)));
-
-            list.add(code);
-
-            return;
-        }
-
-        for(int i = 0; i < n; i++){
-            String newPrefix = prefix + set[i];
-            getCombinations(set, newPrefix, n, boxes - 1, list);
-        }
-    }
-
-    private ArrayList<int[]> parseDuplicates(ArrayList<int[]> list){
-
-        ArrayList<int[]> duplicateList = new ArrayList<>();
-
-        for(int[] value : list){
-
-            boolean duplicate = false;
-
-            for(int i = 0; i < value.length; i++){
-
-                for(int j = i + 1; j < value.length; j++){
-
-                    if(i != value.length - 1) {
-                        if (value[i] == value[j]) duplicate = true;
+                if(j != 0) {
+                    if(j + nbBoxes <= numbers.length()){
+                        range = numbers.substring(j, nbBoxes + j);
                     }
                     else{
-                        if(value[i] == value[0]) duplicate = true;
+                        range = numbers.substring(j, numbers.length());
+                        range = range + strNext;
+                        nextInt++;
+                        strNext = strNext + nextInt;
                     }
                 }
+                list = getCombinations(range, list);
             }
-
-            if(duplicate) duplicateList.add(value);
         }
 
-        for(int[] value : duplicateList) list.remove(value);
+
+        LOG.info(list.size() + " combinations combinations ");
+        Display.info("");
 
         return list;
+    }
+
+    /**
+     * Return a ArrayList<int[]> with all permuted characters from a String to Integer array
+     * <p>
+     *     If range equals to "123" the ArrayList contains then the ArrayList contains :
+     *     [1,2,3],[1,3,2],[2,1,3],[2,3,1],[3,1,2],[3,2,1]
+     * </p>
+     * @param   range   The String to swap
+     * @param   list    The ArrayList<int[]> in which to add the permutations
+     * @return          The ArrayList in parameter with new permutations
+     */
+    private ArrayList<int[]> getCombinations(String range, ArrayList<int[]> list){
+
+        int [] factorials = new int[nbBoxes + 1];
+
+        factorials[0] = 1;
+
+        for (int i = 1; i <= nbBoxes; i++) {
+            factorials[i] = factorials[i-1] * i;
+        }
+
+        for (int i = 0; i < factorials[nbBoxes]; i++) {
+
+            String newCode="";
+            String temp = range;
+
+            int index = i;
+
+            for (int j = nbBoxes; j > 0 ;j--){
+
+                int selected = index / factorials[j-1];
+
+                newCode += temp.charAt(selected);
+                index = index % factorials[j-1];
+                temp = temp.substring(0,selected) + temp.substring(selected+1);
+            }
+
+            int[]code = new int[nbBoxes];
+            for(int j = 0; j < newCode.length(); j++){
+                if(!Character.isDigit(newCode.charAt(j))) {
+                    LOG.error("Error when converting char to int");
+                    break;
+                }
+                code[j] = Integer.parseInt(String.valueOf(newCode.charAt(j)));
+            }
+
+            list.add(code);
+        }
+
+        return list;
+    }
+
+    /**
+     * Return a String of numbers
+     * <p>
+     *     If value = 5 then the String equals to "01234"
+     * </p>
+     * @param   value   The maximum value starting from zero
+     * @return          A String with all numbers to the value
+     */
+    private String stringOfNumbers(int value){
+
+        String stringOfNumbers = "";
+        for(int i = 0; i < value; i++) stringOfNumbers = stringOfNumbers + i;
+
+        return stringOfNumbers;
     }
 }
