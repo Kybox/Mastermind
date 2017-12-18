@@ -31,8 +31,6 @@ public class Defender {
 
     public void startGame(){
 
-        int trials = 0;
-
         if(autoManagement) {
 
             do { gameTour(); }

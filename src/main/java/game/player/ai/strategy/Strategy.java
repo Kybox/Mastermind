@@ -143,7 +143,7 @@ public class Strategy {
     /**
      * Return a ArrayList<int[]> with all permuted characters from a String to Integer array
      * <p>
-     *     If range equals to "123" the ArrayList contains then the ArrayList contains :
+     *     If range equals to "123" then the ArrayList contains :
      *     [1,2,3],[1,3,2],[2,1,3],[2,3,1],[3,1,2],[3,2,1]
      * </p>
      * @param   range   The String to swap
