@@ -9,7 +9,7 @@ import main.java.view.Display;
 
 import java.util.Arrays;
 
-public class Challenger {
+public class Challenger implements IGameMode {
 
     private GameOver gameOver;
     private int[] secretCode;
@@ -20,15 +20,19 @@ public class Challenger {
     private Controller controller;
     private boolean autoManagement;
 
-    public Challenger(GameOver gameOver){
+    public Challenger(GameOver gameOver, boolean autoManagement){
 
         this.gameOver = gameOver;
+        this.autoManagement = autoManagement;
+
         controller = new Controller();
         maxTrials = Settings.getTrials();
 
-        //setSecretCode();
+        setSecretCode();
+        startGame();
     }
 
+    @Override
     public void startGame(){
 
         trials = 0;
@@ -44,6 +48,7 @@ public class Challenger {
         }
     }
 
+    @Override
     public boolean gameTour(){
 
         trials++;
@@ -70,6 +75,7 @@ public class Challenger {
         return finished;
     }
 
+    @Override
     public void setSecretCode(){
 
         int nbBoxes = Settings.getBoxes();
@@ -83,9 +89,5 @@ public class Challenger {
 
     public int getTrials(){
         return trials;
-    }
-
-    public void setAutoManagement(boolean auto){
-        autoManagement = auto;
     }
 }

@@ -52,23 +52,15 @@ public class Game implements Observer{
         switch (GAME_MODE){
             case 1:
                 Display.info("Mode sélectionné -> Challenger");
-                Challenger challenger = new Challenger(gameOver);
-                challenger.setAutoManagement(true);
-                challenger.setSecretCode();
-                challenger.startGame();
+                new Challenger(gameOver, true);
                 break;
             case 2:
                 Display.info("Mode sélectionné -> Duel");
-                Duel duel = new Duel(gameOver);
-                duel.setSecretCode();
-                duel.startGame();
+                new Duel(gameOver);
                 break;
             case 3:
                 Display.info("Mode sélectionné -> Défenseur");
-                Defender defender = new Defender(gameOver);
-                defender.setAutoManagement(true);
-                defender.setSecretCode();
-                defender.startGame();
+                new Defender(gameOver, true);
                 break;
         }
     }

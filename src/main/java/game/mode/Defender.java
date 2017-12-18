@@ -9,7 +9,7 @@ import main.java.view.Display;
 
 import java.util.Arrays;
 
-public class Defender {
+public class Defender implements IGameMode {
 
     private AI computer;
     private int[] secretCode;
@@ -21,14 +21,20 @@ public class Defender {
     private boolean win;
     private boolean finished;
 
-    public Defender(GameOver gameOver){
+    public Defender(GameOver gameOver, boolean autoManagement){
 
         this.gameOver = gameOver;
+        this.autoManagement = autoManagement;
+
         controller = new Controller();
         maxTrials = Settings.getTrials();
         computer = new AI(Settings.getBoxes(), Settings.getMaxNumbers());
+
+        setSecretCode();
+        startGame();
     }
 
+    @Override
     public void startGame(){
 
         if(autoManagement) {
@@ -40,6 +46,7 @@ public class Defender {
         }
     }
 
+    @Override
     public boolean gameTour(){
 
         trials++;
@@ -70,6 +77,7 @@ public class Defender {
         return finished;
     }
 
+    @Override
     public void setSecretCode(){
 
         String code = controller.getSecretCode(Settings.getBoxes(), Settings.getMaxNumbers());
@@ -82,9 +90,5 @@ public class Defender {
 
     public int getTrials(){
         return trials;
-    }
-
-    public void setAutoManagement(boolean auto){
-        autoManagement = auto;
     }
 }
