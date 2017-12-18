@@ -9,54 +9,47 @@ import java.util.*;
 public class Strategy {
 
     private ArrayList<int[]> combinationList;
-    private Map<int[], Integer> existingList;
-    private Map<int[], Integer> wellPutList;
-    private int nbBoxes;
+    private int nbKeys;
     private int maxNumber;
-    private int loop = 0;
-    private int total = 0;
-    private int totalComb = 0;
-    private int percent = 0;
 
     private static final Logger LOG = LogManager.getLogger(Strategy.class);
 
     public Strategy(){ }
 
-    public void initCombinations(int nbBoxes, int maxNumber){
+    /**
+     * Initialization of the strategy by all combinations
+     * @param   nbKeys      The number of keys in the combination
+     * @param   maxNumber   The maximum number in the combination
+     */
+    public void initCombinations(int nbKeys, int maxNumber){
 
-        this.nbBoxes = nbBoxes;
+        this.nbKeys = nbKeys;
         this.maxNumber = maxNumber;
 
-        totalComb =  (int) Math.pow(maxNumber, nbBoxes);
         combinationList = setCombinations();
-
-        wellPutList = new HashMap<>();
-        existingList = new HashMap<>();
-
-        //Display.info(combinationList.size() + " total combinations parsed");
     }
+
 
     public void setClues(String clues, int[] code){
 
         int wellPut = Integer.parseInt(String.valueOf(clues.charAt(0)));
-        int existing = Integer.parseInt(String.valueOf(clues.charAt(2)));
+        int nbMisplaced = Integer.parseInt(String.valueOf(clues.charAt(2)));
 
         if(wellPut == 0) combinationList = removeAllFor(code);
-        else wellPutList.put(code, wellPut);
 
-        if(existing == code.length) combinationList = removeNotContain(code);
-        else if(existing + wellPut == code.length) combinationList = removeNotContain(code);
-        else if(existing == 0) combinationList = removeAllFor(code);
-        else existingList.put(code, existing);
+        if(nbMisplaced == code.length) combinationList = removeNotContain(code);
+        else if(nbMisplaced + wellPut == code.length) combinationList = removeNotContain(code);
 
         combinationList.remove(code);
 
-        //Display.info( combinationList.size() + " combinaitions left");
+        LOG.info( combinationList.size() + " combinaitions left");
     }
 
     public int[] getNewCode(){
 
-        return combinationList.get(new Random().nextInt(combinationList.size()));
+        if(combinationList.size() > 1)
+            return combinationList.get(new Random().nextInt(combinationList.size()));
+        else return combinationList.get(0);
     }
 
     private ArrayList<int[]> removeNotContain(int[]code){
@@ -77,9 +70,10 @@ public class Strategy {
             }
         }
 
-        //Display.info(uselessList.size() + " codes to remove");
+        LOG.info(uselessList.size() + " codes to remove");
 
-        for(int[] value : uselessList) combinationList.remove(value);
+        for(int[] value : uselessList)
+            combinationList.remove(value);
 
         return combinationList;
     }
@@ -96,12 +90,9 @@ public class Strategy {
 
         for(int[] value : uselessList) combinationList.remove(value);
 
+        LOG.info(uselessList.size() + " codes to remove");
+
         return combinationList;
-    }
-
-    private void checkWellPlaced(){
-
-
     }
 
     private ArrayList<int[]> setCombinations(){
@@ -109,18 +100,18 @@ public class Strategy {
         String numbers = stringOfNumbers(maxNumber);
         ArrayList<int[]> list = new ArrayList<>();
 
-        if(nbBoxes == numbers.length()) list = getCombinations(numbers, list);
+        if(nbKeys == numbers.length()) list = getCombinations(numbers, list);
         else{
             int nextInt = 0;
             String strNext = "0";
 
             for(int j = 0; j < maxNumber; j++){
 
-                String range = numbers.substring(0, nbBoxes);
+                String range = numbers.substring(0, nbKeys);
 
                 if(j != 0) {
-                    if(j + nbBoxes <= numbers.length()){
-                        range = numbers.substring(j, nbBoxes + j);
+                    if(j + nbKeys <= numbers.length()){
+                        range = numbers.substring(j, nbKeys + j);
                     }
                     else{
                         range = numbers.substring(j, numbers.length());
@@ -134,7 +125,7 @@ public class Strategy {
         }
 
 
-        LOG.info(list.size() + " combinations combinations ");
+        LOG.info(list.size() + " combinations generated");
         Display.info("");
 
         return list;
@@ -152,22 +143,22 @@ public class Strategy {
      */
     private ArrayList<int[]> getCombinations(String range, ArrayList<int[]> list){
 
-        int [] factorials = new int[nbBoxes + 1];
+        int [] factorials = new int[nbKeys + 1];
 
         factorials[0] = 1;
 
-        for (int i = 1; i <= nbBoxes; i++) {
+        for (int i = 1; i <= nbKeys; i++) {
             factorials[i] = factorials[i-1] * i;
         }
 
-        for (int i = 0; i < factorials[nbBoxes]; i++) {
+        for (int i = 0; i < factorials[nbKeys]; i++) {
 
             String newCode="";
             String temp = range;
 
             int index = i;
 
-            for (int j = nbBoxes; j > 0 ;j--){
+            for (int j = nbKeys; j > 0 ; j--){
 
                 int selected = index / factorials[j-1];
 
@@ -176,7 +167,7 @@ public class Strategy {
                 temp = temp.substring(0,selected) + temp.substring(selected+1);
             }
 
-            int[]code = new int[nbBoxes];
+            int[]code = new int[nbKeys];
             for(int j = 0; j < newCode.length(); j++){
                 if(!Character.isDigit(newCode.charAt(j))) {
                     LOG.error("Error when converting char to int");
