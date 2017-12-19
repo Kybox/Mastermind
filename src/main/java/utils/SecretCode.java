@@ -75,12 +75,11 @@ public class SecretCode {
 
 
                 for(int i = 0; i < secretCode.length; i++){
-
-                    for(int j = 0; j < secretCode.length; j++){
-
-                        if(code[i] == secretCode[j]) existing++;
-                    }
                     if(code[i] == secretCode[i]) wellPut++;
+                    else{
+                        for(int j = 0; j < secretCode.length; j++)
+                            if(code[i] == secretCode[j]) existing++;
+                    }
                 }
 
                 String strExisting;
