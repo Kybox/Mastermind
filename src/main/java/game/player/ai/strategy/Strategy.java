@@ -1,6 +1,5 @@
 package main.java.game.player.ai.strategy;
 
-import main.java.view.Display;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 
@@ -41,8 +40,6 @@ public class Strategy {
         else if(nbMisplaced + wellPut == code.length) combinationList = removeNotContain(code);
 
         combinationList.remove(code);
-
-        LOG.info( combinationList.size() + " combinaitions left");
     }
 
     public int[] getNewCode(){
@@ -70,8 +67,6 @@ public class Strategy {
             }
         }
 
-        LOG.info(uselessList.size() + " codes to remove");
-
         for(int[] value : uselessList)
             combinationList.remove(value);
 
@@ -89,8 +84,6 @@ public class Strategy {
         }
 
         for(int[] value : uselessList) combinationList.remove(value);
-
-        LOG.info(uselessList.size() + " codes to remove");
 
         return combinationList;
     }
@@ -123,10 +116,6 @@ public class Strategy {
                 list = getCombinations(range, list);
             }
         }
-
-
-        LOG.info(list.size() + " combinations generated");
-        Display.info("");
 
         return list;
     }

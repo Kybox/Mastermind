@@ -65,7 +65,7 @@ public class Defender implements IGameMode {
             if (!SecretCode.isEqual(secretCode, newCode)) {
 
                 Display.info("Votre réponse :");
-                String clues = controller.getClues(Settings.getBoxes(), newCode, secretCode);
+                String clues = controller.getClues(newCode, secretCode);
                 computer.setClues(clues);
             }
             else {

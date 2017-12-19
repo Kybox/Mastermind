@@ -74,7 +74,7 @@ public class Challenger implements IGameMode {
 
         return finished;
     }
-    
+
     public void setSecretCode(){
 
         int nbBoxes = Settings.getBoxes();

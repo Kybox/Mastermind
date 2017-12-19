@@ -98,7 +98,7 @@ public class Controller {
         return line;
     }
 
-    public String getClues(int nbBoxes, String code, int[] secretCode){
+    public String getClues(String code, int[] secretCode){
 
         String line = "";
 
