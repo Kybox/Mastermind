@@ -1,7 +1,20 @@
 # Mastermind
 Projet OpenClassrooms
+Réalisation du jeu Mastermind et d'un jeu de réflexion +/-.
+
+**Lancement de l'application :**
+
+Au démarrage de l'application, le menu principal s'affiche dans la console d'éxécution (voir l'image ci-dessous).
 
 ![Menu pricipal](https://img15.hostingpics.net/pics/678614Mastermindmenu.png)
+
+La sélection du jeu s'effectue par une saisie au clavier du chiffre 1 ou 2 et en validant avec la touche "entrée". Une confirmation du jeu sélectionné apparaitra à l'écran.
+
+Il vous sera ensuite demandé de sélectionner un mode de jeu parmis les trois proposés (voir l'image ci-dessous)
+
+![Game_MODE](https://img15.hostingpics.net/pics/990166Mastermindmode.png)
+
+Comment précédemment, la sélection du mode de jeu s'effectue par une saisie au clavier du chiffre 1, 2 ou 3 et en validant avec la touche "entrée". La confirmation du mode sélectionné apparaitra à l'écran.
 
 **Intelligence artificielle et stratégie :**
 
