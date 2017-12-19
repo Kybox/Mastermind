@@ -1,7 +1,7 @@
 # Mastermind
 Projet OpenClassrooms
 
-![Menu pricipal](https://www.hostingpics.net/viewer.php?id=678614Mastermindmenu.png][IMG]https://img15.hostingpics.net/pics/678614Mastermindmenu.png)
+![Menu pricipal](https://img15.hostingpics.net/pics/678614Mastermindmenu.png)
 
 **Intelligence artificielle et stratégie :**
 
