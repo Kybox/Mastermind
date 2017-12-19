@@ -10,8 +10,4 @@ public class Display {
         System.err.println(error);
     }
 
-    public static void loading(String loaded){
-        System.out.print("\r");
-        System.out.print(loaded);
-    }
 }

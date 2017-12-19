@@ -4,5 +4,4 @@ public interface IGameMode {
 
     void startGame();
     boolean gameTour();
-    void setSecretCode();
 }

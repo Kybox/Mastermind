@@ -77,7 +77,6 @@ public class Defender implements IGameMode {
         return finished;
     }
 
-    @Override
     public void setSecretCode(){
 
         String code = controller.getSecretCode(Settings.getBoxes(), Settings.getMaxNumbers());

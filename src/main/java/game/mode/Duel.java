@@ -22,7 +22,6 @@ public class Duel implements IGameMode {
         defender = new Defender(gameOver, false);
         challenger = new Challenger(gameOver, false);
 
-        setSecretCode();
         startGame();
     }
 
@@ -54,12 +53,5 @@ public class Duel implements IGameMode {
         }
 
         return blnFinished;
-    }
-
-    @Override
-    public void setSecretCode(){
-
-        defender.setSecretCode();
-        challenger.setSecretCode();
     }
 }

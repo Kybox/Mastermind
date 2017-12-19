@@ -68,15 +68,6 @@ public class Game implements Observer{
     @Override
     public void update(Observable o, Object arg) {
 
-        Display.info("+------------------+");
-        Display.info("| Fin de la partie |");
-        Display.info("+------------------+");
-        Display.info("");
-        Display.info("Faites votre choix parmis les propositions suivantes :");
-        Display.info("\t-> [1] - Recommencer une nouvelle partie");
-        Display.info("\t-> [2] - Retour au menu principal");
-        Display.info("\t-> [3] - Quitter l'application");
-
         switch (controller.getUserReply()){
 
             case 1: startGame();

@@ -15,28 +15,19 @@ public class GameOver extends Observable {
             Display.info("");
 
             switch (Game.GAME_MODE){
-                case 1:
-                    Display.info("+----------------------------------------------------+");
-                    Display.info("| Gagné ! Vous avez découvert la combinaison secrète |");
-                    Display.info("+----------------------------------------------------+");
-                    break;
-
-                case 2:
-                    Display.info("+----------------------------------------------------+");
-                    Display.info("| Gagné ! Vous avez découvert la combinaison secrète |");
-                    Display.info("+----------------------------------------------------+");
-                    break;
 
                 case 3:
                     Display.info("+------------------------------------------------------------+");
                     Display.info("| Perdu ! L'ordinateur a découvert votre combinaison secrète |");
                     Display.info("+------------------------------------------------------------+");
                     break;
-            }
 
-            Display.info("  Combinaison secrète : " + code);
-            Display.info("  Nombre d'essais : " + trials + " / " + Settings.getTrials());
-            Display.info("");
+                default:
+                    Display.info("+----------------------------------------------------+");
+                    Display.info("| Gagné ! Vous avez découvert la combinaison secrète |");
+                    Display.info("+----------------------------------------------------+");
+                    break;
+            }
         }
         else{
 
@@ -49,7 +40,7 @@ public class GameOver extends Observable {
 
                 case 2:
                     Display.info("+------------------------------------------------------------+");
-                    Display.info("| Gagné ! L'ordinateur a découvert votre combinaison secrète |");
+                    Display.info("| Perdu ! L'ordinateur a découvert votre combinaison secrète |");
                     Display.info("+------------------------------------------------------------+");
                     break;
 
@@ -59,11 +50,19 @@ public class GameOver extends Observable {
                     Display.info("+------------------------------------------------------------------+");
                     break;
             }
-
-            Display.info("  Combinaison secrète : " + code);
-            Display.info("  Nombre d'essais : " + trials + " / " + Settings.getTrials());
-            Display.info("");
         }
+
+        Display.info("  Combinaison secrète : " + code);
+        Display.info("  Nombre d'essais : " + trials + " / " + Settings.getTrials());
+        Display.info("");
+        Display.info("+------------------+");
+        Display.info("| Fin de la partie |");
+        Display.info("+------------------+");
+        Display.info("");
+        Display.info("Faites votre choix parmis les propositions suivantes :");
+        Display.info("\t-> [1] - Recommencer une nouvelle partie");
+        Display.info("\t-> [2] - Retour au menu principal");
+        Display.info("\t-> [3] - Quitter l'application");
 
         setChanged();
         notifyObservers();
