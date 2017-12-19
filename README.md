@@ -25,15 +25,15 @@ Comment précédemment, la sélection du mode de jeu s'effectue par une saisie a
 
 Dans ce mode de jeu, c'est à vous de découvrir la combinaison secrète que l'application a généré. Vous devrez saisir une première combinaison au hasard pour que l'application vous donne un premier indice. A vous de découvrir en un minimum de coups la combinaison secrète.
 
-![Challenger](https://img15.hostingpics.net/pics/912131Mastermindchallenger.png)
+![Mastermind-Challenger](https://img15.hostingpics.net/pics/912131Mastermindchallenger.png)
 
 
 
 ### Mastermind en mode défenseur :
 
-Dans ce mode de jeu, vous devrez tout d'abord saisir une combinaison secrète de votre choix (en fonction du [fichier de configuration](https://github.com/Kybox/Mastermind/blob/master/src/main/resources/config.properties)). C'est cette combinaison que l'application tentera de découvrir à l'aide des indices qui vous lui fournirez. Les indices devront être saisis avec le formation suivant : chiffre virgule chiffre.
+Dans ce mode de jeu, vous devrez tout d'abord saisir une combinaison secrète de votre choix (en fonction du [fichier de configuration](https://github.com/Kybox/Mastermind/blob/master/src/main/resources/config.properties)). C'est cette combinaison que l'application tentera de découvrir à l'aide des indices qui vous lui fournirez. Les indices devront être saisis dans le format suivant : chiffre virgule chiffre.
 
-![Defender](https://img15.hostingpics.net/pics/999122Masterminddefender.png)
+![Mastermind-Defender](https://img15.hostingpics.net/pics/999122Masterminddefender.png)
 
 Le premier chiffre correspondra au nombre de chiffres bien placés dans votre combinaison secrète. Le second chiffre correspondra au nombre de chiffres présent dans votre combinaison secrète mais mals placés.
 
@@ -44,7 +44,14 @@ Exemple :
 
 Afin de ne pas induire en érreur l'application en saisissant des indices qui ne correspondraient pas à la proposition de combinaison faite par l'application, une vérification sera effectuée sur chaque indice que vous saisirez. Si une erreur est détectée, il vous sera alors demandé de revérifier votre indice et de le saisir à nouveau (voir l'image ci-dessous)
 
-![ERROR](https://img15.hostingpics.net/pics/255866Masterminderreur.png)
+![Mastermind-Error](https://img15.hostingpics.net/pics/255866Masterminderreur.png)
+
+
+
+### Mastermind en mode duel :
+
+Dans ce mode de jeu, vous serez en compétition avec l'application. Il vous sera demander de saisir la combinaison secrète que l'application devra retrouver. De son côté, l'application va générer une combinaison secrète que vous devrez retrouver. Chacun jouera à tour de rôle. Celui qui aura retrouvé la combinaison secrète en premier gagnera la partie.
+![Mastermind-Duel](https://img15.hostingpics.net/pics/538015Mastermindduel.png)
 
 
 
@@ -54,4 +61,4 @@ Pour le mode de jeu "défenseur" du jeu Mastermind, l'application charge en mém
 
 Au fur et à mesure des indices fournis par l'utilisateur, l'application éjecte de sa liste les combinaisons qui ne correspondent pas à celle qui doit être trouvée.
 
-Statistiquement, sur un ensemble de 10 parties jouées, l'application retrouve la combinaison en 10 coups de moyenne, ce qui laisse une chance à l'utilisateur de gagner. Cette moyenne pourra éventuellement être revue à la baisse avec l'ajout d'un menu de sélection de difficultée indépendant au fichier de configuration.
+Statistiquement, sur un ensemble de 10 parties jouées, l'application retrouve la combinaison en une moyenne de 10 coups (minimum 5 coups et maximum 13 coups sur l'ensemble des 10 parties jouées), ce qui laisse une chance à l'utilisateur de gagner. Cette moyenne pourra éventuellement être revue à la baisse avec l'ajout d'un menu de sélection de difficultées, indépendant du fichier de configuration.
