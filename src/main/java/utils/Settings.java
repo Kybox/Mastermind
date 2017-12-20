@@ -14,6 +14,10 @@ public class Settings {
     private static final String FILE = "main/resources/config.properties";
     private static final Logger LOG = LogManager.getLogger(Settings.class);
 
+    /**
+     * Load the configuration file
+     * @return  The game settings
+     */
     public static Properties loadProperties(){
 
         LOG.info("Loading configuration file...");
@@ -43,20 +47,28 @@ public class Settings {
         return SETTINGS;
     }
 
+    /**
+     * Get the number of keys that make up the combination
+     * @return  The number of keys
+     */
     public static int getBoxes(){
 
-        Integer boxes = null;
+        int nbKeys = 0;
 
-        try{ boxes = Integer.parseInt(SETTINGS.getProperty("nbBoxes")); }
+        try{ nbKeys = Integer.parseInt(SETTINGS.getProperty("nbBoxes")); }
         catch (NumberFormatException | NullPointerException e) {
-            LOG.error("Error in the configuration file for boxes");
+            LOG.error("Error in the configuration file for nbKeys");
         }
-        return boxes;
+        return nbKeys;
     }
 
+    /**
+     * Get the maximum value of the digits
+     * @return  The maximum value
+     */
     public static int getMaxNumbers(){
 
-        Integer nbNumbers = null;
+        int nbNumbers = 0;
 
         try { nbNumbers = Integer.parseInt(SETTINGS.getProperty("nbNumbers")); }
         catch (NumberFormatException e) { LOG.error("Error in the configutation file, wrong number format"); }
@@ -64,9 +76,13 @@ public class Settings {
         return nbNumbers;
     }
 
+    /**
+     * Get the maximum number of turns for each game played
+     * @return  The maximum number of trials
+     */
     public static int getTrials(){
 
-        Integer nbTrials = null;
+        int nbTrials = 0;
 
         try { nbTrials = Integer.parseInt(SETTINGS.getProperty("nbTrials")); }
         catch (NumberFormatException e) { LOG.error("Error in the configutation file, wrong number format"); }
