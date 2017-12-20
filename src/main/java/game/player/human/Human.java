@@ -1,18 +1,18 @@
-package main.java.controller;
+package main.java.game.player.human;
 
 import main.java.utils.CheckInput;
 import main.java.view.Display;
 
 import java.util.Scanner;
 
-public class Controller {
+public class Human {
 
     private final String GAME_TYPE = "game";
     private final String GAME_MODE = "mode";
 
     private Scanner scanner;
 
-    public Controller(){
+    public Human(){
         scanner = new Scanner(System.in);
     }
 

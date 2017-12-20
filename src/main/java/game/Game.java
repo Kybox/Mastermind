@@ -1,6 +1,6 @@
 package main.java.game;
 
-import main.java.controller.Controller;
+import main.java.game.player.human.Human;
 import main.java.game.mode.Challenger;
 import main.java.game.mode.Defender;
 import main.java.game.mode.Duel;
@@ -16,7 +16,7 @@ public class Game implements Observer{
     public static int GAME_TYPE;
     public static int GAME_MODE;
     private GameOver gameOver;
-    private Controller controller;
+    private Human human;
     private static final Logger LOG = LogManager.getLogger(Game.class);
 
     public Game(){
@@ -29,9 +29,9 @@ public class Game implements Observer{
         Display.info("|   MENU PRINCIPAL   |");
         Display.info("+--------------------+");
         Display.info("");
-        controller = new Controller();
+        human = new Human();
 
-        GAME_TYPE = controller.getGame();
+        GAME_TYPE = human.getGame();
 
         switch (GAME_TYPE){
             case 1:
@@ -42,7 +42,7 @@ public class Game implements Observer{
                 break;
         }
 
-        GAME_MODE = controller.getMode();
+        GAME_MODE = human.getMode();
 
         startGame();
     }
@@ -68,7 +68,7 @@ public class Game implements Observer{
     @Override
     public void update(Observable o, Object arg) {
 
-        switch (controller.getMenuSelection()){
+        switch (human.getMenuSelection()){
 
             case 1: startGame();
                 break;

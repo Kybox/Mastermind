@@ -1,6 +1,6 @@
 package main.java.game.mode;
 
-import main.java.controller.Controller;
+import main.java.game.player.human.Human;
 import main.java.game.GameOver;
 import main.java.game.player.ai.AI;
 import main.java.utils.SecretCode;
@@ -19,7 +19,7 @@ public class Defender implements IGameMode {
     private final AI computer;
     private final int maxTrials;
     private final GameOver gameOver;
-    private final Controller controller;
+    private final Human human;
     private final boolean autoManagement;
 
     /**
@@ -32,7 +32,7 @@ public class Defender implements IGameMode {
         this.gameOver = gameOver;
         this.autoManagement = autoManagement;
 
-        controller = new Controller();
+        human = new Human();
         maxTrials = Settings.getTrials();
         computer = new AI();
 
@@ -71,7 +71,7 @@ public class Defender implements IGameMode {
             if (!SecretCode.isEqual(secretCode, newCode)) {
 
                 Display.info("Votre réponse :");
-                String clues = controller.getClues(newCode, secretCode);
+                String clues = human.getClues(newCode, secretCode);
                 computer.setClues(clues);
             }
             else {
@@ -87,7 +87,7 @@ public class Defender implements IGameMode {
      * Generate a secret combinaition
      */
     private void setSecretCode(){
-        String code = controller.getSecretCode();
+        String code = human.getSecretCode();
         secretCode = SecretCode.convertToDigit(code);
     }
 

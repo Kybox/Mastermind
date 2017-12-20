@@ -1,6 +1,6 @@
 package main.java.game.mode;
 
-import main.java.controller.Controller;
+import main.java.game.player.human.Human;
 import main.java.game.GameOver;
 import main.java.game.player.ai.AI;
 import main.java.utils.SecretCode;
@@ -19,7 +19,7 @@ public class Challenger implements IGameMode {
     private final AI computer;
     private final int maxTrials;
     private final GameOver gameOver;
-    private final Controller controller;
+    private final Human human;
     private final boolean autoManagement;
 
     /**
@@ -33,7 +33,7 @@ public class Challenger implements IGameMode {
         this.autoManagement = autoManagement;
 
         computer = new AI();
-        controller = new Controller();
+        human = new Human();
         maxTrials = Settings.getTrials();
 
         setSecretCode();
@@ -69,7 +69,7 @@ public class Challenger implements IGameMode {
             Display.info("------------------------");
             Display.info("Saisir une combinaison :");
 
-            String combination = controller.getGameInput();
+            String combination = human.getGameInput();
 
             if (SecretCode.isEqual(secretCode, combination)) {
                 win = true;
