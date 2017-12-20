@@ -54,7 +54,9 @@ public class Game {
 
 
     private void endgameMenu() {
-        
+
+        Display.endgameMenu();
+
         switch (human.getGameOverSelection()){
 
             case 1: startGame();

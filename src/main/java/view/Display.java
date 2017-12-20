@@ -102,6 +102,12 @@ public class Display {
         Display.error("\tVeuillez saisir 1, 2 ou 3 suivant votre choix de réponse");
     }
 
+    /**
+     * Displays the result of the game
+     * @param   win       If the game has been won
+     * @param   code      The winning combination
+     * @param   trials    The number of rounds played
+     */
     public static void gameOver(boolean win, String code, int trials){
 
         if (win) {
@@ -147,6 +153,14 @@ public class Display {
 
         Display.info("  Combinaison secrète : " + code);
         Display.info("  Nombre d'essais : " + trials + " / " + Settings.getTrials());
+
+    }
+
+    /**
+     * Displays the endgame menu
+     */
+    public static void endgameMenu(){
+
         Display.info("");
         Display.info("+------------------+");
         Display.info("| Fin de la partie |");
@@ -157,6 +171,4 @@ public class Display {
         Display.info("\t-> [2] - Retour au menu principal");
         Display.info("\t-> [3] - Quitter l'application");
     }
-
-    
 }
