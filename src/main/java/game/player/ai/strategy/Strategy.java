@@ -119,7 +119,7 @@ public class Strategy {
         if(nbKeys == numbers.length()) list = getCombinations(numbers, list);
         else{
             int nextInt = 0;
-            String strNext = "0";
+            StringBuilder strNext = new StringBuilder("0");
 
             for(int j = 0; j < maxNumber; j++){
 
@@ -133,7 +133,7 @@ public class Strategy {
                         range = numbers.substring(j, numbers.length());
                         range = range + strNext;
                         nextInt++;
-                        strNext = strNext + nextInt;
+                        strNext.append(nextInt);
                     }
                 }
                 list = getCombinations(range, list);
@@ -165,7 +165,7 @@ public class Strategy {
 
         for (int i = 0; i < factorials[nbKeys]; i++) {
 
-            String newCode="";
+            StringBuilder newCode= new StringBuilder();
             String temp = range;
 
             int index = i;
@@ -174,7 +174,7 @@ public class Strategy {
 
                 int selected = index / factorials[j-1];
 
-                newCode += temp.charAt(selected);
+                newCode.append(temp.charAt(selected));
                 index = index % factorials[j-1];
                 temp = temp.substring(0,selected) + temp.substring(selected+1);
             }
@@ -204,9 +204,9 @@ public class Strategy {
      */
     private String stringOfNumbers(int value){
 
-        String stringOfNumbers = "";
-        for(int i = 0; i < value; i++) stringOfNumbers = stringOfNumbers + i;
+        StringBuilder stringOfNumbers = new StringBuilder();
+        for(int i = 0; i < value; i++) stringOfNumbers.append(i);
 
-        return stringOfNumbers;
+        return stringOfNumbers.toString();
     }
 }
