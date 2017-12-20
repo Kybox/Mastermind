@@ -96,7 +96,7 @@ public class AI {
     }
 
     /**
-     * Set clues to the AI Strategy or keep in memory the clues
+     * Set clues to the AI Strategy or keep them in memory
      * @param   clues   The game indices
      */
     public void setClues(String clues){
