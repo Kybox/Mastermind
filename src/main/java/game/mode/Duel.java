@@ -1,7 +1,6 @@
 package main.java.game.mode;
 
 import main.java.game.GameOver;
-import main.java.utils.Settings;
 
 import java.util.Arrays;
 
