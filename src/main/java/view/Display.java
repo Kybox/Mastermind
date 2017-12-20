@@ -5,14 +5,27 @@ import main.java.utils.Settings;
 
 public class Display {
 
+    /**
+     * Displays an informational message
+     * @param   info    The message to display
+     */
     public static void info(String info){
+
         System.out.println(info);
     }
 
+    /**
+     * Displays an error message
+     * @param   error   The error to display
+     */
     public static void error(String error){
+
         System.err.println(error);
     }
 
+    /**
+     * Displays the main menu for game selection
+     */
     public static void mainMenuSelections(){
         Display.info("Sélectionner un jeu :");
         Display.info("---------------------");
@@ -20,6 +33,9 @@ public class Display {
         Display.info("[2] - Recherche +/-");
     }
 
+    /**
+     * Displays the game mode selection menu
+     */
     public static void gameModeSelections(){
         Display.info("");
         Display.info("Sélectionner un mode de jeu :");
@@ -29,6 +45,9 @@ public class Display {
         Display.info("[3] - Défenseur -> c'est à l'ordinateur de trouver votre combinaison secrète");
     }
 
+    /**
+     * Displays the indications for entering a secret combination
+     */
     public static void secretCombinationSelection(){
         Display.info("-----------------------------");
         Display.info("Sélectionner votre combinaison secrête :");
@@ -36,13 +55,19 @@ public class Display {
                         + (Settings.getMaxNumbers() - 1) + ")");
     }
 
+    /**
+     * Displays an error message about the combination
+     */
     public static void invalidCombination(){
         int nbKeys = Settings.getKeys();
         int maxNumbers = Settings.getMaxNumbers();
-        Display.info("Vous devez saisir une combinaison de " + nbKeys
+        Display.error("Vous devez saisir une combinaison de " + nbKeys
                 + " chiffres inférieurs ou égals à " + (maxNumbers - 1));
     }
 
+    /**
+     * Displays an error message regarding clues
+     */
     public static void invalidFormat(){
         switch (Game.GAME_TYPE){
             case 1:
@@ -57,11 +82,17 @@ public class Display {
         }
     }
 
+    /**
+     * Displays an error message indicating that the clues are incorrect
+     */
     public static void invalidClues(){
         Display.error("\tVotre indice n'est pas correct !");
         Display.error("\tMerci de vérifier votre réponse.");
     }
 
+    /**
+     * Displays an error message about the menu after the end of a game
+     */
     public static void invalidMenuSelection(){
         Display.error("\tVeuillez saisir 1, 2 ou 3 suivant votre choix de réponse");
     }
