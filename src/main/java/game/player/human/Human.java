@@ -67,10 +67,7 @@ public class Human {
         while (true){
 
             line = new Scanner(System.in).nextLine();
-            if(!CheckInput.inputCombinationApproved(line)) {
-                Display.invalidCombination();
-                continue;
-            }
+            if(!CheckInput.inputCombinationApproved(line)) Display.invalidCombination();
             else break;
         }
 
