@@ -119,7 +119,7 @@ public class AI {
      * @param   userCode    The combination proposed by the user
      * @return              The clues
      */
-    public static String getClues(int[] secretCode, String userCode){
+    public String getClues(int[] secretCode, String userCode){
 
         StringBuilder clues = new StringBuilder();
         int[] code = SecretCode.convertToDigit(userCode);
