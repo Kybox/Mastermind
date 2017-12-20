@@ -11,49 +11,54 @@ public class CheckInput {
 
     private static final Logger LOG = LogManager.getLogger(CheckInput.class);
 
-    public static boolean params(String s, int max){
+    /**
+     * Check if the value entered by the user is correct
+     * @param   selection       The selection
+     * @param   maxSelection    The maximum value of selection
+     * @return                  True if the selection is correct otherwise false
+     */
+    public static boolean menuSelection(String selection, int maxSelection){
 
         int mode;
-        try{ mode = Integer.parseInt(s); }
+        try{ mode = Integer.parseInt(selection); }
         catch (NumberFormatException | NullPointerException e) { return false; }
-
-        return mode != 0 && mode < (max + 1);
+        return mode != 0 && mode < (maxSelection + 1);
     }
 
-    public static boolean isApproved(String s){
+    /**
+     * Check if the combination entered by the user is in the correct format
+     * @param   combination     The combination entered by the user
+     * @return                  True for a correct format otherwise false
+     */
+    public static boolean inputCombinationApproved(String combination){
 
-        try{ Integer.parseInt(s); }
+        try{ Integer.parseInt(combination); }
         catch (NumberFormatException | NullPointerException e) {
-            Display.info("Vous devez saisir une combinaison de chiffres !");
             return false;
         }
 
-        int nbBoxes = Settings.getBoxes();
-        if(s.length() < nbBoxes || s.length() > nbBoxes) {
-            Display.info("Vous devez saisir une combinaison de " + nbBoxes + " chiffres !");
-            return false;
-        }
+        int nbKeys = Settings.getKeys();
+        if(combination.length() < nbKeys || combination.length() > nbKeys) return false;
 
         int maxNumbers = Settings.getMaxNumbers();
-        for(int i = 0; i < s.length(); i++){
-            if(Integer.parseInt(String.valueOf(s.charAt(i))) > maxNumbers - 1) {
-                Display.info("Vous devez saisir des chiffres inférieurs ou égals à " + (maxNumbers - 1));
+        for(int i = 0; i < combination.length(); i++){
+            if(Integer.parseInt(String.valueOf(combination.charAt(i))) > maxNumbers - 1)
                 return false;
-            }
         }
 
         return true;
     }
 
-    public static boolean getClues(String s, String code, int[] secretCode){
+
+    public static boolean checkCluesSyntax(String clues, String combination, int[] secretCode){
         switch (Game.GAME_TYPE) {
             // Mastermind
             case 1:
-                if (s.length() != 3 || s.charAt(1) != ','
-                        || !Character.isDigit(s.charAt(0)) || !Character.isDigit(s.charAt(2))) {
+                if (clues.length() != 3 || clues.charAt(1) != ','
+                        || !Character.isDigit(clues.charAt(0)) || !Character.isDigit(clues.charAt(2))) {
                     Display.invalidFormat();
                     return false;
-                } else if (!checkClues(s, code, secretCode)) {
+                } else if (!checkClues(clues, combination, secretCode)) {
                     Display.invalidClues();
                     return false;
                 }
@@ -61,21 +66,21 @@ public class CheckInput {
 
             // Search +/-
             case 2:
-                if (s.length() != Settings.getBoxes()) {
+                if (clues.length() != Settings.getKeys()) {
                     Display.invalidFormat();
                     return false;
                 }
                 else {
                     boolean error = false;
-                    for (int i = 0; i < s.length(); i++) {
-                        if (s.charAt(i) != '-' && s.charAt(i) != '=' && s.charAt(i) != '+') {
+                    for (int i = 0; i < clues.length(); i++) {
+                        if (clues.charAt(i) != '-' && clues.charAt(i) != '=' && clues.charAt(i) != '+') {
                             Display.invalidFormat();
                             return false;
                         } else {
-                            int nb = Integer.parseInt(String.valueOf(code.charAt(i)));
-                            if (nb < secretCode[i] && s.charAt(i) != '+') error = true;
-                            else if (nb > secretCode[i] && s.charAt(i) != '-') error = true;
-                            else if (nb == secretCode[i] && s.charAt(i) != '=') error = true;
+                            int nb = Integer.parseInt(String.valueOf(combination.charAt(i)));
+                            if (nb < secretCode[i] && clues.charAt(i) != '+') error = true;
+                            else if (nb > secretCode[i] && clues.charAt(i) != '-') error = true;
+                            else if (nb == secretCode[i] && clues.charAt(i) != '=') error = true;
                             if (error) break;
                         }
                     }
@@ -93,7 +98,7 @@ public class CheckInput {
         }
     }
 
-    public static boolean checkClues(String clues, String code, int[] secretCode){
+    private static boolean checkClues(String clues, String code, int[] secretCode){
 
         switch (Game.GAME_TYPE){
             case 1:
@@ -106,8 +111,7 @@ public class CheckInput {
                         existing++;
                 }
                 String checked = wellPut + "," + existing;
-                if(checked.equals(clues)) return true;
-                else return false;
+                return checked.equals(clues);
 
             case 2:
                 return false;
@@ -116,7 +120,7 @@ public class CheckInput {
         }
     }
 
-    public static boolean checkMenuSelection(String reply){
+    public static boolean gameOverSelection(String reply){
 
         if(reply.equals("1") || reply.equals("2") || reply.equals("3")) return true;
         else {

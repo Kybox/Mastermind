@@ -51,7 +51,7 @@ public class Settings {
      * Get the number of keys that make up the combination
      * @return  The number of keys
      */
-    public static int getBoxes(){
+    public static int getKeys(){
 
         int nbKeys = 0;
 

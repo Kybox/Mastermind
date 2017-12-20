@@ -32,8 +32,15 @@ public class Display {
     public static void secretCombinationSelection(){
         Display.info("-----------------------------");
         Display.info("Sélectionner votre combinaison secrête :");
-        Display.info("(" + Settings.getBoxes() + " chiffres compris entre 0 et "
+        Display.info("(" + Settings.getKeys() + " chiffres compris entre 0 et "
                         + (Settings.getMaxNumbers() - 1) + ")");
+    }
+
+    public static void invalidCombination(){
+        int nbKeys = Settings.getKeys();
+        int maxNumbers = Settings.getMaxNumbers();
+        Display.info("Vous devez saisir une combinaison de " + nbKeys
+                + " chiffres inférieurs ou égals à " + (maxNumbers - 1));
     }
 
     public static void invalidFormat(){

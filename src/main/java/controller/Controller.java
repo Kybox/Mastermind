@@ -42,7 +42,7 @@ public class Controller {
 
             String line = scanner.nextLine();
 
-            if (!CheckInput.params(line, nbChoices)) Display.error(msg);
+            if (!CheckInput.menuSelection(line, nbChoices)) Display.error(msg);
             else {
                 input = Integer.parseInt(line);
                 break;
@@ -59,7 +59,10 @@ public class Controller {
 
             line = scanner.nextLine();
 
-            if(!CheckInput.isApproved(line)) continue;
+            if(!CheckInput.inputCombinationApproved(line)) {
+                Display.invalidCombination();
+                continue;
+            }
             else break;
         }
 
@@ -76,7 +79,10 @@ public class Controller {
 
             line = scanner.nextLine();
 
-            if(!CheckInput.isApproved(line)) continue;
+            if(!CheckInput.inputCombinationApproved(line)){
+                Display.invalidCombination();
+                continue;
+            }
             else break;
         }
 
@@ -89,7 +95,7 @@ public class Controller {
 
         while (true){
             line = scanner.nextLine();
-            if(!CheckInput.getClues(line, code, secretCode)) continue;
+            if(!CheckInput.checkCluesSyntax(line, code, secretCode)) continue;
             else break;
         }
 
@@ -104,7 +110,7 @@ public class Controller {
 
             String line = scanner.nextLine();
 
-            if(!CheckInput.checkMenuSelection(line)) continue;
+            if(!CheckInput.gameOverSelection(line)) continue;
             else {
                 reply = Integer.parseInt(line);
                 break;

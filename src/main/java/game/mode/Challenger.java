@@ -86,7 +86,7 @@ public class Challenger implements IGameMode {
      * Generate a secret combinaition
      */
     private void setSecretCode(){
-        secretCode = SecretCode.generate(Settings.getBoxes(), Settings.getMaxNumbers());
+        secretCode = SecretCode.generate(Settings.getKeys(), Settings.getMaxNumbers());
     }
 
     /**
