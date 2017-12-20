@@ -7,42 +7,47 @@ import java.util.Scanner;
 
 public class Human {
 
-    private final String GAME_TYPE = "game";
-    private final String GAME_MODE = "mode";
+    /**
+     * Default Human constructor
+     */
+    public Human(){ }
 
-    private Scanner scanner;
-
-    public Human(){
-        scanner = new Scanner(System.in);
-    }
-
+    /**
+     * Get the desired game
+     * @return  The index of the selected game
+     */
     public int getGame(){
 
         Display.mainMenuSelections();
         String gameMsg = "Saissir le numéro correspondant au jeu souhaité";
-        return getParamsInput(GAME_TYPE, gameMsg);
+        return getParamsInput(2, gameMsg);
     }
 
+    /**
+     * Get the desired game mode
+     * @return  The index of the selected game mode
+     */
     public int getMode(){
 
         Display.gameModeSelections();
         String modeMsg = "Saissir le numéro correspondant au mode de jeu souhaité";
-        return getParamsInput(GAME_MODE, modeMsg);
+        return getParamsInput(3, modeMsg);
     }
 
-    private int getParamsInput(String type, String msg){
+    /**
+     * Get player input for the game and the game mode
+     * @param   maxIndex    The maximum index that can be selected
+     * @param   msg         The error message if the value is incorrect
+     * @return              The index of the selected choice
+     */
+    private int getParamsInput(int maxIndex, String msg){
 
-        int nbChoices = 0;
         int input;
-
-        if(type.equals(GAME_TYPE)) nbChoices = 2;
-        else if(type.equals(GAME_MODE)) nbChoices = 3;
 
         while (true){
 
-            String line = scanner.nextLine();
-
-            if (!CheckInput.menuSelection(line, nbChoices)) Display.error(msg);
+            String line = new Scanner(System.in).nextLine();
+            if (!CheckInput.menuSelection(line, maxIndex)) Display.error(msg);
             else {
                 input = Integer.parseInt(line);
                 break;
@@ -51,14 +56,17 @@ public class Human {
         return input;
     }
 
+    /**
+     * Get the combination entered by the player
+     * @return  The player's combination
+     */
     public String getGameInput(){
 
         String line;
 
         while (true){
 
-            line = scanner.nextLine();
-
+            line = new Scanner(System.in).nextLine();
             if(!CheckInput.inputCombinationApproved(line)) {
                 Display.invalidCombination();
                 continue;
@@ -69,32 +77,28 @@ public class Human {
         return line;
     }
 
+    /**
+     * Get the secret combination created by the player
+     * @return  The secret combination
+     */
     public String getSecretCode(){
 
         Display.secretCombinationSelection();
-
-        String line;
-
-        while (true){
-
-            line = scanner.nextLine();
-
-            if(!CheckInput.inputCombinationApproved(line)){
-                Display.invalidCombination();
-                continue;
-            }
-            else break;
-        }
-
-        return line;
+        return getGameInput();
     }
 
+    /**
+     * Get the clues provided by the player
+     * @param code          The player's combination
+     * @param secretCode    The secret combination
+     * @return              The clues
+     */
     public String getClues(String code, int[] secretCode){
 
         String line;
 
         while (true){
-            line = scanner.nextLine();
+            line = new Scanner(System.in).nextLine();
             if(!CheckInput.checkCluesSyntax(line, code, secretCode)) continue;
             else break;
         }
@@ -102,14 +106,17 @@ public class Human {
         return line;
     }
 
-    public int getMenuSelection(){
+    /**
+     * Get the game over menu selection
+     * @return  The choice of the player
+     */
+    public int getGameOverSelection(){
 
         int reply;
 
         while (true){
 
-            String line = scanner.nextLine();
-
+            String line = new Scanner(System.in).nextLine();
             if(!CheckInput.gameOverSelection(line)) continue;
             else {
                 reply = Integer.parseInt(line);
