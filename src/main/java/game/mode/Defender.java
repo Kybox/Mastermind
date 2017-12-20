@@ -87,7 +87,7 @@ public class Defender implements IGameMode {
      * Generate a secret combinaition
      */
     private void setSecretCode(){
-        String code = controller.getSecretCode(Settings.getBoxes(), Settings.getMaxNumbers());
+        String code = controller.getSecretCode();
         secretCode = SecretCode.convertToDigit(code);
     }
 

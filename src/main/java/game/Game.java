@@ -68,7 +68,7 @@ public class Game implements Observer{
     @Override
     public void update(Observable o, Object arg) {
 
-        switch (controller.getUserReply()){
+        switch (controller.getMenuSelection()){
 
             case 1: startGame();
                 break;

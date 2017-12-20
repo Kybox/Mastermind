@@ -1,6 +1,5 @@
 package main.java.utils;
 
-import main.java.game.Game;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 

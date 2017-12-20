@@ -2,17 +2,19 @@ package main.java.utils;
 
 import main.java.game.Game;
 import main.java.view.Display;
+import org.apache.log4j.LogManager;
+import org.apache.log4j.Logger;
 
 import java.util.Arrays;
 
-import static java.lang.Integer.parseInt;
-
 public class CheckInput {
+
+    private static final Logger LOG = LogManager.getLogger(CheckInput.class);
 
     public static boolean params(String s, int max){
 
         int mode;
-        try{ mode = parseInt(s); }
+        try{ mode = Integer.parseInt(s); }
         catch (NumberFormatException | NullPointerException e) { return false; }
 
         return mode != 0 && mode < (max + 1);
@@ -20,7 +22,7 @@ public class CheckInput {
 
     public static boolean isApproved(String s){
 
-        try{ parseInt(s); }
+        try{ Integer.parseInt(s); }
         catch (NumberFormatException | NullPointerException e) {
             Display.info("Vous devez saisir une combinaison de chiffres !");
             return false;
@@ -43,52 +45,51 @@ public class CheckInput {
         return true;
     }
 
-    public static boolean getCluesGame1(String s, String code, int[] secretCode){
-
-        if(s.length() != 3 || s.charAt(1) != ','
-                || !Character.isDigit(s.charAt(0)) || !Character.isDigit(s.charAt(2))){
-            Display.error("Vous devez saisir 2 indices séparés par une virgule :");
-            Display.info("\tle premier pour le nombre de chiffre bien placés,");
-            Display.info("\tet le second pour le nombre de chiffres présents mal placés");
-            Display.info("\tExemple : 1 bien placé & 2 présents donne -> 1,2");
-            return false;
-        }
-        else if(!checkClues(s, code, secretCode)){
-            Display.error("\tVotre indice n'est pas correct !");
-            Display.error("\tMerci de vérifier votre réponse.");
-            return false;
-        }
-        else return true;
-    }
-    public static boolean getCluesGame2(String s, String code, int[] secretCode){
-
-        if(s.length() != Settings.getBoxes()) {
-            Display.error("Vous devez saisir un indice pour chacun des " + Settings.getBoxes() + " chiffres !");
-            return false;
-        }
-        else {
-            boolean error = false;
-            for (int i = 0; i < s.length(); i++) {
-                if(s.charAt(i) != '-' && s.charAt(i) != '=' && s.charAt(i) != '+') {
-                    Display.error("Vous devez saisir un indice (- ou = ou +) pour chaque chiffre");
-                    Display.error("\tExemple : +--=");
+    public static boolean getClues(String s, String code, int[] secretCode){
+        switch (Game.GAME_TYPE) {
+            // Mastermind
+            case 1:
+                if (s.length() != 3 || s.charAt(1) != ','
+                        || !Character.isDigit(s.charAt(0)) || !Character.isDigit(s.charAt(2))) {
+                    Display.invalidFormat();
+                    return false;
+                } else if (!checkClues(s, code, secretCode)) {
+                    Display.invalidClues();
                     return false;
                 }
-                else{
-                    int nb = Integer.parseInt(String.valueOf(code.charAt(i)));
-                    if(nb < secretCode[i] && s.charAt(i) != '+') error = true;
-                    else if(nb > secretCode[i] &&  s.charAt(i) != '-') error = true;
-                    else if(nb == secretCode[i] && s.charAt(i) != '=') error = true;
-                    if(error) break;
-                }
-            }
+                else return true;
 
-            if(error){
-                Display.error("\tVotre indice n'est pas correct !");
-                Display.error("\tMerci de vérifier votre réponse.");
+            // Search +/-
+            case 2:
+                if (s.length() != Settings.getBoxes()) {
+                    Display.invalidFormat();
+                    return false;
+                }
+                else {
+                    boolean error = false;
+                    for (int i = 0; i < s.length(); i++) {
+                        if (s.charAt(i) != '-' && s.charAt(i) != '=' && s.charAt(i) != '+') {
+                            Display.invalidFormat();
+                            return false;
+                        } else {
+                            int nb = Integer.parseInt(String.valueOf(code.charAt(i)));
+                            if (nb < secretCode[i] && s.charAt(i) != '+') error = true;
+                            else if (nb > secretCode[i] && s.charAt(i) != '-') error = true;
+                            else if (nb == secretCode[i] && s.charAt(i) != '=') error = true;
+                            if (error) break;
+                        }
+                    }
+
+                    if (error) {
+                        Display.invalidClues();
+                        return false;
+                    }
+                    else return true;
+                }
+
+            default:
+                LOG.error("Invalid game type");
                 return false;
-            }
-            else return true;
         }
     }
 
@@ -115,11 +116,11 @@ public class CheckInput {
         }
     }
 
-    public static boolean checkReply(String reply){
+    public static boolean checkMenuSelection(String reply){
 
         if(reply.equals("1") || reply.equals("2") || reply.equals("3")) return true;
         else {
-            Display.error("Veuillez saisir 1, 2 ou 3 suivant votre choix de réponse");
+            Display.invalidMenuSelection();
             return false;
         }
     }

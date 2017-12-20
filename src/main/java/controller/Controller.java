@@ -1,6 +1,5 @@
 package main.java.controller;
 
-import main.java.game.Game;
 import main.java.utils.CheckInput;
 import main.java.view.Display;
 
@@ -14,33 +13,21 @@ public class Controller {
     private Scanner scanner;
 
     public Controller(){
-
         scanner = new Scanner(System.in);
     }
 
     public int getGame(){
 
-        Display.info("Sélectionner un jeu :");
-        Display.info("---------------------");
-        Display.info("[1] - Mastermind");
-        Display.info("[2] - Recherche +/-");
-
+        Display.mainMenuSelections();
         String gameMsg = "Saissir le numéro correspondant au jeu souhaité";
         return getParamsInput(GAME_TYPE, gameMsg);
     }
 
     public int getMode(){
 
-        Display.info("");
-        Display.info("Sélectionner un mode de jeu :");
-        Display.info("-----------------------------");
-        Display.info("[1] - Challenger -> vous devez trouver la combinaison secrète de l'ordinateur");
-        Display.info("[2] - Duel -> l'ordinateur et vous jouez tour à tour pour trouver la combinaison secrète");
-        Display.info("[3] - Défenseur -> c'est à l'ordinateur de trouver votre combinaison secrète");
-
+        Display.gameModeSelections();
         String modeMsg = "Saissir le numéro correspondant au mode de jeu souhaité";
         return getParamsInput(GAME_MODE, modeMsg);
-
     }
 
     private int getParamsInput(String type, String msg){
@@ -55,7 +42,7 @@ public class Controller {
 
             String line = scanner.nextLine();
 
-            if (!CheckInput.params(line, nbChoices)) System.out.println(msg);
+            if (!CheckInput.params(line, nbChoices)) Display.error(msg);
             else {
                 input = Integer.parseInt(line);
                 break;
@@ -79,11 +66,9 @@ public class Controller {
         return line;
     }
 
-    public String getSecretCode(int nbBoxes, int maxNumbers){
+    public String getSecretCode(){
 
-        Display.info("-----------------------------");
-        Display.info("Sélectionner votre combinaison secrête :");
-        Display.info("(" + nbBoxes + " chiffres compris entre 0 et " + (maxNumbers - 1) + ")");
+        Display.secretCombinationSelection();
 
         String line;
 
@@ -100,30 +85,18 @@ public class Controller {
 
     public String getClues(String code, int[] secretCode){
 
-        String line = "";
+        String line;
 
-        switch (Game.GAME_TYPE){
-            case 1:
-                while (true){
-                    line = scanner.nextLine();
-                    if(!CheckInput.getCluesGame1(line, code, secretCode)) continue;
-                    else break;
-                }
-                break;
-
-            case 2:
-                while (true){
-                    line = scanner.nextLine();
-                    if(!CheckInput.getCluesGame2(line, code, secretCode)) continue;
-                    else break;
-                }
-                break;
+        while (true){
+            line = scanner.nextLine();
+            if(!CheckInput.getClues(line, code, secretCode)) continue;
+            else break;
         }
 
         return line;
     }
 
-    public int getUserReply(){
+    public int getMenuSelection(){
 
         int reply;
 
@@ -131,7 +104,7 @@ public class Controller {
 
             String line = scanner.nextLine();
 
-            if(!CheckInput.checkReply(line)) continue;
+            if(!CheckInput.checkMenuSelection(line)) continue;
             else {
                 reply = Integer.parseInt(line);
                 break;
