@@ -11,16 +11,22 @@ import java.util.Arrays;
 
 public class Defender implements IGameMode {
 
-    private AI computer;
-    private int[] secretCode;
-    private Controller controller;
-    private GameOver gameOver;
-    private int maxTrials;
-    private boolean autoManagement;
     private int trials;
     private boolean win;
     private boolean finished;
 
+    private int[] secretCode;
+    private final AI computer;
+    private final int maxTrials;
+    private final GameOver gameOver;
+    private final Controller controller;
+    private final boolean autoManagement;
+
+    /**
+     * The Defender constructor
+     * @param   gameOver        A GameOver object for the game
+     * @param   autoManagement  Indicates if the class manages itself the game rounds
+     */
     public Defender(GameOver gameOver, boolean autoManagement){
 
         this.gameOver = gameOver;
@@ -28,7 +34,7 @@ public class Defender implements IGameMode {
 
         controller = new Controller();
         maxTrials = Settings.getTrials();
-        computer = new AI(Settings.getBoxes(), Settings.getMaxNumbers());
+        computer = new AI();
 
         setSecretCode();
         startGame();
@@ -77,16 +83,26 @@ public class Defender implements IGameMode {
         return finished;
     }
 
-    public void setSecretCode(){
-
+    /**
+     * Generate a secret combinaition
+     */
+    private void setSecretCode(){
         String code = controller.getSecretCode(Settings.getBoxes(), Settings.getMaxNumbers());
         secretCode = SecretCode.convertToDigit(code);
     }
 
+    /**
+     * Retrieves the generated secret combination
+     * @return  The secret combination
+     */
     public int[] getSecretCode(){
         return secretCode;
     }
 
+    /**
+     * Retrieves the number of trials
+     * @return  Trials
+     */
     public int getTrials(){
         return trials;
     }
