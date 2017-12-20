@@ -1,7 +1,6 @@
 package main.java.game.mode;
 
 import main.java.game.player.human.Human;
-import main.java.game.GameOver;
 import main.java.game.player.ai.AI;
 import main.java.utils.SecretCode;
 import main.java.utils.Settings;
@@ -18,18 +17,15 @@ public class Defender implements IGameMode {
     private int[] secretCode;
     private final AI computer;
     private final int maxTrials;
-    private final GameOver gameOver;
     private final Human human;
     private final boolean autoManagement;
 
     /**
      * The Defender constructor
-     * @param   gameOver        A GameOver object for the game
      * @param   autoManagement  Indicates if the class manages itself the game rounds
      */
-    public Defender(GameOver gameOver, boolean autoManagement){
+    public Defender(boolean autoManagement){
 
-        this.gameOver = gameOver;
         this.autoManagement = autoManagement;
 
         human = new Human();
@@ -48,7 +44,7 @@ public class Defender implements IGameMode {
             do { gameTour(); }
             while (!finished);
 
-            gameOver.display(win, Arrays.toString(secretCode), trials - 1);
+            Display.gameOver(win, Arrays.toString(secretCode), trials - 1);
         }
     }
 

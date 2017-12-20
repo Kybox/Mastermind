@@ -1,12 +1,11 @@
 package main.java.game.mode;
 
-import main.java.game.GameOver;
+import main.java.view.Display;
 
 import java.util.Arrays;
 
 public class Duel implements IGameMode {
 
-    private GameOver gameOver;
     private Defender defender;
     private Challenger challenger;
     private boolean blnFinished;
@@ -14,12 +13,10 @@ public class Duel implements IGameMode {
     private int[] secretCode;
     private int trials;
 
-    public Duel(GameOver gameOver){
+    public Duel(){
 
-        this.gameOver = gameOver;
-
-        defender = new Defender(gameOver, false);
-        challenger = new Challenger(gameOver, false);
+        defender = new Defender(false);
+        challenger = new Challenger(false);
 
         startGame();
     }
@@ -30,7 +27,7 @@ public class Duel implements IGameMode {
         do{ gameTour(); }
         while (!blnFinished);
 
-        gameOver.display(gameWon, Arrays.toString(secretCode), trials);
+        Display.gameOver(gameWon, Arrays.toString(secretCode), trials);
     }
 
     @Override

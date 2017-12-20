@@ -9,7 +9,7 @@ public interface IGameMode {
 
     /**
      * Performs a game round
-     * @return  True if the game is over otherwise false
+     * @return  True if the game is over otherwise
      */
     boolean gameTour();
 }

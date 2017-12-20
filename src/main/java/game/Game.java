@@ -5,30 +5,15 @@ import main.java.game.mode.Challenger;
 import main.java.game.mode.Defender;
 import main.java.game.mode.Duel;
 import main.java.view.Display;
-import org.apache.log4j.LogManager;
-import org.apache.log4j.Logger;
 
-import java.util.Observable;
-import java.util.Observer;
-
-public class Game implements Observer{
+public class Game {
 
     public static int GAME_TYPE;
     public static int GAME_MODE;
-    private GameOver gameOver;
-    private Human human;
-    private static final Logger LOG = LogManager.getLogger(Game.class);
+    private final Human human;
 
     public Game(){
 
-        gameOver = new GameOver();
-        gameOver.addObserver(this);
-
-        Display.info("");
-        Display.info("+--------------------+");
-        Display.info("|   MENU PRINCIPAL   |");
-        Display.info("+--------------------+");
-        Display.info("");
         human = new Human();
 
         GAME_TYPE = human.getGame();
@@ -52,22 +37,24 @@ public class Game implements Observer{
         switch (GAME_MODE){
             case 1:
                 Display.info("Mode sélectionné -> Challenger");
-                new Challenger(gameOver, true);
+                new Challenger(true);
                 break;
             case 2:
                 Display.info("Mode sélectionné -> Duel");
-                new Duel(gameOver);
+                new Duel();
                 break;
             case 3:
                 Display.info("Mode sélectionné -> Défenseur");
-                new Defender(gameOver, true);
+                new Defender(true);
                 break;
         }
+
+        endgameMenu();
     }
 
-    @Override
-    public void update(Observable o, Object arg) {
 
+    private void endgameMenu() {
+        
         switch (human.getGameOverSelection()){
 
             case 1: startGame();
