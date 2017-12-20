@@ -1,5 +1,6 @@
 package main.java.utils;
 
+import main.java.game.Game;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 
@@ -10,23 +11,28 @@ public class SecretCode {
 
     private static final Logger LOG = LogManager.getLogger(SecretCode.class);
 
-    public static int[] generate(int boxes, int nbNumbers){
+    /**
+     * Generate a secret combination based on the method's parameters
+     * @param   nbKeys      Number of key elements in the combination
+     * @param   maxNumbers  Maximum value of the numbers that make up the combination
+     * @return              A secret combination
+     */
+    public static int[] generate(int nbKeys, int maxNumbers){
 
         int index = 0, key;
         Random random = new Random();
-        int[] keys = new int[boxes];
+        int[] code = new int[nbKeys];
 
-        while (index < boxes){
+        while (index < nbKeys){
 
             boolean exist;
 
             do{
                 exist = false;
-
-                key = random.nextInt(nbNumbers);
+                key = random.nextInt(maxNumbers);
 
                 for (int i = 0; i < index; i++) {
-                    if (keys[i] == key) {
+                    if (code[i] == key) {
                         exist = true;
                         break;
                     }
@@ -34,15 +40,18 @@ public class SecretCode {
             }
             while (exist);
 
-            keys[index] = key;
+            code[index] = key;
             index++;
         }
-
-        return keys;
+        return code;
     }
 
-
-
+    /**
+     * Checking if the user's combination is identical to the secret combination
+     * @param   secretCode  The secret combination to find
+     * @param   userCode    The combination that the user proposed
+     * @return              True if both combinaitions are identical otherwise return false
+     */
     public static boolean isEqual(int[] secretCode, String userCode){
 
         int[] code = convertToDigit(userCode);
@@ -51,63 +60,19 @@ public class SecretCode {
         else return false;
     }
 
+    /**
+     * Convert a string into an array of integers
+     * @param   code    A combination in a string
+     * @return          An array of integers
+     */
     public static int[] convertToDigit(String code){
 
-        int[] result = new int[code.length()];
+        int[] array = new int[code.length()];
 
         for(int i = 0; i < code.length(); i++){
-            try{ result[i] = Integer.parseInt(String.valueOf(code.charAt(i))); }
+            try{ array[i] = Integer.parseInt(String.valueOf(code.charAt(i))); }
             catch (NumberFormatException e ) { LOG.fatal("Invalid code to digit conversion"); }
         }
-        return result;
-    }
-
-    public static String getClues(int game, int[] secretCode, String userCode){
-
-        String clues = "";
-        int[] code = convertToDigit(userCode);
-
-        switch (game){
-
-            case 1:
-                int existing = 0;
-                int wellPut = 0;
-
-
-                for(int i = 0; i < secretCode.length; i++){
-                    if(code[i] == secretCode[i]) wellPut++;
-                    else{
-                        for(int j = 0; j < secretCode.length; j++)
-                            if(code[i] == secretCode[j]) existing++;
-                    }
-                }
-
-                String strExisting;
-                if(existing > 1) strExisting = existing + " présents, ";
-                else strExisting = existing + " présent, ";
-
-                String strWellPut;
-                if(wellPut > 1) strWellPut = wellPut + " bien placés.";
-                else strWellPut = wellPut + " bien placé.";
-
-                clues = strExisting + strWellPut;
-                break;
-
-            case 2:
-
-                for(int i = 0; i < secretCode.length; i++){
-
-                    if(secretCode[i] < code[i]) clues = clues + "-";
-                    else if(secretCode[i] == code[i]) clues = clues + "=";
-                    else if(secretCode[i] > code[i]) clues = clues + "+";
-                }
-
-                break;
-
-            default:
-                LOG.fatal("Incorrect game type");
-        }
-
-        return clues;
+        return array;
     }
 }
