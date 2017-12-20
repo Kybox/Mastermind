@@ -28,20 +28,28 @@ public class Strategy {
         combinationList = setCombinations();
     }
 
-
+    /**
+     * Parse clues and remove combinations based on clues
+     * @param   clues   Number of well placed and misplaced
+     * @param   code    The last combination generated
+     */
     public void setClues(String clues, int[] code){
 
-        int wellPut = Integer.parseInt(String.valueOf(clues.charAt(0)));
+        int nbWellPlaced = Integer.parseInt(String.valueOf(clues.charAt(0)));
         int nbMisplaced = Integer.parseInt(String.valueOf(clues.charAt(2)));
 
-        if(wellPut == 0) combinationList = removeAllFor(code);
+        if(nbWellPlaced == 0) combinationList = removeAllFor(code);
 
         if(nbMisplaced == code.length) combinationList = removeNotContain(code);
-        else if(nbMisplaced + wellPut == code.length) combinationList = removeNotContain(code);
+        else if(nbMisplaced + nbWellPlaced == code.length) combinationList = removeNotContain(code);
 
         combinationList.remove(code);
     }
 
+    /**
+     * Get a new combination from the list
+     * @return  A new combination
+     */
     public int[] getNewCode(){
 
         if(combinationList.size() > 1)
@@ -49,6 +57,11 @@ public class Strategy {
         else return combinationList.get(0);
     }
 
+    /**
+     * Removes all combinations that do not contain the elements of the proposed combination
+     * @param   code    The last combination generated
+     * @return          The new combination list
+     */
     private ArrayList<int[]> removeNotContain(int[]code){
 
         ArrayList<int[]> uselessList = new ArrayList<>();
@@ -73,6 +86,12 @@ public class Strategy {
         return combinationList;
     }
 
+
+    /**
+     * Remove all combinations that contain the keys of the last combination generated
+     * @param   code    The last combination generated
+     * @return          The new combination list
+     */
     private ArrayList<int[]> removeAllFor(int[] code){
 
         ArrayList<int[]> uselessList = new ArrayList<>();
@@ -83,11 +102,15 @@ public class Strategy {
             }
         }
 
-        for(int[] value : uselessList) combinationList.remove(value);
+        uselessList.forEach(value -> combinationList.remove(value));
 
         return combinationList;
     }
 
+    /**
+     * Generate all combinations with all possible permutations
+     * @return  The list of all combinations
+     */
     private ArrayList<int[]> setCombinations(){
 
         String numbers = stringOfNumbers(maxNumber);
