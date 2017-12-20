@@ -49,7 +49,13 @@ public class CheckInput {
         return true;
     }
 
-
+    /**
+     * Check if the clues are in the correct format
+     * @param   clues           The clues
+     * @param   combination     The new proposed combination
+     * @param   secretCode      The secret combination
+     * @return                  True if all is correct otherwise false
+     */
     public static boolean checkCluesSyntax(String clues, String combination, int[] secretCode){
         switch (Game.GAME_TYPE) {
             // Mastermind
@@ -98,6 +104,13 @@ public class CheckInput {
         }
     }
 
+    /**
+     * Check if the suggested clues are correct
+     * @param   clues       The clues
+     * @param   code        The new proposed combination
+     * @param   secretCode  The secret combination
+     * @return              True if all is correct otherwise false
+     */
     private static boolean checkClues(String clues, String code, int[] secretCode){
 
         switch (Game.GAME_TYPE){
