@@ -2,22 +2,28 @@ package main.java.game.player.ai;
 
 import main.java.game.player.ai.strategy.Strategy;
 import main.java.game.Game;
+import main.java.utils.SecretCode;
+import main.java.utils.Settings;
+import org.apache.log4j.LogManager;
+import org.apache.log4j.Logger;
 
 import java.util.*;
 
 public class AI {
 
     private int trials;
-    private int nbBoxes;
-    private int maxNumber;
+    private final int nbBoxes;
+    private final int maxNumber;
     private int[] code;
     private String[] searchClues;
     private Strategy strategy;
 
-    public AI(int nbBoxes, int maxNumber){
+    private static final Logger LOG = LogManager.getLogger(AI.class);
 
-        this.nbBoxes = nbBoxes;
-        this.maxNumber = maxNumber;
+    public AI(){
+
+        nbBoxes = Settings.getBoxes();
+        maxNumber = Settings.getMaxNumbers();
 
         // Set all digits to 0
         code = new int[nbBoxes];
@@ -35,10 +41,15 @@ public class AI {
         }
     }
 
+    /**
+     * Generate a new combination based on the selected game
+     * @return  The new combination
+     */
     public String generate(){
 
-        String strCode = "";
+        StringBuilder strCode = new StringBuilder();
 
+        // Mastermind
         if(Game.GAME_TYPE == 1){
 
             if(trials == 0){
@@ -55,16 +66,18 @@ public class AI {
                         }
                         if(!exist) break;
                     }
-                    strCode = strCode + code[i];
+                    strCode.append(code[i]);
                 }
             }
             else{
                 code = strategy.getNewCode();
-                for(int i = 0; i < code.length; i++){
-                    strCode = strCode + code[i];
+                for (int key : code) {
+                    strCode.append(key);
                 }
             }
         }
+
+        // Search with +/-
         else if(Game.GAME_TYPE == 2) {
             for (int i = 0; i < nbBoxes; i++) {
                 if (searchClues[i] != null) {
@@ -74,14 +87,18 @@ public class AI {
                     Random random = new Random();
                     code[i] = random.nextInt(maxNumber);
                 }
-                strCode = strCode + code[i];
+                strCode.append(code[i]);
             }
         }
 
         trials++;
-        return strCode;
+        return strCode.toString();
     }
 
+    /**
+     * Set clues to the AI Strategy or keep in memory the clues
+     * @param   clues   The game indices
+     */
     public void setClues(String clues){
 
         switch (Game.GAME_TYPE){
@@ -96,8 +113,53 @@ public class AI {
         }
     }
 
-    public int getTrials(){
+    /**
+     * Sets the indices according to the selected game
+     * @param   secretCode  The secret combination to find
+     * @param   userCode    The combination proposed by the user
+     * @return              The clues
+     */
+    public static String getClues(int[] secretCode, String userCode){
 
-        return trials;
+        StringBuilder clues = new StringBuilder();
+        int[] code = SecretCode.convertToDigit(userCode);
+
+        switch (Game.GAME_TYPE){
+
+            // Mastermind
+            case 1:
+                int existing = 0;
+                int wellPut = 0;
+
+                for(int i = 0; i < secretCode.length; i++){
+                    if(code[i] == secretCode[i]) wellPut++;
+                    else for (int key : secretCode) if (code[i] == key) existing++;
+                }
+
+                String strExisting;
+                if(existing > 1) strExisting = existing + " présents, ";
+                else strExisting = existing + " présent, ";
+
+                String strWellPut;
+                if(wellPut > 1) strWellPut = wellPut + " bien placés.";
+                else strWellPut = wellPut + " bien placé.";
+
+                clues = new StringBuilder(strExisting + strWellPut);
+                break;
+
+            // Search game +/-
+            case 2:
+                for(int i = 0; i < secretCode.length; i++){
+                    if(secretCode[i] < code[i]) clues.append("-");
+                    else if(secretCode[i] == code[i]) clues.append("=");
+                    else if(secretCode[i] > code[i]) clues.append("+");
+                }
+                break;
+
+            default:
+                LOG.fatal("Incorrect game type");
+        }
+
+        return clues.toString();
     }
 }
