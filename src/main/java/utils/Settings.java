@@ -55,7 +55,7 @@ public class Settings {
 
         int nbKeys = 0;
 
-        try{ nbKeys = Integer.parseInt(SETTINGS.getProperty("nbBoxes")); }
+        try{ nbKeys = Integer.parseInt(SETTINGS.getProperty("nbKeys")); }
         catch (NumberFormatException | NullPointerException e) {
             LOG.error("Error in the configuration file for nbKeys");
         }
@@ -88,5 +88,9 @@ public class Settings {
         catch (NumberFormatException e) { LOG.error("Error in the configutation file, wrong number format"); }
         catch (NullPointerException e) { LOG.error("Error in the configuration file for trials"); }
         return nbTrials;
+    }
+
+    public static boolean isDevMode(){
+        return Boolean.parseBoolean(SETTINGS.getProperty("devMode"));
     }
 }
