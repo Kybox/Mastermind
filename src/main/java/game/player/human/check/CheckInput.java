@@ -58,7 +58,7 @@ public class CheckInput {
      * @return                  True if all is correct otherwise false
      */
     public static boolean checkCluesSyntax(String clues, String combination, int[] secretCode){
-        
+
         switch (Game.GAME_TYPE) {
             // Mastermind
             case 1:
@@ -135,7 +135,12 @@ public class CheckInput {
         }
     }
 
-    public static boolean gameOverSelection(String reply){
+    /**
+     * Check if the user correctly entered the index of a selection
+     * @param   reply   The reply
+     * @return          True if all is correct otherwise false
+     */
+    public static boolean endgameMenuSelection(String reply){
 
         if(reply.equals("1") || reply.equals("2") || reply.equals("3")) return true;
         else {

@@ -107,14 +107,14 @@ public class Human {
      * Get the game over menu selection
      * @return  The choice of the player
      */
-    public int getGameOverSelection(){
+    public int getEndgameSelection(){
 
         int reply;
 
         while (true){
 
             String line = new Scanner(System.in).nextLine();
-            if(!CheckInput.gameOverSelection(line)) continue;
+            if(!CheckInput.endgameMenuSelection(line)) continue;
             else {
                 reply = Integer.parseInt(line);
                 break;

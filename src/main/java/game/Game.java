@@ -65,7 +65,7 @@ public class Game {
 
         Display.endgameMenu();
 
-        switch (human.getGameOverSelection()){
+        switch (human.getEndgameSelection()){
 
             case 1: startGameMode();
                 break;
