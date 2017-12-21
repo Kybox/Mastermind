@@ -69,12 +69,14 @@ public class Settings {
      */
     public static int getMaxNumbers(){
 
-        int nbNumbers = 0;
+        int maxNumbers = 0;
 
-        try { nbNumbers = Integer.parseInt(SETTINGS.getProperty("nbNumbers")); }
+        try { maxNumbers = Integer.parseInt(SETTINGS.getProperty("nbNumbers")); }
         catch (NumberFormatException e) { LOG.error("Error in the configutation file, wrong number format"); }
         catch (NullPointerException e) { LOG.error("Error in the configuration file range of numbers"); }
-        return nbNumbers;
+        if(maxNumbers < 4) maxNumbers = 4;
+        else if(maxNumbers > 10) maxNumbers = 10;
+        return maxNumbers;
     }
 
     /**
