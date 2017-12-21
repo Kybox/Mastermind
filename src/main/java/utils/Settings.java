@@ -27,7 +27,6 @@ public class Settings {
         InputStream inputStream = null;
 
         try {
-            // Check si input(file)
             inputStream = Main.class.getClassLoader().getResourceAsStream(FILE);
 
             if(inputStream != null) {
@@ -92,11 +91,18 @@ public class Settings {
         return nbTrials;
     }
 
+    /**
+     * Check if developer mode is enabled
+     * @return  True if it's activated otherwhise false
+     */
     public static boolean isDevMode(){
         if(!devMode) return Boolean.parseBoolean(SETTINGS.getProperty("devMode"));
         else return true;
     }
 
+    /**
+     * Sets the developer mode (for the Main class)
+     */
     public static void setDevMode(){
         Display.info("Mode développeur");
         devMode = true;
