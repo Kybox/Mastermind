@@ -23,7 +23,7 @@ public class AI {
     public AI(){
 
         nbBoxes = Settings.getKeys();
-        maxNumber = Settings.getMaxNumbers();
+        maxNumber = Settings.getMaxNumber();
 
         // Set all digits to 0
         code = new int[nbBoxes];

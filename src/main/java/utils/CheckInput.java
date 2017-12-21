@@ -40,7 +40,7 @@ public class CheckInput {
         int nbKeys = Settings.getKeys();
         if(combination.length() < nbKeys || combination.length() > nbKeys) return false;
 
-        int maxNumbers = Settings.getMaxNumbers();
+        int maxNumbers = Settings.getMaxNumber();
         for(int i = 0; i < combination.length(); i++){
             if(Integer.parseInt(String.valueOf(combination.charAt(i))) > maxNumbers - 1)
                 return false;

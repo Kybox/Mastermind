@@ -67,16 +67,16 @@ public class Settings {
      * Get the maximum value of the digits
      * @return  The maximum value
      */
-    public static int getMaxNumbers(){
+    public static int getMaxNumber(){
 
-        int maxNumbers = 0;
+        int maxNumber = 0;
 
-        try { maxNumbers = Integer.parseInt(SETTINGS.getProperty("nbNumbers")); }
+        try { maxNumber = Integer.parseInt(SETTINGS.getProperty("maxNumber")); }
         catch (NumberFormatException e) { LOG.error("Error in the configutation file, wrong number format"); }
         catch (NullPointerException e) { LOG.error("Error in the configuration file range of numbers"); }
-        if(maxNumbers < 4) maxNumbers = 4;
-        else if(maxNumbers > 10) maxNumbers = 10;
-        return maxNumbers;
+        if(maxNumber < 4) maxNumber = 4;
+        else if(maxNumber > 10) maxNumber = 10;
+        return maxNumber;
     }
 
     /**

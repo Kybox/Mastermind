@@ -57,7 +57,7 @@ public class Display {
         Display.info("-----------------------------");
         Display.info("Sélectionner votre combinaison secrête :");
         Display.info("(" + Settings.getKeys() + " chiffres compris entre 0 et "
-                        + (Settings.getMaxNumbers() - 1) + ")");
+                        + (Settings.getMaxNumber() - 1) + ")");
     }
 
     /**
@@ -65,7 +65,7 @@ public class Display {
      */
     public static void invalidCombination(){
         int nbKeys = Settings.getKeys();
-        int maxNumbers = Settings.getMaxNumbers();
+        int maxNumbers = Settings.getMaxNumber();
         Display.error("Vous devez saisir une combinaison de " + nbKeys
                 + " chiffres inférieurs ou égals à " + (maxNumbers - 1));
     }
