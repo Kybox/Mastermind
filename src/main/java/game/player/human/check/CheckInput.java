@@ -78,21 +78,7 @@ public class CheckInput {
                     return false;
                 }
                 else {
-                    boolean error = false;
-                    for (int i = 0; i < clues.length(); i++) {
-                        if (clues.charAt(i) != '-' && clues.charAt(i) != '=' && clues.charAt(i) != '+') {
-                            Display.invalidFormat();
-                            return false;
-                        } else {
-                            int nb = Integer.parseInt(String.valueOf(combination.charAt(i)));
-                            if (nb < secretCode[i] && clues.charAt(i) != '+') error = true;
-                            else if (nb > secretCode[i] && clues.charAt(i) != '-') error = true;
-                            else if (nb == secretCode[i] && clues.charAt(i) != '=') error = true;
-                            if (error) break;
-                        }
-                    }
-
-                    if (error) {
+                    if (!checkClues(clues, combination, secretCode)) {
                         Display.invalidClues();
                         return false;
                     }
@@ -108,18 +94,18 @@ public class CheckInput {
     /**
      * Check if the suggested clues are correct
      * @param   clues       The clues
-     * @param   code        The new proposed combination
+     * @param   combination The new proposed combination
      * @param   secretCode  The secret combination
      * @return              True if all is correct otherwise false
      */
-    private static boolean checkClues(String clues, String code, int[] secretCode){
+    private static boolean checkClues(String clues, String combination, int[] secretCode){
 
         switch (Game.GAME_TYPE){
             case 1:
                 int wellPut = 0;
                 int existing = 0;
-                for(int i = 0; i < code.length(); i++){
-                    int value = Integer.parseInt(String.valueOf(code.charAt(i)));
+                for(int i = 0; i < combination.length(); i++){
+                    int value = Integer.parseInt(String.valueOf(combination.charAt(i)));
                     if(value == secretCode[i]) wellPut++;
                     else if(Arrays.stream(secretCode).anyMatch(j -> j == value))
                         existing++;
@@ -128,7 +114,20 @@ public class CheckInput {
                 return checked.equals(clues);
 
             case 2:
-                return false;
+                boolean error = false;
+                for (int i = 0; i < clues.length(); i++) {
+                    if (clues.charAt(i) != '-' && clues.charAt(i) != '=' && clues.charAt(i) != '+') {
+                        Display.invalidFormat();
+                        return false;
+                    }
+                    else {
+                        int nb = Integer.parseInt(String.valueOf(combination.charAt(i)));
+                        if (nb < secretCode[i] && clues.charAt(i) != '+') error = true;
+                        else if (nb > secretCode[i] && clues.charAt(i) != '-') error = true;
+                        else if (nb == secretCode[i] && clues.charAt(i) != '=') error = true;
+                        return error;
+                    }
+                }
 
             default: return false;
         }
