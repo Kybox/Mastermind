@@ -41,7 +41,8 @@ public class Challenger implements IGameMode {
 
         trials = 0;
 
-        Display.info("Combinaison secrête : " + Arrays.toString(secretCode));
+        if(Settings.isDevMode())
+            Display.info("Combinaison secrête : " + Arrays.toString(secretCode));
 
         if(autoManagement) {
 
