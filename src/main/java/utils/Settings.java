@@ -1,6 +1,7 @@
 package main.java.utils;
 
 import main.java.Main;
+import main.java.view.Display;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 
@@ -11,6 +12,7 @@ import java.util.Properties;
 public class Settings {
 
     private static Properties SETTINGS;
+    private static boolean devMode = false;
     private static final String FILE = "main/resources/config.properties";
     private static final Logger LOG = LogManager.getLogger(Settings.class);
 
@@ -91,6 +93,12 @@ public class Settings {
     }
 
     public static boolean isDevMode(){
-        return Boolean.parseBoolean(SETTINGS.getProperty("devMode"));
+        if(!devMode) return Boolean.parseBoolean(SETTINGS.getProperty("devMode"));
+        else return true;
+    }
+
+    public static void setDevMode(){
+        Display.info("Mode développeur");
+        devMode = true;
     }
 }
