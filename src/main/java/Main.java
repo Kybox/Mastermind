@@ -17,7 +17,5 @@ public class Main {
 
         if(Settings.loadProperties() != null) new Game();
         else Display.error("Error loading configuration file");
-
-
     }
 }
