@@ -1,6 +1,6 @@
 package main.java.game.player.human;
 
-import main.java.utils.CheckInput;
+import main.java.game.player.human.check.CheckInput;
 import main.java.view.Display;
 
 import java.util.Scanner;

@@ -1,6 +1,7 @@
-package main.java.utils;
+package main.java.game.player.human.check;
 
 import main.java.game.Game;
+import main.java.utils.Settings;
 import main.java.view.Display;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
