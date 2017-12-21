@@ -12,6 +12,9 @@ public class Game {
     public static int GAME_MODE;
     private final Human human;
 
+    /**
+     * Game class constructor
+     */
     public Game(){
 
         human = new Human();
@@ -29,10 +32,13 @@ public class Game {
 
         GAME_MODE = human.getMode();
 
-        startGame();
+        startGameMode();
     }
 
-    private void startGame(){
+    /**
+     * Initialize the selected game mode
+     */
+    private void startGameMode(){
 
         switch (GAME_MODE){
             case 1:
@@ -52,14 +58,16 @@ public class Game {
         endgameMenu();
     }
 
-
+    /**
+     * Display the end of game menu
+     */
     private void endgameMenu() {
 
         Display.endgameMenu();
 
         switch (human.getGameOverSelection()){
 
-            case 1: startGame();
+            case 1: startGameMode();
                 break;
 
             case 2: new Game();
