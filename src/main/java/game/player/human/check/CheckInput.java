@@ -58,6 +58,7 @@ public class CheckInput {
      * @return                  True if all is correct otherwise false
      */
     public static boolean checkCluesSyntax(String clues, String combination, int[] secretCode){
+        
         switch (Game.GAME_TYPE) {
             // Mastermind
             case 1:
@@ -94,7 +95,7 @@ public class CheckInput {
     /**
      * Check if the suggested clues are correct
      * @param   clues       The clues
-     * @param   combination The new proposed combination
+     * @param   combination        The new proposed combination
      * @param   secretCode  The secret combination
      * @return              True if all is correct otherwise false
      */
@@ -119,15 +120,16 @@ public class CheckInput {
                     if (clues.charAt(i) != '-' && clues.charAt(i) != '=' && clues.charAt(i) != '+') {
                         Display.invalidFormat();
                         return false;
-                    }
-                    else {
+                    } else {
                         int nb = Integer.parseInt(String.valueOf(combination.charAt(i)));
                         if (nb < secretCode[i] && clues.charAt(i) != '+') error = true;
                         else if (nb > secretCode[i] && clues.charAt(i) != '-') error = true;
                         else if (nb == secretCode[i] && clues.charAt(i) != '=') error = true;
-                        return error;
+                        if (error) break;
                     }
                 }
+
+                return !error;
 
             default: return false;
         }
