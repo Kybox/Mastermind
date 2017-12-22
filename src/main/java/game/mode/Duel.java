@@ -15,10 +15,8 @@ public class Duel implements IGameMode {
 
     public Duel(){
 
-        defender = new Defender(false);
-        challenger = new Challenger(false);
-
-        startGame();
+        defender = new Defender();
+        challenger = new Challenger();
     }
 
     @Override

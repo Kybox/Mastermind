@@ -18,34 +18,26 @@ public class Defender implements IGameMode {
     private final AI computer;
     private final int maxTrials;
     private final Human human;
-    private final boolean autoManagement;
 
     /**
      * The Defender constructor
-     * @param   autoManagement  Indicates if the class manages itself the game rounds
      */
-    public Defender(boolean autoManagement){
-
-        this.autoManagement = autoManagement;
+    public Defender(){
 
         human = new Human();
         maxTrials = Settings.getTrials();
         computer = new AI();
-
-        setSecretCode();
-        startGame();
     }
 
     @Override
     public void startGame(){
 
-        if(autoManagement) {
+        setSecretCode();
 
-            do { gameTour(); }
-            while (!finished);
+        do { gameTour(); }
+        while (!finished);
 
-            Display.gameOver(win, Arrays.toString(secretCode), trials - 1);
-        }
+        Display.gameOver(win, Arrays.toString(secretCode), trials - 1);
     }
 
     @Override

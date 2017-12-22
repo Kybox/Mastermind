@@ -18,39 +18,32 @@ public class Challenger implements IGameMode {
     private final AI computer;
     private final int maxTrials;
     private final Human human;
-    private final boolean autoManagement;
 
     /**
      * The Challenger constructor
-     * @param   autoManagement  Indicates if the class manages itself the game rounds
      */
-    public Challenger(boolean autoManagement){
-
-        this.autoManagement = autoManagement;
+    public Challenger(){
 
         computer = new AI();
         human = new Human();
         maxTrials = Settings.getTrials();
-
-        setSecretCode();
-        startGame();
     }
 
     @Override
     public void startGame(){
+
+        setSecretCode();
 
         trials = 0;
 
         if(Settings.isDevMode())
             Display.info("Combinaison secrête : " + Arrays.toString(secretCode));
 
-        if(autoManagement) {
+        do { gameTour(); }
+        while (!finished);
 
-            do { gameTour(); }
-            while (!finished);
+        Display.gameOver(win, Arrays.toString(secretCode), trials);
 
-            Display.gameOver(win, Arrays.toString(secretCode), trials);
-        }
     }
 
     @Override

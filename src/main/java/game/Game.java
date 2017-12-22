@@ -1,5 +1,6 @@
 package main.java.game;
 
+import main.java.game.mode.IGameMode;
 import main.java.game.player.human.Human;
 import main.java.game.mode.Challenger;
 import main.java.game.mode.Defender;
@@ -40,20 +41,26 @@ public class Game {
      */
     private void startGameMode(){
 
+        IGameMode iGameMode = null;
+
         switch (GAME_MODE){
             case 1:
                 Display.info("Mode sélectionné -> Challenger");
-                new Challenger(true);
+                iGameMode = new Challenger();
                 break;
             case 2:
                 Display.info("Mode sélectionné -> Duel");
-                new Duel();
+                iGameMode = new Duel();
                 break;
             case 3:
                 Display.info("Mode sélectionné -> Défenseur");
-                new Defender(true);
+                iGameMode = new Defender();
                 break;
         }
+
+        assert iGameMode != null;
+
+        iGameMode.startGame();
 
         endgameMenu();
     }
