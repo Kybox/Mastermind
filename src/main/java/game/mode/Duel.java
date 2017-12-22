@@ -4,7 +4,7 @@ import main.java.view.Display;
 
 import java.util.Arrays;
 
-public class Duel implements IGameMode {
+public class Duel implements GameMode {
 
     private Defender defender;
     private Challenger challenger;

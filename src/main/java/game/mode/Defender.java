@@ -8,7 +8,7 @@ import main.java.view.Display;
 
 import java.util.Arrays;
 
-public class Defender implements IGameMode {
+public class Defender implements GameMode {
 
     private int trials;
     private boolean win;

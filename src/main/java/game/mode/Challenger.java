@@ -8,7 +8,7 @@ import main.java.view.Display;
 
 import java.util.Arrays;
 
-public class Challenger implements IGameMode {
+public class Challenger implements GameMode {
 
     private int[] secretCode;
     private int trials;

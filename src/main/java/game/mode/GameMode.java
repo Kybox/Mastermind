@@ -1,6 +1,6 @@
 package main.java.game.mode;
 
-public interface IGameMode {
+public interface GameMode {
 
     /**
      * Start the game after initializing the different parameters
