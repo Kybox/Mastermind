@@ -1,5 +1,6 @@
 package main.java.game.player.ai.strategy;
 
+import main.java.view.Display;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 
@@ -59,29 +60,25 @@ public class Strategy {
 
     /**
      * Removes all combinations that do not contain the elements of the proposed combination
-     * @param   code    The last combination generated
-     * @return          The new combination list
+     * @param   combination    The last combination generated
+     * @return                  The new combination list
      */
-    private ArrayList<int[]> removeNotContain(int[]code){
+    private ArrayList<int[]> removeNotContain(int[] combination){
 
-        ArrayList<int[]> uselessList = new ArrayList<>();
-        ArrayList<Integer> uselessNumber = new ArrayList<>();
+        Iterator<int[]> iterator = combinationList.iterator();
 
-        for(int i = 0; i < maxNumber; i++){
-            final int nb = i;
-            if(!Arrays.stream(code).anyMatch(j -> j == nb))
-                uselessNumber.add(nb);
-        }
+        while (iterator.hasNext()){
 
-        for(int[] value : combinationList){
-            for(int uselessNb : uselessNumber){
-                if(Arrays.stream(value).anyMatch(i -> i == uselessNb))
-                    uselessList.add(value);
+            int[] code = iterator.next();
+
+            for(int key : combination){
+                if(!Arrays.stream(code).anyMatch(e -> e == key)) {
+                    LOG.info("Removed combination -> " + Arrays.toString(code));
+                    iterator.remove();
+                    break;
+                }
             }
         }
-
-        for(int[] value : uselessList)
-            combinationList.remove(value);
 
         return combinationList;
     }
@@ -89,20 +86,23 @@ public class Strategy {
 
     /**
      * Remove all combinations that contain the keys of the last combination generated
-     * @param   code    The last combination generated
-     * @return          The new combination list
+     * @param   combination     The last combination generated
+     * @return                  The new combination list
      */
-    private ArrayList<int[]> removeAllFor(int[] code){
+    private ArrayList<int[]> removeAllFor(int[] combination){
 
-        ArrayList<int[]> uselessList = new ArrayList<>();
+        Iterator<int[]> iterator = combinationList.iterator();
 
-        for(int[] value : combinationList){
-            for(int i = 0; i < value.length; i++){
-                if(value[i] == code[i]) uselessList.add(value);
+        while (iterator.hasNext()){
+            int[] code = iterator.next();
+            for(int i = 0; i < code.length; i++){
+                if(code[i] == combination[i]) {
+                    LOG.info("Removed combination -> " + Arrays.toString(code));
+                    iterator.remove();
+                    break;
+                }
             }
         }
-
-        uselessList.forEach(value -> combinationList.remove(value));
 
         return combinationList;
     }
@@ -126,6 +126,7 @@ public class Strategy {
                 String range = numbers.substring(0, nbKeys);
 
                 if(j != 0) {
+
                     if(j + nbKeys <= numbers.length()){
                         range = numbers.substring(j, nbKeys + j);
                     }
@@ -160,34 +161,38 @@ public class Strategy {
         factorials[0] = 1;
 
         for (int i = 1; i <= nbKeys; i++) {
-            factorials[i] = factorials[i-1] * i;
+            factorials[i] = factorials[i - 1] * i;
         }
 
         for (int i = 0; i < factorials[nbKeys]; i++) {
 
-            StringBuilder newCode= new StringBuilder();
+            StringBuilder newCode = new StringBuilder();
             String temp = range;
 
             int index = i;
 
             for (int j = nbKeys; j > 0 ; j--){
 
-                int selected = index / factorials[j-1];
+                int selected = index / factorials[j - 1];
 
                 newCode.append(temp.charAt(selected));
-                index = index % factorials[j-1];
-                temp = temp.substring(0,selected) + temp.substring(selected+1);
+                index = index % factorials[j - 1];
+                temp = temp.substring(0, selected) + temp.substring(selected + 1);
             }
 
             int[]code = new int[nbKeys];
+
             for(int j = 0; j < newCode.length(); j++){
+                /*
                 if(!Character.isDigit(newCode.charAt(j))) {
                     LOG.error("Error when converting char to int");
                     break;
                 }
+                */
                 code[j] = Integer.parseInt(String.valueOf(newCode.charAt(j)));
             }
 
+            Display.info(Arrays.toString(code));
             list.add(code);
         }
 
