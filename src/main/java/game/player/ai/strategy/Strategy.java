@@ -83,7 +83,6 @@ public class Strategy {
         return combinationList;
     }
 
-
     /**
      * Remove all combinations that contain the keys of the last combination generated
      * @param   combination     The last combination generated
@@ -116,7 +115,7 @@ public class Strategy {
         String numbers = stringOfNumbers(maxNumber);
         ArrayList<int[]> list = new ArrayList<>();
 
-        if(nbKeys == numbers.length()) list = getCombinations(numbers, list);
+        if(nbKeys == numbers.length()) list = getCombinations(stringToArray(numbers), list);
         else{
             int nextInt = 0;
             StringBuilder strNext = new StringBuilder("0");
@@ -137,7 +136,7 @@ public class Strategy {
                         strNext.append(nextInt);
                     }
                 }
-                list = getCombinations(range, list);
+                list = getCombinations(stringToArray(range), list);
             }
         }
 
@@ -145,58 +144,71 @@ public class Strategy {
     }
 
     /**
-     * Return a ArrayList<int[]> with all permuted characters from a String to Integer array
-     * <p>
-     *     If range equals to "123" then the ArrayList contains :
-     *     [1,2,3],[1,3,2],[2,1,3],[2,3,1],[3,1,2],[3,2,1]
-     * </p>
-     * @param   range   The String to swap
-     * @param   list    The ArrayList<int[]> in which to add the permutations
-     * @return          The ArrayList in parameter with new permutations
+     * Swap integers in the array passed as a parameter
+     * @param   range   An integer array
+     * @return          The list of all possible permutations of range
      */
-    private ArrayList<int[]> getCombinations(String range, ArrayList<int[]> list){
+    public ArrayList<int[]> getCombinations(int[] range, ArrayList<int[]> combinationList) {
 
-        int [] factorials = new int[nbKeys + 1];
+        // Main list that will be incremented
+        ArrayList<List<Integer>> storageList = new ArrayList<>();
 
-        factorials[0] = 1;
+        // Adding a first list to start the iteration
+        storageList.add(new ArrayList<>());
 
-        for (int i = 1; i <= nbKeys; i++) {
-            factorials[i] = factorials[i - 1] * i;
-        }
+        // Iteration over each integer in range[]
+        for (int i = 0; i < range.length; i++) {
 
-        for (int i = 0; i < factorials[nbKeys]; i++) {
+            System.out.println("--------------------------------");
+            System.out.println("Main Iteration = " + (i+1));
 
-            StringBuilder newCode = new StringBuilder();
-            String temp = range;
+            // Temporary list that will be added to the main list
+            ArrayList<List<Integer>> tempStorageList = new ArrayList<>();
 
-            int index = i;
+            System.out.println("StorageList size = " + storageList.size());
 
-            for (int j = nbKeys; j > 0 ; j--){
+            int nbList = 1;
 
-                int selected = index / factorials[j - 1];
+            // Iteration on each list of storageList
+            for (List<Integer> list : storageList) {
 
-                newCode.append(temp.charAt(selected));
-                index = index % factorials[j - 1];
-                temp = temp.substring(0, selected) + temp.substring(selected + 1);
-            }
+                System.out.println("---------");
+                System.out.println("Iteration list = " + nbList + " / " + (list.size() + 1));
 
-            int[]code = new int[nbKeys];
+                // Iteration on each integer in the list
+                for (int j = 0; j <= list.size(); j++) {
 
-            for(int j = 0; j < newCode.length(); j++){
-                /*
-                if(!Character.isDigit(newCode.charAt(j))) {
-                    LOG.error("Error when converting char to int");
-                    break;
+                    // Add a new integer (range[x]) at the index j
+                    list.add(j, range[i]);
+
+                    System.out.println("-> Add " + range[i] + " at index " +  j);
+
+                    System.out.println("list = " + list.toString());
+
+
+                    List<Integer> tempCombList = new ArrayList<>(list);
+
+                    System.out.println("tempCombList = " + tempCombList.toString());
+                    list.remove(j);
+                    System.out.println("list = " + list.toString());
+
+                    tempStorageList.add(tempCombList);
+
+                    System.out.println("Currentset = " + tempStorageList.toString());
                 }
-                */
-                code[j] = Integer.parseInt(String.valueOf(newCode.charAt(j)));
+
+                nbList++;
             }
 
-            Display.info(Arrays.toString(code));
-            list.add(code);
+            System.out.println("Final Currentset = " + tempStorageList.toString());
+
+            storageList = new ArrayList<>(tempStorageList);
         }
 
-        return list;
+        for(List<Integer> integerList : storageList)
+            combinationList.add(integerList.stream().mapToInt(e -> e).toArray());
+
+        return combinationList;
     }
 
     /**
@@ -213,5 +225,16 @@ public class Strategy {
         for(int i = 0; i < value; i++) stringOfNumbers.append(i);
 
         return stringOfNumbers.toString();
+    }
+
+    private int[] stringToArray(String value){
+
+        int[] intArray = new int[value.length()];
+
+        for (int i = 0; i < value.length(); i++) {
+            intArray[i] = Character.digit(value.charAt(i), 10);
+        }
+
+        return intArray;
     }
 }
