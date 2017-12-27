@@ -80,6 +80,7 @@ public class Human implements Player {
      * Get the secret combination created by the player
      * @return  The secret combination
      */
+    @Override
     public int[] setSecretCode(){
 
         Display.secretCombinationSelection();
@@ -92,6 +93,7 @@ public class Human implements Player {
      * @param secretCode    The secret combination
      * @return              The clues
      */
+    @Override
     public String getClues(String combination, int[] secretCode){
 
         String line;

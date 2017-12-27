@@ -42,6 +42,7 @@ public class Computer implements Player{
         }
     }
 
+    @Override
     public int[] setSecretCode(){
 
         return SecretCode.generate(nbBoxes, maxNumber);
@@ -51,6 +52,7 @@ public class Computer implements Player{
      * Generate a new combination based on the selected game
      * @return  The new combination
      */
+    @Override
     public String getNewCombination(){
 
         StringBuilder strCode = new StringBuilder();
@@ -105,6 +107,7 @@ public class Computer implements Player{
      * Set clues to the Computer Strategy or keep them in memory
      * @param   clues   The game indices
      */
+    @Override
     public void setClues(String clues){
 
         switch (Game.GAME_TYPE){
@@ -125,6 +128,7 @@ public class Computer implements Player{
      * @param   secretCode  The secret combination to find
      * @return              The clues
      */
+    @Override
     public String getClues(String userCode, int[] secretCode){
 
         StringBuilder clues = new StringBuilder();
