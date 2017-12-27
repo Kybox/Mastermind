@@ -53,16 +53,15 @@ public class Defender implements GameMode {
             finished = true;
         }
         else {
-            Display.info("-----------------------------");
-            Display.info("Proposition de l'ordinateur : ");
 
-            String newCode = computer.getNewCombination();
-            System.out.println(newCode);
+            String combination = computer.getNewCombination();
+            Display.computerCombination(combination);
 
-            if (!SecretCode.isEqual(secretCode, newCode)) {
+            if (!SecretCode.isEqual(secretCode, combination)) {
 
+                Display.info("");
                 Display.info("Votre réponse :");
-                String clues = human.getClues(newCode, secretCode);
+                String clues = human.getClues(combination, secretCode);
                 computer.setClues(clues);
             }
             else {

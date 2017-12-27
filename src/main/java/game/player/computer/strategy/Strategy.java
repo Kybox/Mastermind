@@ -159,21 +159,11 @@ public class Strategy {
         // Iteration over each integer in range[]
         for (int i = 0; i < range.length; i++) {
 
-            System.out.println("--------------------------------");
-            System.out.println("Main Iteration = " + (i+1));
-
             // Temporary list that will be added to the main list
             ArrayList<List<Integer>> tempStorageList = new ArrayList<>();
 
-            System.out.println("StorageList size = " + storageList.size());
-
-            int nbList = 1;
-
             // Iteration on each list of storageList
             for (List<Integer> list : storageList) {
-
-                System.out.println("---------");
-                System.out.println("Iteration list = " + nbList + " / " + (list.size() + 1));
 
                 // Iteration on each integer in the list
                 for (int j = 0; j <= list.size(); j++) {
@@ -181,26 +171,13 @@ public class Strategy {
                     // Add a new integer (range[x]) at the index j
                     list.add(j, range[i]);
 
-                    System.out.println("-> Add " + range[i] + " at index " +  j);
-
-                    System.out.println("list = " + list.toString());
-
-
                     List<Integer> tempCombList = new ArrayList<>(list);
 
-                    System.out.println("tempCombList = " + tempCombList.toString());
                     list.remove(j);
-                    System.out.println("list = " + list.toString());
 
                     tempStorageList.add(tempCombList);
-
-                    System.out.println("Currentset = " + tempStorageList.toString());
                 }
-
-                nbList++;
             }
-
-            System.out.println("Final Currentset = " + tempStorageList.toString());
 
             storageList = new ArrayList<>(tempStorageList);
         }

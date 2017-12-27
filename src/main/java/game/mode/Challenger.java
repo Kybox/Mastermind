@@ -56,9 +56,7 @@ public class Challenger implements GameMode {
             finished = true;
         }
         else {
-            Display.info("------------------------");
-            Display.info("Saisir une combinaison :");
-
+            Display.typeCombination();
             String combination = human.getNewCombination();
 
             if (SecretCode.isEqual(secretCode, combination)) {
@@ -66,7 +64,7 @@ public class Challenger implements GameMode {
                 finished = true;
             }
             else {
-                Display.info("Réponse : " + computer.getClues(combination, secretCode));
+                Display.clues(computer.getClues(combination, secretCode));
             }
         }
         return finished;

@@ -60,6 +60,35 @@ public class Display {
                         + (Settings.getMaxNumber() - 1) + ")");
     }
 
+    public static void computerCombination(String combination){
+        String line = "";
+        for(int i=0; i < combination.length(); i++)
+            line = line + "-";
+
+        Display.info("");
+        Display.info("+-----------------------------+");
+        Display.info("| Proposition de l'ordinateur |");
+        Display.info("+-----------------------------+");
+        Display.info("| -> " + combination + " <- |");
+        Display.info("+----" + line + "----+");
+    }
+
+    public static void clues(String clues){
+        Display.info("");
+        Display.info("+-------------------------+");
+        Display.info("| Réponse de l'ordinateur |");
+        Display.info("+-------------------------+");
+        Display.info(clues);
+        Display.info("");
+    }
+
+    public static void typeCombination(){
+        Display.info("");
+        Display.info("+------------------------+");
+        Display.info("| Saisir une combinaison |");
+        Display.info("+------------------------+");
+    }
+
     /**
      * Displays an error message about the combination
      */
