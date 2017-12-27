@@ -11,10 +11,10 @@ import java.util.Arrays;
 
 public class Challenger implements GameMode {
 
-    private int[] secretCode;
     private int trials;
     private boolean win;
     private boolean finished;
+    private int[] secretCode;
 
     private final Player computer;
     private final Player human;
@@ -28,12 +28,11 @@ public class Challenger implements GameMode {
         computer = new Computer();
         human = new Human();
         maxTrials = Settings.getTrials();
+        setSecretCode();
     }
 
     @Override
     public void startGame(){
-
-        setSecretCode();
 
         trials = 0;
 

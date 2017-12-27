@@ -29,12 +29,13 @@ public class Defender implements GameMode {
         human = new Human();
         maxTrials = Settings.getTrials();
         computer = new Computer();
+        setSecretCode();
     }
 
     @Override
     public void startGame(){
 
-        setSecretCode();
+
 
         do { gameTour(); }
         while (!finished);
