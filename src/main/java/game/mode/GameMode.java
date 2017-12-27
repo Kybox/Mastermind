@@ -12,4 +12,6 @@ public interface GameMode {
      * @return  True if the game is over otherwise
      */
     boolean gameTour();
+
+    boolean isGameWon();
 }

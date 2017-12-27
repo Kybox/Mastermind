@@ -54,10 +54,18 @@ public class Display {
      * Displays the indications for entering a secret combination
      */
     public static void secretCombinationSelection(){
-        Display.info("-----------------------------");
-        Display.info("Sélectionner votre combinaison secrête :");
-        Display.info("(" + Settings.getKeys() + " chiffres compris entre 0 et "
+        Display.info("+----------------------------------------+");
+        Display.info("| Sélectionner votre combinaison secrête |");
+        Display.info("+----------------------------------------+");
+        Display.info("    (" + Settings.getKeys() + " chiffres compris entre 0 et "
                         + (Settings.getMaxNumber() - 1) + ")");
+    }
+
+    public static void secretCode(String secretCode){
+        Display.info("+---------------------------- devMode +");
+        Display.info("| Combinaison secrête de l'ordinateur |" );
+        Display.info("+-------------------------------------+");
+        Display.info("\t -> " + secretCode);
     }
 
     public static void computerCombination(String combination){
@@ -84,6 +92,8 @@ public class Display {
 
     public static void typeCombination(){
         Display.info("");
+        Display.info("          +--------------+");
+        Display.info("          | A votre tour |");
         Display.info("+------------------------+");
         Display.info("| Saisir une combinaison |");
         Display.info("+------------------------+");
@@ -133,15 +143,15 @@ public class Display {
 
     /**
      * Displays the result of the game
-     * @param   win       If the game has been won
+     * @param   gameWon   If the game has been won
      * @param   code      The winning combination
      * @param   trials    The number of rounds played
      */
-    public static void gameOver(boolean win, String code, int trials){
+    public static void gameOver(boolean gameWon, String code, int trials, boolean isPartNull){
 
-        if (win) {
-            Display.info("");
+        Display.info("");
 
+        if (gameWon) {
             switch (Game.GAME_MODE){
 
                 case 3:
@@ -167,9 +177,18 @@ public class Display {
                     break;
 
                 case 2:
-                    Display.info("+------------------------------------------------------------+");
-                    Display.info("| Perdu ! L'ordinateur a découvert votre combinaison secrète |");
-                    Display.info("+------------------------------------------------------------+");
+
+                    if(isPartNull) {
+                        Display.info("+------------------------------------------------------------+");
+                        Display.info("| Perdu ! L'ordinateur a découvert votre combinaison secrète |");
+                        Display.info("+------------------------------------------------------------+");
+                    }
+                    else {
+                        Display.info("+----------------------------------------------------------------+");
+                        Display.info("| Perdu ! Aucun des joueurs n'a découvert la combinaison secrète |");
+                        Display.info("+----------------------------------------------------------------+");
+                    }
+
                     break;
 
                 case 3:

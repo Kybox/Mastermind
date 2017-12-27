@@ -104,25 +104,6 @@ public class Computer implements Player{
     }
 
     /**
-     * Set clues to the Computer Strategy or keep them in memory
-     * @param   clues   The game indices
-     */
-    @Override
-    public void setClues(String clues){
-
-        switch (Game.GAME_TYPE){
-            case 1:
-                strategy.setClues(clues, code);
-                break;
-
-            case 2:
-                for(int i = 0; i < searchClues.length; i++)
-                    searchClues[i] = String.valueOf(clues.charAt(i));
-                break;
-        }
-    }
-
-    /**
      * Sets the indices according to the selected game
      * @param   userCode    The combination proposed by the user
      * @param   secretCode  The secret combination to find
@@ -171,5 +152,23 @@ public class Computer implements Player{
         }
 
         return clues.toString();
+    }
+
+    /**
+     * Set clues to the Computer Strategy or keep them in memory
+     * @param   clues   The game indices
+     */
+    public void setClues(String clues){
+
+        switch (Game.GAME_TYPE){
+            case 1:
+                strategy.setClues(clues, code);
+                break;
+
+            case 2:
+                for(int i = 0; i < searchClues.length; i++)
+                    searchClues[i] = String.valueOf(clues.charAt(i));
+                break;
+        }
     }
 }

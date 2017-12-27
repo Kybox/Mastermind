@@ -12,7 +12,7 @@ import java.util.Arrays;
 public class Challenger implements GameMode {
 
     private int trials;
-    private boolean win;
+    private boolean gameWon;
     private boolean finished;
     private int[] secretCode;
 
@@ -42,7 +42,7 @@ public class Challenger implements GameMode {
         do { gameTour(); }
         while (!finished);
 
-        Display.gameOver(win, Arrays.toString(secretCode), trials);
+        Display.gameOver(gameWon, Arrays.toString(secretCode), trials, false);
 
     }
 
@@ -52,22 +52,26 @@ public class Challenger implements GameMode {
         trials++;
 
         if(trials > maxTrials) {
-            win = false;
+            gameWon = false;
             finished = true;
+            trials = maxTrials;
         }
         else {
             Display.typeCombination();
             String combination = human.getNewCombination();
 
             if (SecretCode.isEqual(secretCode, combination)) {
-                win = true;
+                gameWon = true;
                 finished = true;
             }
-            else {
-                Display.clues(computer.getClues(combination, secretCode));
-            }
+            else human.setClues(computer.getClues(combination, secretCode));
         }
         return finished;
+    }
+
+    @Override
+    public boolean isGameWon(){
+        return gameWon;
     }
 
     /**

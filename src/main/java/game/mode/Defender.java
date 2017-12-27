@@ -12,7 +12,7 @@ import java.util.Arrays;
 public class Defender implements GameMode {
 
     private int trials;
-    private boolean win;
+    private boolean gameWon;
     private boolean finished;
 
     private int[] secretCode;
@@ -35,12 +35,10 @@ public class Defender implements GameMode {
     @Override
     public void startGame(){
 
-
-
         do { gameTour(); }
         while (!finished);
 
-        Display.gameOver(win, Arrays.toString(secretCode), trials - 1);
+        Display.gameOver(gameWon, Arrays.toString(secretCode), trials - 1, false);
     }
 
     @Override
@@ -49,7 +47,7 @@ public class Defender implements GameMode {
         trials++;
 
         if(trials > maxTrials) {
-            win = false;
+            gameWon = false;
             finished = true;
         }
         else {
@@ -65,7 +63,7 @@ public class Defender implements GameMode {
                 computer.setClues(clues);
             }
             else {
-                win = true;
+                gameWon = true;
                 finished = true;
             }
         }
@@ -73,12 +71,17 @@ public class Defender implements GameMode {
         return finished;
     }
 
+    @Override
+    public boolean isGameWon(){
+        return gameWon;
+    }
+
     /**
      * Generate a secret combinaition
      */
     private void setSecretCode(){
+
         secretCode = human.setSecretCode();
-        //secretCode = SecretCode.convertToDigit(code);
     }
 
     /**

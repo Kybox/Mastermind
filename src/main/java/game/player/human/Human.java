@@ -62,6 +62,7 @@ public class Human implements Player {
      * Get the combination entered by the player
      * @return  The player's combination
      */
+    @Override
     public String getNewCombination(){
 
         String line;
@@ -109,7 +110,7 @@ public class Human implements Player {
 
     @Override
     public void setClues(String clues) {
-
+        Display.clues(clues);
     }
 
     /**
