@@ -1,7 +1,8 @@
 package main.java.game.mode;
 
+import main.java.game.player.Player;
+import main.java.game.player.computer.Computer;
 import main.java.game.player.human.Human;
-import main.java.game.player.ai.AI;
 import main.java.utils.SecretCode;
 import main.java.utils.Settings;
 import main.java.view.Display;
@@ -15,16 +16,16 @@ public class Challenger implements GameMode {
     private boolean win;
     private boolean finished;
 
-    private final AI computer;
+    private final Player computer;
+    private final Player human;
     private final int maxTrials;
-    private final Human human;
 
     /**
      * The Challenger constructor
      */
     public Challenger(){
 
-        computer = new AI();
+        computer = new Computer();
         human = new Human();
         maxTrials = Settings.getTrials();
     }
@@ -59,14 +60,14 @@ public class Challenger implements GameMode {
             Display.info("------------------------");
             Display.info("Saisir une combinaison :");
 
-            String combination = human.getGameInput();
+            String combination = human.getNewCombination();
 
             if (SecretCode.isEqual(secretCode, combination)) {
                 win = true;
                 finished = true;
             }
             else {
-                Display.info("Réponse : " + computer.getClues(secretCode, combination));
+                Display.info("Réponse : " + computer.getClues(combination, secretCode));
             }
         }
         return finished;
@@ -76,6 +77,7 @@ public class Challenger implements GameMode {
      * Generate a secret combinaition
      */
     private void setSecretCode(){
+
         secretCode = SecretCode.generate(Settings.getKeys(), Settings.getMaxNumber());
     }
 

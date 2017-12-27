@@ -1,11 +1,13 @@
 package main.java.game.player.human;
 
+import main.java.game.player.Player;
 import main.java.game.player.human.check.CheckInput;
+import main.java.utils.SecretCode;
 import main.java.view.Display;
 
 import java.util.Scanner;
 
-public class Human {
+public class Human implements Player {
 
     /**
      * Default Human constructor
@@ -60,7 +62,7 @@ public class Human {
      * Get the combination entered by the player
      * @return  The player's combination
      */
-    public String getGameInput(){
+    public String getNewCombination(){
 
         String line;
 
@@ -78,29 +80,34 @@ public class Human {
      * Get the secret combination created by the player
      * @return  The secret combination
      */
-    public String getSecretCode(){
+    public int[] setSecretCode(){
 
         Display.secretCombinationSelection();
-        return getGameInput();
+        return SecretCode.convertToDigit(getNewCombination());
     }
 
     /**
      * Get the clues provided by the player
-     * @param code          The player's combination
+     * @param combination   The player's combination
      * @param secretCode    The secret combination
      * @return              The clues
      */
-    public String getClues(String code, int[] secretCode){
+    public String getClues(String combination, int[] secretCode){
 
         String line;
 
         while (true){
             line = new Scanner(System.in).nextLine();
-            if(!CheckInput.checkCluesSyntax(line, code, secretCode)) continue;
+            if(!CheckInput.checkCluesSyntax(line, combination, secretCode)) continue;
             else break;
         }
 
         return line;
+    }
+
+    @Override
+    public void setClues(String clues) {
+
     }
 
     /**

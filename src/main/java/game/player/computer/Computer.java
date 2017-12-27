@@ -1,6 +1,7 @@
-package main.java.game.player.ai;
+package main.java.game.player.computer;
 
-import main.java.game.player.ai.strategy.Strategy;
+import main.java.game.player.Player;
+import main.java.game.player.computer.strategy.Strategy;
 import main.java.game.Game;
 import main.java.utils.SecretCode;
 import main.java.utils.Settings;
@@ -9,7 +10,7 @@ import org.apache.log4j.Logger;
 
 import java.util.*;
 
-public class AI {
+public class Computer implements Player{
 
     private int trials;
     private final int nbBoxes;
@@ -18,9 +19,9 @@ public class AI {
     private String[] searchClues;
     private Strategy strategy;
 
-    private static final Logger LOG = LogManager.getLogger(AI.class);
+    private static final Logger LOG = LogManager.getLogger(Computer.class);
 
-    public AI(){
+    public Computer(){
 
         nbBoxes = Settings.getKeys();
         maxNumber = Settings.getMaxNumber();
@@ -41,11 +42,16 @@ public class AI {
         }
     }
 
+    public int[] setSecretCode(){
+
+        return SecretCode.generate(nbBoxes, maxNumber);
+    }
+
     /**
      * Generate a new combination based on the selected game
      * @return  The new combination
      */
-    public String generate(){
+    public String getNewCombination(){
 
         StringBuilder strCode = new StringBuilder();
 
@@ -96,7 +102,7 @@ public class AI {
     }
 
     /**
-     * Set clues to the AI Strategy or keep them in memory
+     * Set clues to the Computer Strategy or keep them in memory
      * @param   clues   The game indices
      */
     public void setClues(String clues){
@@ -115,11 +121,11 @@ public class AI {
 
     /**
      * Sets the indices according to the selected game
-     * @param   secretCode  The secret combination to find
      * @param   userCode    The combination proposed by the user
+     * @param   secretCode  The secret combination to find
      * @return              The clues
      */
-    public String getClues(int[] secretCode, String userCode){
+    public String getClues(String userCode, int[] secretCode){
 
         StringBuilder clues = new StringBuilder();
         int[] code = SecretCode.convertToDigit(userCode);

@@ -1,7 +1,8 @@
 package main.java.game.mode;
 
+import main.java.game.player.Player;
+import main.java.game.player.computer.Computer;
 import main.java.game.player.human.Human;
-import main.java.game.player.ai.AI;
 import main.java.utils.SecretCode;
 import main.java.utils.Settings;
 import main.java.view.Display;
@@ -15,9 +16,10 @@ public class Defender implements GameMode {
     private boolean finished;
 
     private int[] secretCode;
-    private final AI computer;
     private final int maxTrials;
-    private final Human human;
+
+    private final Player computer;
+    private final Player human;
 
     /**
      * The Defender constructor
@@ -26,7 +28,7 @@ public class Defender implements GameMode {
 
         human = new Human();
         maxTrials = Settings.getTrials();
-        computer = new AI();
+        computer = new Computer();
     }
 
     @Override
@@ -53,7 +55,7 @@ public class Defender implements GameMode {
             Display.info("-----------------------------");
             Display.info("Proposition de l'ordinateur : ");
 
-            String newCode = computer.generate();
+            String newCode = computer.getNewCombination();
             System.out.println(newCode);
 
             if (!SecretCode.isEqual(secretCode, newCode)) {
@@ -75,8 +77,8 @@ public class Defender implements GameMode {
      * Generate a secret combinaition
      */
     private void setSecretCode(){
-        String code = human.getSecretCode();
-        secretCode = SecretCode.convertToDigit(code);
+        secretCode = human.setSecretCode();
+        //secretCode = SecretCode.convertToDigit(code);
     }
 
     /**

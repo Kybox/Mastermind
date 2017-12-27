@@ -1,6 +1,5 @@
-package main.java.game.player.ai.strategy;
+package main.java.game.player.computer.strategy;
 
-import main.java.view.Display;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 
@@ -145,8 +144,9 @@ public class Strategy {
 
     /**
      * Swap integers in the array passed as a parameter
-     * @param   range   An integer array
-     * @return          The list of all possible permutations of range
+     * @param   range               An integer array
+     * @param   combinationList     The integers array that will be return with combinations
+     * @return                      The list of all possible permutations of range
      */
     public ArrayList<int[]> getCombinations(int[] range, ArrayList<int[]> combinationList) {
 
