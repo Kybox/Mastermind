@@ -21,11 +21,13 @@ Comment précédemment, la sélection du mode de jeu s'effectue par une saisie a
 
 
 
-### Mastermind en mode challenger :
+### Mode de jeu challenger :
 
 Dans ce mode de jeu, c'est à vous de découvrir la combinaison secrète que l'application a généré. Vous devrez saisir une première combinaison au hasard pour que l'application vous donne un premier indice. A vous de découvrir en un minimum de coups la combinaison secrète.
 
-![Mastermind-Challenger](https://img15.hostingpics.net/pics/912131Mastermindchallenger.png)
+| Mastermind | Recherche + / - |
+|------------|-----------------|
+|![Challenger1](https://img15.hostingpics.net/pics/205380jeu1challenger.png)|![Challenger2](https://img15.hostingpics.net/pics/995840jeu2challenger.png)|
 
 
 
@@ -53,7 +55,7 @@ Afin de ne pas induire en erreur l'application en saisissant des indices qui ne 
 Dans ce mode de jeu, vous serez en compétition avec l'application. Il vous sera demandé de saisir la combinaison secrète que l'application devra retrouver. De son côté, l'application va générer une combinaison secrète que vous devrez retrouver. Chacun jouera à tour de rôle. Celui qui aura retrouvé la combinaison secrète en premier gagnera la partie.
 
 ![Mastermind-Duel](https://img15.hostingpics.net/pics/538015Mastermindduel.png)
-
+ 
 
 
 ### Intelligence artificielle et stratégie :
