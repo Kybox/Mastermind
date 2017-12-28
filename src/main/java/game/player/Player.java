@@ -22,5 +22,9 @@ public interface Player {
      */
     String getClues(String combination, int[] secretCode);
 
+    /**
+     * Set the clues
+     * @param clues The clues to keep
+     */
     void setClues(String clues);
 }
