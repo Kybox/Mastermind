@@ -9,6 +9,11 @@ import main.java.view.Display;
 
 import java.util.Arrays;
 
+/**
+ * @author Kybox
+ * @version 1.0
+ */
+
 public class Challenger implements GameMode {
 
     private int trials;

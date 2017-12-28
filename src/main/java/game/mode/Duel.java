@@ -5,6 +5,11 @@ import main.java.view.Display;
 
 import java.util.Arrays;
 
+/**
+ * @author Kybox
+ * @version 1.0
+ */
+
 public class Duel implements GameMode {
 
     private final Defender defender;

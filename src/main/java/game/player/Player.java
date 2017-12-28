@@ -1,5 +1,10 @@
 package main.java.game.player;
 
+/**
+ * @author Kybox
+ * @version 1.0
+ */
+
 public interface Player {
 
     /**

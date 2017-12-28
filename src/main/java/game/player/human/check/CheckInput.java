@@ -8,6 +8,11 @@ import org.apache.log4j.Logger;
 
 import java.util.Arrays;
 
+/**
+ * @author Kybox
+ * @version 1.0
+ */
+
 public class CheckInput {
 
     private static final Logger LOG = LogManager.getLogger(CheckInput.class);

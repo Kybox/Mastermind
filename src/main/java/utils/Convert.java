@@ -1,5 +1,10 @@
 package main.java.utils;
 
+/**
+ * @author Kybox
+ * @version 1.0
+ */
+
 public class Convert {
 
     /**

@@ -7,6 +7,11 @@ import main.java.game.mode.Defender;
 import main.java.game.mode.Duel;
 import main.java.view.Display;
 
+/**
+ * @author Kybox
+ * @version 1.0
+ */
+
 public class Game {
 
     public static int GAME_TYPE;

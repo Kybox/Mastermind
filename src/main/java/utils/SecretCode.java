@@ -6,6 +6,11 @@ import org.apache.log4j.Logger;
 import java.util.Arrays;
 import java.util.Random;
 
+/**
+ * @author Kybox
+ * @version 1.0
+ */
+
 public class SecretCode {
 
     private static final Logger LOG = LogManager.getLogger(SecretCode.class);

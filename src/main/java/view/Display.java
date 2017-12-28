@@ -3,6 +3,11 @@ package main.java.view;
 import main.java.game.Game;
 import main.java.utils.Settings;
 
+/**
+ * @author Kybox
+ * @version 1.0
+ */
+
 public class Display {
 
     /**
@@ -62,6 +67,10 @@ public class Display {
         Display.info(msg + "compris entre 0 et " + (Settings.getMaxNumber() - 1));
     }
 
+    /**
+     * Display the computer's secret combination in devMode
+     * @param secretCode    The secret combination
+     */
     public static void secretCode(String secretCode){
         Display.info("+---------------------------- devMode +");
         Display.info("| Combinaison secrête de l'ordinateur |" );
@@ -69,6 +78,10 @@ public class Display {
         Display.info("\t -> " + secretCode);
     }
 
+    /**
+     * Display a new combination that the computer generated
+     * @param combination   The combination to display
+     */
     public static void computerCombination(String combination){
         StringBuilder line = new StringBuilder();
         for(int i = 0; i < combination.length(); i++)
@@ -97,6 +110,9 @@ public class Display {
         Display.info("");
     }
 
+    /**
+     * Display a message to tell the player to enter a combination
+     */
     public static void typeCombination(){
         Display.info("");
         Display.info("          +--------------+");
@@ -153,8 +169,9 @@ public class Display {
      * @param   gameWon   If the game has been won
      * @param   code      The winning combination
      * @param   trials    The number of rounds played
+     * @param   isDraw    True if the game is draw, otherwise false
      */
-    public static void gameOver(boolean gameWon, String code, int trials, boolean isPartNull){
+    public static void gameOver(boolean gameWon, String code, int trials, boolean isDraw){
 
         Display.info("");
 
@@ -185,10 +202,10 @@ public class Display {
 
                 case 2:
 
-                    if(isPartNull) {
-                        Display.info("+----------------------------------------------------------------+");
-                        Display.info("| Perdu ! Aucun des joueurs n'a découvert la combinaison secrète |");
-                        Display.info("+----------------------------------------------------------------+");
+                    if(isDraw) {
+                        Display.info("+--------------------------------------------------------------------+");
+                        Display.info("| Match nul ! Aucun des joueurs n'a découvert la combinaison secrète |");
+                        Display.info("+--------------------------------------------------------------------+");
                     }
                     else {
                         Display.info("+------------------------------------------------------------+");
@@ -207,7 +224,7 @@ public class Display {
             }
         }
 
-        if(!isPartNull) Display.info("  Combinaison secrète : " + code);
+        if(!isDraw) Display.info("  Combinaison secrète : " + code);
         Display.info("  Nombre d'essais : " + trials + " / " + Settings.getTrials());
 
     }

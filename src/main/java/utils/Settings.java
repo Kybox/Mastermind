@@ -9,6 +9,11 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.Properties;
 
+/**
+ * @author Kybox
+ * @version 1.0
+ */
+
 public class Settings {
 
     private static Properties SETTINGS;
@@ -103,7 +108,7 @@ public class Settings {
     }
 
     /**
-     * Sets the developer mode (for the Main class)
+     * Sets the developer mode (from the Main class)
      */
     public static void setDevMode(){
         Display.info("Mode développeur");

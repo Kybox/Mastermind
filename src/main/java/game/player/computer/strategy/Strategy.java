@@ -8,6 +8,11 @@ import org.apache.log4j.Logger;
 
 import java.util.*;
 
+/**
+ * @author Kybox
+ * @version 1.0
+ */
+
 public class Strategy {
 
     private ArrayList<int[]> combinationList;

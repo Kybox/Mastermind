@@ -7,6 +7,11 @@ import main.java.view.Display;
 
 import java.util.Scanner;
 
+/**
+ * @author Kybox
+ * @version 1.0
+ */
+
 public class Human implements Player {
 
     /**
