@@ -17,7 +17,6 @@ public class Computer implements Player{
     private final int nbKeys;
     private final int maxNumber;
     private int[] code;
-    private String[] searchClues;
     private Strategy strategy;
 
     private static final Logger LOG = LogManager.getLogger(Computer.class);
@@ -31,17 +30,6 @@ public class Computer implements Player{
         code = new int[nbKeys];
 
         strategy = new Strategy();
-
-        switch (Game.GAME_TYPE){
-
-            case 1:
-                strategy.initCombinations(nbKeys, maxNumber);
-                break;
-
-            case 2:
-                searchClues = new String[nbKeys];
-                break;
-        }
     }
 
     @Override
@@ -103,7 +91,7 @@ public class Computer implements Player{
         }
 
         trials++;
-        
+
         return strCode.toString();
     }
 
@@ -165,18 +153,5 @@ public class Computer implements Player{
     public void setClues(String clues){
 
         strategy.setClues(clues, code);
-
-        /*
-        switch (Game.GAME_TYPE){
-            case 1:
-                strategy.setClues(clues, code);
-                break;
-
-            case 2:
-                for(int i = 0; i < searchClues.length; i++)
-                    searchClues[i] = String.valueOf(clues.charAt(i));
-                break;
-        }
-        */
     }
 }

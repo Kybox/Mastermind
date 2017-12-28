@@ -22,19 +22,8 @@ public class Strategy {
     public Strategy(){
         this.nbKeys = Settings.getKeys();
         this.maxNumber = Settings.getMaxNumber();
-    }
 
-    /**
-     * Initialization of the strategy by all combinations
-     * @param   nbKeys      The number of keys in the combination
-     * @param   maxNumber   The maximum number in the combination
-     */
-    public void initCombinations(int nbKeys, int maxNumber){
-
-        this.nbKeys = nbKeys;
-        this.maxNumber = maxNumber;
-
-        combinationList = setCombinations();
+        if(Game.GAME_TYPE == 1) combinationList = setCombinations();
     }
 
     /**
