@@ -75,8 +75,12 @@ public class Strategy {
 
                         case '+':
                             minKeys[i] = code[i] + 1;
-                            newCode[i] = random.nextInt(maxNumber - minKeys[i]) + minKeys[i];
+                            if(maxKeys[i] == minKeys[i]) newCode[i] = minKeys[i];
+                            else if(maxKeys[i] - minKeys[i] >= 0)
+                                newCode[i] = random.nextInt(maxKeys[i] - minKeys[i]) + minKeys[i];
+                            else newCode[i] = random.nextInt(maxNumber - minKeys[i]) + minKeys[i];
                             break;
+
                         default:
                             newCode[i] = code[i];
                             break;
