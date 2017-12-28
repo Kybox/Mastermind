@@ -51,8 +51,6 @@ Afin de ne pas induire en erreur l'application en saisissant des indices qui ne 
 ### Mastermind en mode duel :
 
 Dans ce mode de jeu, vous serez en compétition avec l'application. Il vous sera demandé de saisir la combinaison secrète que l'application devra retrouver. De son côté, l'application va générer une combinaison secrète que vous devrez retrouver. Chacun jouera à tour de rôle. Celui qui aura retrouvé la combinaison secrète en premier gagnera la partie.
-
-![Mastermind-Duel](https://img15.hostingpics.net/pics/538015Mastermindduel.png)
  
 
 
