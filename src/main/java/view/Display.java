@@ -57,7 +57,7 @@ public class Display {
         Display.info("+----------------------------------------+");
         Display.info("| Sélectionner votre combinaison secrête |");
         Display.info("+----------------------------------------+");
-        Display.info("    (" + Settings.getKeys() + " chiffres compris entre 0 et "
+        Display.info("(" + Settings.getKeys() + " chiffres uniques compris entre 0 et "
                         + (Settings.getMaxNumber() - 1) + ")");
     }
 
@@ -105,8 +105,8 @@ public class Display {
     public static void invalidCombination(){
         int nbKeys = Settings.getKeys();
         int maxNumbers = Settings.getMaxNumber();
-        Display.error("Vous devez saisir une combinaison de " + nbKeys
-                + " chiffres inférieurs ou égals à " + (maxNumbers - 1));
+        Display.error("\tVous devez saisir une combinaison de " + nbKeys + " chiffres");
+        Display.error("\t      uniques et inférieurs ou égals à " + (maxNumbers - 1) + ".");
     }
 
     /**
@@ -179,14 +179,15 @@ public class Display {
                 case 2:
 
                     if(isPartNull) {
-                        Display.info("+------------------------------------------------------------+");
-                        Display.info("| Perdu ! L'ordinateur a découvert votre combinaison secrète |");
-                        Display.info("+------------------------------------------------------------+");
-                    }
-                    else {
                         Display.info("+----------------------------------------------------------------+");
                         Display.info("| Perdu ! Aucun des joueurs n'a découvert la combinaison secrète |");
                         Display.info("+----------------------------------------------------------------+");
+                    }
+                    else {
+                        Display.info("+------------------------------------------------------------+");
+                        Display.info("| Perdu ! L'ordinateur a découvert votre combinaison secrète |");
+                        Display.info("+------------------------------------------------------------+");
+
                     }
 
                     break;
@@ -199,7 +200,7 @@ public class Display {
             }
         }
 
-        Display.info("  Combinaison secrète : " + code);
+        if(!isPartNull) Display.info("  Combinaison secrète : " + code);
         Display.info("  Nombre d'essais : " + trials + " / " + Settings.getTrials());
 
     }

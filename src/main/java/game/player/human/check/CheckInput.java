@@ -45,6 +45,11 @@ public class CheckInput {
         for(int i = 0; i < combination.length(); i++){
             if(Integer.parseInt(String.valueOf(combination.charAt(i))) > maxNumbers - 1)
                 return false;
+            
+            char item = combination.charAt(i);
+            int firstIndex = combination.indexOf(item);
+            if(firstIndex > -1 && combination.indexOf(item, firstIndex + 1) > -1)
+                return false;
         }
 
         return true;
