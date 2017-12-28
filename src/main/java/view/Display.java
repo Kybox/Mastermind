@@ -87,7 +87,13 @@ public class Display {
         Display.info("+-------------------------+");
         Display.info("| Réponse de l'ordinateur |");
         Display.info("+-------------------------+");
-        Display.info(clues);
+        if(Game.GAME_TYPE == 1) Display.info(clues);
+        else{
+            StringBuilder msg = new StringBuilder();
+            for(int i = 0; i < clues.length(); i++)
+                msg.append("[ ").append(clues.charAt(i)).append(" ]");
+            Display.info(msg.toString());
+        }
         Display.info("");
     }
 
