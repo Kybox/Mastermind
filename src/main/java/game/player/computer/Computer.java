@@ -5,7 +5,6 @@ import main.java.game.player.computer.strategy.Strategy;
 import main.java.game.Game;
 import main.java.utils.SecretCode;
 import main.java.utils.Settings;
-import main.java.view.Display;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 
@@ -13,11 +12,11 @@ import java.util.*;
 
 public class Computer implements Player{
 
+    private int[] code;
     private int trials;
     private final int nbKeys;
     private final int maxNumber;
-    private int[] code;
-    private Strategy strategy;
+    private final Strategy strategy;
 
     private static final Logger LOG = LogManager.getLogger(Computer.class);
 
