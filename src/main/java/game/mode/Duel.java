@@ -7,8 +7,8 @@ import java.util.Arrays;
 
 public class Duel implements GameMode {
 
-    private Defender defender;
-    private Challenger challenger;
+    private final Defender defender;
+    private final Challenger challenger;
     private boolean blnFinished;
     private boolean gameWon;
     private boolean isNull;

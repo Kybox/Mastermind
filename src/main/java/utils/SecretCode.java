@@ -55,8 +55,7 @@ public class SecretCode {
 
         int[] code = convertToDigit(userCode);
 
-        if(Arrays.equals(secretCode, code)) return true;
-        else return false;
+        return Arrays.equals(secretCode, code);
     }
 
     /**

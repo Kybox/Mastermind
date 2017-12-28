@@ -2,7 +2,6 @@ package main.java.game.player.computer.strategy;
 
 import main.java.game.Game;
 import main.java.utils.Settings;
-import main.java.view.Display;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 
@@ -11,8 +10,8 @@ import java.util.*;
 public class Strategy {
 
     private ArrayList<int[]> combinationList;
-    private int nbKeys;
-    private int maxNumber;
+    private final int nbKeys;
+    private final int maxNumber;
     private int[] maxKeys;
     private int[] minKeys;
     private int[] newCode;
@@ -60,18 +59,22 @@ public class Strategy {
 
                 for(int i = 0; i < nbKeys; i++){
 
-                    if(clues.charAt(i) == '-') {
+                    switch (clues.charAt(i)) {
 
-                        maxKeys[i] = code[i] - 1;
-                        if(maxKeys[i] != 0) newCode[i] = random.nextInt(maxKeys[i]);
-                        else newCode[i] = 0;
-                    }
-                    else if(clues.charAt(i) == '+') {
+                        case '-':
+                            maxKeys[i] = code[i] - 1;
+                            if (maxKeys[i] != 0) newCode[i] = random.nextInt(maxKeys[i]);
+                            else newCode[i] = 0;
+                            break;
 
-                        minKeys[i] = code[i] + 1;
-                        newCode[i] = random.nextInt(maxNumber - minKeys[i]) + minKeys[i];
+                        case '+':
+                            minKeys[i] = code[i] + 1;
+                            newCode[i] = random.nextInt(maxNumber - minKeys[i]) + minKeys[i];
+                            break;
+                        default:
+                            newCode[i] = code[i];
+                            break;
                     }
-                    else newCode[i] = code[i];
                 }
                 break;
         }
@@ -111,7 +114,7 @@ public class Strategy {
             int[] code = iterator.next();
 
             for(int key : combination){
-                if(!Arrays.stream(code).anyMatch(e -> e == key)) {
+                if(Arrays.stream(code).noneMatch(e -> e == key)) {
                     LOG.info("Removed combination -> " + Arrays.toString(code));
                     iterator.remove();
                     break;
@@ -188,7 +191,7 @@ public class Strategy {
      * @param   combinationList     The integers array that will be return with combinations
      * @return                      The list of all possible permutations of range
      */
-    public ArrayList<int[]> getCombinations(int[] range, ArrayList<int[]> combinationList) {
+    private ArrayList<int[]> getCombinations(int[] range, ArrayList<int[]> combinationList) {
 
         // Main list that will be incremented
         ArrayList<List<Integer>> storageList = new ArrayList<>();
@@ -197,7 +200,7 @@ public class Strategy {
         storageList.add(new ArrayList<>());
 
         // Iteration over each integer in range[]
-        for (int i = 0; i < range.length; i++) {
+        for (int key : range) {
 
             // Temporary list that will be added to the main list
             ArrayList<List<Integer>> tempStorageList = new ArrayList<>();
@@ -209,7 +212,7 @@ public class Strategy {
                 for (int j = 0; j <= list.size(); j++) {
 
                     // Add a new integer (range[x]) at the index j
-                    list.add(j, range[i]);
+                    list.add(j, key);
 
                     List<Integer> tempCombList = new ArrayList<>(list);
 
