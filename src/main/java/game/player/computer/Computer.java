@@ -149,6 +149,7 @@ public class Computer implements Player{
      * Set clues to the Computer Strategy or keep them in memory
      * @param   clues   The game indices
      */
+    @Override
     public void setClues(String clues){
 
         strategy.setClues(clues, code);
