@@ -1,5 +1,8 @@
 package main.java.game.player.computer.strategy;
 
+import main.java.game.Game;
+import main.java.utils.Settings;
+import main.java.view.Display;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 
@@ -10,10 +13,16 @@ public class Strategy {
     private ArrayList<int[]> combinationList;
     private int nbKeys;
     private int maxNumber;
+    private int[] maxKeys;
+    private int[] minKeys;
+    private int[] newCode;
 
     private static final Logger LOG = LogManager.getLogger(Strategy.class);
 
-    public Strategy(){ }
+    public Strategy(){
+        this.nbKeys = Settings.getKeys();
+        this.maxNumber = Settings.getMaxNumber();
+    }
 
     /**
      * Initialization of the strategy by all combinations
@@ -29,21 +38,54 @@ public class Strategy {
     }
 
     /**
-     * Parse clues and remove combinations based on clues
+     * Parse clues and keep combinations based on clues
      * @param   clues   Number of well placed and misplaced
      * @param   code    The last combination generated
      */
     public void setClues(String clues, int[] code){
 
-        int nbWellPlaced = Integer.parseInt(String.valueOf(clues.charAt(0)));
-        int nbMisplaced = Integer.parseInt(String.valueOf(clues.charAt(2)));
+        switch (Game.GAME_TYPE){
 
-        if(nbWellPlaced == 0) combinationList = removeAllFor(code);
+            // Mastermind
+            case 1:
+                int nbWellPlaced = Integer.parseInt(String.valueOf(clues.charAt(0)));
+                int nbMisplaced = Integer.parseInt(String.valueOf(clues.charAt(2)));
 
-        if(nbMisplaced == code.length) combinationList = removeNotContain(code);
-        else if(nbMisplaced + nbWellPlaced == code.length) combinationList = removeNotContain(code);
+                if(nbWellPlaced == 0) combinationList = removeAllFor(code);
 
-        combinationList.remove(code);
+                if(nbMisplaced == code.length) combinationList = removeNotContain(code);
+                else if(nbMisplaced + nbWellPlaced == code.length) combinationList = removeNotContain(code);
+
+                combinationList.remove(code);
+
+                break;
+
+            // Search +/-
+            case 2:
+
+                if(maxKeys == null) maxKeys = new int[nbKeys];
+                if(minKeys == null) minKeys = new int[nbKeys];
+                if(newCode == null) newCode = new int[nbKeys];
+
+                Random random = new Random();
+
+                for(int i = 0; i < nbKeys; i++){
+
+                    if(clues.charAt(i) == '-') {
+
+                        maxKeys[i] = code[i] - 1;
+                        if(maxKeys[i] != 0) newCode[i] = random.nextInt(maxKeys[i]);
+                        else newCode[i] = 0;
+                    }
+                    else if(clues.charAt(i) == '+') {
+
+                        minKeys[i] = code[i] + 1;
+                        newCode[i] = random.nextInt(maxNumber - minKeys[i]) + minKeys[i];
+                    }
+                    else newCode[i] = code[i];
+                }
+                break;
+        }
     }
 
     /**
@@ -52,9 +94,18 @@ public class Strategy {
      */
     public int[] getNewCode(){
 
-        if(combinationList.size() > 1)
-            return combinationList.get(new Random().nextInt(combinationList.size()));
-        else return combinationList.get(0);
+        switch (Game.GAME_TYPE){
+            case 1:
+                if(combinationList.size() > 1)
+                    return combinationList.get(new Random().nextInt(combinationList.size()));
+                else return combinationList.get(0);
+
+            case 2: return newCode;
+
+            default:
+                LOG.error("Invalid game type");
+                return null;
+        }
     }
 
     /**

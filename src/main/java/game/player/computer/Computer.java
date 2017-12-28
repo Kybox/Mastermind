@@ -5,6 +5,7 @@ import main.java.game.player.computer.strategy.Strategy;
 import main.java.game.Game;
 import main.java.utils.SecretCode;
 import main.java.utils.Settings;
+import main.java.view.Display;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 
@@ -13,7 +14,7 @@ import java.util.*;
 public class Computer implements Player{
 
     private int trials;
-    private final int nbBoxes;
+    private final int nbKeys;
     private final int maxNumber;
     private int[] code;
     private String[] searchClues;
@@ -23,21 +24,22 @@ public class Computer implements Player{
 
     public Computer(){
 
-        nbBoxes = Settings.getKeys();
+        nbKeys = Settings.getKeys();
         maxNumber = Settings.getMaxNumber();
 
         // Set all digits to 0
-        code = new int[nbBoxes];
+        code = new int[nbKeys];
+
+        strategy = new Strategy();
 
         switch (Game.GAME_TYPE){
 
             case 1:
-                strategy = new Strategy();
-                strategy.initCombinations(nbBoxes, maxNumber);
+                strategy.initCombinations(nbKeys, maxNumber);
                 break;
 
             case 2:
-                searchClues = new String[nbBoxes];
+                searchClues = new String[nbKeys];
                 break;
         }
     }
@@ -45,7 +47,7 @@ public class Computer implements Player{
     @Override
     public int[] setSecretCode(){
 
-        return SecretCode.generate(nbBoxes, maxNumber);
+        return SecretCode.generate(nbKeys, maxNumber);
     }
 
     /**
@@ -61,7 +63,7 @@ public class Computer implements Player{
         if(Game.GAME_TYPE == 1){
 
             if(trials == 0){
-                for(int i = 0; i < nbBoxes; i++){
+                for(int i = 0; i < nbKeys; i++){
                     code[i] = new Random().nextInt(maxNumber);
                     while(true){
                         boolean exist = false;
@@ -87,11 +89,12 @@ public class Computer implements Player{
 
         // Search with +/-
         else if(Game.GAME_TYPE == 2) {
-            for (int i = 0; i < nbBoxes; i++) {
-                if (searchClues[i] != null) {
-                    if (searchClues[i].equals("-")) code[i] = code[i] - 1;
-                    else if (searchClues[i].equals("+")) code[i] = code[i] + 1;
-                } else {
+
+            if(trials != 0) code = strategy.getNewCode();
+
+            for (int i = 0; i < nbKeys; i++) {
+
+                if(trials == 0){
                     Random random = new Random();
                     code[i] = random.nextInt(maxNumber);
                 }
@@ -100,6 +103,7 @@ public class Computer implements Player{
         }
 
         trials++;
+        
         return strCode.toString();
     }
 
@@ -160,6 +164,9 @@ public class Computer implements Player{
      */
     public void setClues(String clues){
 
+        strategy.setClues(clues, code);
+
+        /*
         switch (Game.GAME_TYPE){
             case 1:
                 strategy.setClues(clues, code);
@@ -170,5 +177,6 @@ public class Computer implements Player{
                     searchClues[i] = String.valueOf(clues.charAt(i));
                 break;
         }
+        */
     }
 }
