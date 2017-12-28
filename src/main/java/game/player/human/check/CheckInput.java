@@ -73,7 +73,7 @@ public class CheckInput {
                         || !Character.isDigit(clues.charAt(0)) || !Character.isDigit(clues.charAt(2))) {
                     Display.invalidFormat();
                     return false;
-                } else if (!checkClues(clues, combination, secretCode)) {
+                } else if (checkClues(clues, combination, secretCode)) {
                     Display.invalidClues();
                     return false;
                 }
@@ -86,7 +86,7 @@ public class CheckInput {
                     return false;
                 }
                 else {
-                    if (!checkClues(clues, combination, secretCode)) {
+                    if (checkClues(clues, combination, secretCode)) {
                         Display.invalidClues();
                         return false;
                     }
@@ -119,14 +119,14 @@ public class CheckInput {
                         existing++;
                 }
                 String checked = wellPut + "," + existing;
-                return checked.equals(clues);
+                return !checked.equals(clues);
 
             case 2:
                 boolean error = false;
                 for (int i = 0; i < clues.length(); i++) {
                     if (clues.charAt(i) != '-' && clues.charAt(i) != '=' && clues.charAt(i) != '+') {
                         Display.invalidFormat();
-                        return false;
+                        return true;
                     } else {
                         int nb = Integer.parseInt(String.valueOf(combination.charAt(i)));
                         if (nb < secretCode[i] && clues.charAt(i) != '+') error = true;
@@ -136,9 +136,9 @@ public class CheckInput {
                     }
                 }
 
-                return !error;
+                return error;
 
-            default: return false;
+            default: return true;
         }
     }
 
