@@ -30,7 +30,7 @@ public class Duel implements GameMode {
         do{ gameTour(); }
         while (!blnFinished);
 
-        if(!challenger.isGameWon() && !defender.isGameWon()) isNull = true;
+        if(!challenger.isGameWon() && !defender.isGameWon() && trials == Settings.getTrials()) isNull = true;
         Display.gameOver(gameWon, Arrays.toString(secretCode), trials, isNull);
     }
 
@@ -48,7 +48,7 @@ public class Duel implements GameMode {
         else if(defender.gameTour()){
             secretCode = defender.getSecretCode();
             trials = defender.getTrials();
-            gameWon = defender.isGameWon();
+            gameWon = !defender.isGameWon();
             blnFinished = true;
         }
 
