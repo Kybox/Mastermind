@@ -57,8 +57,9 @@ public class Display {
         Display.info("+----------------------------------------+");
         Display.info("| Sélectionner votre combinaison secrête |");
         Display.info("+----------------------------------------+");
-        Display.info("(" + Settings.getKeys() + " chiffres uniques compris entre 0 et "
-                        + (Settings.getMaxNumber() - 1) + ")");
+        String msg = "-> " + Settings.getKeys() + " chiffres ";
+        if(Game.GAME_TYPE == 1) msg = msg + "uniques ";
+        Display.info(msg + "compris entre 0 et " + (Settings.getMaxNumber() - 1));
     }
 
     public static void secretCode(String secretCode){
@@ -69,9 +70,9 @@ public class Display {
     }
 
     public static void computerCombination(String combination){
-        String line = "";
-        for(int i=0; i < combination.length(); i++)
-            line = line + "-";
+        StringBuilder line = new StringBuilder();
+        for(int i = 0; i < combination.length(); i++)
+            line.append("-");
 
         Display.info("");
         Display.info("+-----------------------------+");
