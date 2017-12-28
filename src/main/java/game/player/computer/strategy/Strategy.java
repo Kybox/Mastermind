@@ -1,6 +1,7 @@
 package main.java.game.player.computer.strategy;
 
 import main.java.game.Game;
+import main.java.utils.Convert;
 import main.java.utils.Settings;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
@@ -154,10 +155,10 @@ public class Strategy {
      */
     private ArrayList<int[]> setCombinations(){
 
-        String numbers = stringOfNumbers(maxNumber);
+        String numbers = Convert.integerToStringRange(maxNumber);
         ArrayList<int[]> list = new ArrayList<>();
 
-        if(nbKeys == numbers.length()) list = getCombinations(stringToArray(numbers), list);
+        if(nbKeys == numbers.length()) list = getCombinations(Convert.stringToArray(numbers), list);
         else{
             int nextInt = 0;
             StringBuilder strNext = new StringBuilder("0");
@@ -178,7 +179,7 @@ public class Strategy {
                         strNext.append(nextInt);
                     }
                 }
-                list = getCombinations(stringToArray(range), list);
+                list = getCombinations(Convert.stringToArray(range), list);
             }
         }
 
@@ -229,32 +230,5 @@ public class Strategy {
             combinationList.add(integerList.stream().mapToInt(e -> e).toArray());
 
         return combinationList;
-    }
-
-    /**
-     * Return a String of numbers
-     * <p>
-     *     If value = 5 then the String equals to "01234"
-     * </p>
-     * @param   value   The maximum value starting from zero
-     * @return          A String with all numbers to the value
-     */
-    private String stringOfNumbers(int value){
-
-        StringBuilder stringOfNumbers = new StringBuilder();
-        for(int i = 0; i < value; i++) stringOfNumbers.append(i);
-
-        return stringOfNumbers.toString();
-    }
-
-    private int[] stringToArray(String value){
-
-        int[] intArray = new int[value.length()];
-
-        for (int i = 0; i < value.length(); i++) {
-            intArray[i] = Character.digit(value.charAt(i), 10);
-        }
-
-        return intArray;
     }
 }
