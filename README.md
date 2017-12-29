@@ -1,7 +1,9 @@
-# Mastermind
+# Mastermind 
 Projet OpenClassrooms
 
-Réalisation du jeu Mastermind et d'un jeu de réflexion +/-.
+Réalisation du jeu Mastermind et d'un jeu de réflexion +/-
+
+Développement sous IntelliJ IDEA en Java 8
 
 
 
