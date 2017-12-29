@@ -3,6 +3,7 @@ package main.java.game.player.computer.strategy;
 import main.java.game.Game;
 import main.java.utils.Convert;
 import main.java.utils.Settings;
+import main.java.view.Display;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 
@@ -188,6 +189,9 @@ public class Strategy {
                         strNext.append(nextInt);
                     }
                 }
+
+                // Display.info("StringBuilder range = " + range);
+
                 list = getCombinations(Convert.stringToArray(range), list);
             }
         }
@@ -196,43 +200,43 @@ public class Strategy {
     }
 
     /**
-     * Swap integers in the array passed as a parameter
+     * Swap integers in the array passed as parameter
      * @param   range               An integer array
      * @param   combinationList     The integers array that will be return with combinations
      * @return                      The list of all possible permutations of range
      */
     private ArrayList<int[]> getCombinations(int[] range, ArrayList<int[]> combinationList) {
 
-        // Main list that will be incremented
         ArrayList<List<Integer>> storageList = new ArrayList<>();
-
-        // Adding a first list to start the iteration
         storageList.add(new ArrayList<>());
 
-        // Iteration over each integer in range[]
         for (int key : range) {
 
-            // Temporary list that will be added to the main list
-            ArrayList<List<Integer>> tempStorageList = new ArrayList<>();
+            ArrayList<List<Integer>> tmpKeyList = new ArrayList<>();
 
-            // Iteration on each list of storageList
-            for (List<Integer> list : storageList) {
+            for (List<Integer> integerList : storageList) {
 
-                // Iteration on each integer in the list
-                for (int j = 0; j <= list.size(); j++) {
+                for (int i = 0; i <= integerList.size(); i++) {
 
-                    // Add a new integer (range[x]) at the index j
-                    list.add(j, key);
+                    integerList.add(i, key); // Add
 
-                    List<Integer> tempCombList = new ArrayList<>(list);
+                    List<Integer> newList = new ArrayList<>(integerList);
 
-                    list.remove(j);
+                    integerList.remove(i); // Remove
 
-                    tempStorageList.add(tempCombList);
+                    tmpKeyList.add(newList);
                 }
             }
 
-            storageList = new ArrayList<>(tempStorageList);
+            storageList = new ArrayList<>(tmpKeyList);
+
+            /*
+            Display.info("----------------------------");
+            Display.info("Key = " + key);
+            for(List<Integer> intList: tmpKeyList){
+                Display.info(intList.toString());
+            }
+            */
         }
 
         for(List<Integer> integerList : storageList)
