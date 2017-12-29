@@ -1,0 +1,10 @@
+main.java
+main.java.game
+main.java.game.mode
+main.java.game.player
+main.java.game.player.computer
+main.java.game.player.computer.strategy
+main.java.game.player.human
+main.java.game.player.human.check
+main.java.utils
+main.java.view
