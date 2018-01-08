@@ -5,7 +5,9 @@ Réalisation du jeu Mastermind et d'un jeu de réflexion +/-
 
 Développement sous IntelliJ IDEA en Java 8
 
+### Compilation :
 
+La compilation de l'application se réalise à partir le la classe Main située dans les dossiers src/main/java/
 
 ### Lancement de l'application :
 
@@ -50,7 +52,7 @@ Afin de ne pas induire en erreur l'application en saisissant des indices qui ne 
 
 
 
-### Mastermind en mode duel :
+### Mode de jeu en duel :
 
 Dans ce mode de jeu, vous serez en compétition avec l'application. Il vous sera demandé de saisir la combinaison secrète que l'application devra retrouver. De son côté, l'application va générer une combinaison secrète que vous devrez retrouver. Chacun jouera à tour de rôle. Celui qui aura retrouvé la combinaison secrète en premier gagnera la partie.
  
