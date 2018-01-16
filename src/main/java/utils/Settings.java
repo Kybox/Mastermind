@@ -81,6 +81,10 @@ public class Settings {
         catch (NullPointerException e) { LOG.error("Error in the configuration file range of numbers"); }
         if(maxNumber < 4) maxNumber = 4;
         else if(maxNumber > 10) maxNumber = 10;
+
+        int nbKeys = getKeys();
+        if(nbKeys > maxNumber) maxNumber = nbKeys;
+
         return maxNumber;
     }
 
